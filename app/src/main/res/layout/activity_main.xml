@@ -1,18 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/MainRelative">
+
+    <ImageView
+        android:id="@+id/imageViewlogo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/logorender"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"/>
 
     <TextView
+        android:id="@+id/textViewparte2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Cerca de ti a pocos \n pasos"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_below="@+id/imageViewlogo"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/textViewparte1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:text="Tu casa es lo mas \n importante"
+        android:gravity="center"
+        android:layout_below="@+id/imageViewlogo"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/linearparte1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_margin="30dp">
+
+        <TextView
+            android:id="@+id/textViewestoybuscando"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estoy buscando"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/buttonCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Comprar servicio" />
+
+        <Button
+            android:id="@+id/buttonTrabajador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ofrecer servicio" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearparte2"
+        android:layout_margin="30dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/editTextTextEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Email"
+            android:gravity="center"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/editTextTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:gravity="center"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/buttonAcceder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Acceder" />
+
+        <Button
+            android:id="@+id/buttonRegistrarse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrarse" />
+    </LinearLayout>
+</RelativeLayout>
