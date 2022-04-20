@@ -8,6 +8,20 @@
     android:id="@+id/MainRelative">
 
     <ImageView
+        android:id="@+id/imageViewfondo_lightblue"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/comienzo_lightblue" />
+
+    <ImageView
+        android:id="@+id/imageViewfondo_darkblue"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/comienzo_darkblue" />
+
+    <ImageView
         android:id="@+id/imageViewlogo"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -24,6 +38,7 @@
         android:textSize="23sp"
         android:textStyle="bold"
         android:gravity="center"
+        android:textColor="#2c3340"
         android:layout_below="@+id/imageViewlogo"
         android:layout_centerInParent="true"
         android:layout_marginTop="5dp"
@@ -37,6 +52,7 @@
         android:textStyle="bold"
         android:text="Tu casa es lo mas \n importante"
         android:gravity="center"
+        android:textColor="#2c3340"
         android:layout_below="@+id/imageViewlogo"
         android:layout_centerInParent="true"
         android:layout_marginTop="5dp"
@@ -54,7 +70,10 @@
             android:id="@+id/textViewestoybuscando"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Estoy buscando"
+            android:text="Estoy buscando:"
+            android:textSize="15sp"
+            android:layout_marginBottom="1dp"
+            android:textColor="@color/white"
             android:gravity="center"/>
 
         <Button
@@ -87,6 +106,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Email"
+            android:background="@color/white"
             android:gravity="center"
             android:inputType="textEmailAddress" />
 
@@ -95,6 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contraseña"
+            android:background="@color/white"
             android:gravity="center"
             android:ems="10"
             android:inputType="textPassword" />
