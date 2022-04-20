@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "93150043278",
+    "project_id": "wipehouse-ffdd1",
+    "storage_bucket": "wipehouse-ffdd1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93150043278:android:5f1f3ab3c6112faa473ddf",
+        "android_client_info": {
+          "package_name": "com.example.wipehouse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "93150043278-tpkpv9ahpv21valpuvt2glcredc9cp2j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wipehouse",
+            "certificate_hash": "6e482bacf6bf2eb9fe905daf910def4207117b41"
+          }
+        },
+        {
+          "client_id": "93150043278-g30bobrq5ufaap9janoubfsog9afkdf7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABXK41JAC6ojysZLhTe-_xa1AfHj-y2qU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "93150043278-g30bobrq5ufaap9janoubfsog9afkdf7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
