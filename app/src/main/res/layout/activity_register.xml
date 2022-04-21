@@ -13,7 +13,7 @@
         android:layout_height="75dp"
         android:scaleType="fitStart"
         android:background="@android:color/transparent"
-        app:srcCompat="@drawable/Register_BackArrow" />
+        app:srcCompat="@drawable/register_backarrow" />
 
     <TextView
         android:id="@+id/textViewTitulo"
@@ -26,4 +26,153 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="35dp"
         android:text="Registrate" />
+
+    <LinearLayout
+        android:id="@+id/linearparte1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/textViewTitulo">
+
+        <TextView
+            android:id="@+id/textViewnombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textStyle="bold"
+            android:textColor="#2c3340"
+            android:textSize="20sp"
+            android:paddingLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextTextNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColor="@color/white"
+            android:background="@drawable/blue_roundcorners_low"
+            android:padding="10dp"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textViewApellidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apellidos"
+            android:paddingLeft="10dp"
+            android:textStyle="bold"
+            android:textColor="#2c3340"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:id="@+id/editTextapellidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColor="@color/white"
+            android:background="@drawable/blue_roundcorners_low"
+            android:padding="10dp"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textViewContraseña"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contraseña"
+            android:textStyle="bold"
+            android:textColor="#2c3340"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextTextContraseña"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColor="@color/white"
+            android:background="@drawable/blue_roundcorners_low"
+            android:padding="10dp"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/textViewDNI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DNI"
+            android:textStyle="bold"
+            android:textColor="#2c3340"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextDNI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textColor="@color/white"
+            android:background="@drawable/blue_roundcorners_low"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/textViewemail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Correo Electronico"
+            android:textStyle="bold"
+            android:textColor="#2c3340"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColor="@color/white"
+            android:background="@drawable/blue_roundcorners_low"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/textViewTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teléfono"
+            android:textStyle="bold"
+            android:textColor="#2c3340"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textColor="@color/white"
+            android:background="@drawable/blue_roundcorners_low"
+            android:padding="10dp"/>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonContinuar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:text="Continuar"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@drawable/lightblue_roundcorners"
+        android:textSize="20sp" />
 </RelativeLayout>

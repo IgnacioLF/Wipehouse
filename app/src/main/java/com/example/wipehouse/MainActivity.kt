@@ -1,5 +1,6 @@
 package com.example.wipehouse
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             textViewparte1.setVisibility(View.GONE)
             textViewparte2.setVisibility(View.VISIBLE)
             darkbluebackground.setVisibility(View.GONE)
+            startActivity(Intent(applicationContext,Register::class.java))
         }
     }
 }
