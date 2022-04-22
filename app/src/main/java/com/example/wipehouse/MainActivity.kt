@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.Window
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
+import com.google.firebase.auth.FirebaseAuth
+import java.sql.BatchUpdateException
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,5 +35,30 @@ class MainActivity : AppCompatActivity() {
             darkbluebackground.setVisibility(View.GONE)
             startActivity(Intent(applicationContext,Register::class.java))
         }
+
+        var buttonacceder = findViewById<Button>(R.id.buttonAcceder)
+        buttonacceder.setOnClickListener {
+         login()
+        }
+    }
+
+    fun login(){
+        var edittextemail = findViewById<EditText>(R.id.editTextEmail)
+        var edittextpassword = findViewById<EditText>(R.id.editTextTextPassword)
+        if (edittextemail.text.isNotEmpty()&&edittextpassword.text.isNotEmpty()){
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(edittextemail.toString(),edittextpassword.toString()).addOnCompleteListener {
+            if (it.isSuccessful){
+                //exito
+            }else{
+
+            }
+        }
+        } else {
+            Toast.makeText(applicationContext,"Error alguno de los campos esta vacio",Toast.LENGTH_SHORT)
+        }
+    }
+
+    fun errorlogin(){
+
     }
 }
