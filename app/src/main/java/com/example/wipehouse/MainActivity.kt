@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         if (edittextemail.text.isNotEmpty()&&edittextpassword.text.isNotEmpty()){
         FirebaseAuth.getInstance().signInWithEmailAndPassword(edittextemail.text.toString(),edittextpassword.text.toString()).addOnCompleteListener {
             if (it.isSuccessful){
-                startActivity(Intent(applicationContext,Register::class.java))
+                startActivity(Intent(applicationContext,test::class.java))
             }else{
                 errorlogin()
             }
