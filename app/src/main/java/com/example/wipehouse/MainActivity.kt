@@ -3,10 +3,13 @@ package com.example.wipehouse
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import java.sql.BatchUpdateException
 
 class MainActivity : AppCompatActivity() {
@@ -43,22 +46,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun login(){
-        var edittextemail = findViewById<EditText>(R.id.editTextEmail)
+        var edittextemail = findViewById<EditText>(R.id.editTextTextEmailAddress)
         var edittextpassword = findViewById<EditText>(R.id.editTextTextPassword)
         if (edittextemail.text.isNotEmpty()&&edittextpassword.text.isNotEmpty()){
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(edittextemail.toString(),edittextpassword.toString()).addOnCompleteListener {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(edittextemail.text.toString(),edittextpassword.text.toString()).addOnCompleteListener {
             if (it.isSuccessful){
-                //exito
+                startActivity(Intent(applicationContext,Register::class.java))
             }else{
-
+                errorlogin()
             }
         }
         } else {
-            Toast.makeText(applicationContext,"Error alguno de los campos esta vacio",Toast.LENGTH_SHORT)
+            Toast.makeText(applicationContext,"Error alguno de los campos esta vacio",Toast.LENGTH_SHORT).show()
         }
     }
 
     fun errorlogin(){
-
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Error")
+        builder.setMessage("Se ha producido un error alguno de sus campos son incorrectos")
+        builder.setPositiveButton("Aceptar", null)
+        val dialog = builder.create()
+        dialog.show()
     }
 }

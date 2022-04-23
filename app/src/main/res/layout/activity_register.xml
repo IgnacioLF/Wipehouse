@@ -25,8 +25,7 @@
         android:layout_centerInParent="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="35dp"
-        android:text="Registrate"
-        android:visibility="gone"/>
+        android:text="Registrate" />
 
     <TextView
         android:id="@+id/textViewTitulo2"
@@ -36,10 +35,11 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="35dp"
         android:gravity="center"
-        android:text="Seleccione \n una imagen"
+        android:text="Seleccione\n una imagen"
         android:textColor="#2c3340"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="invisible"/>
 
     <LinearLayout
         android:visibility="gone"
@@ -144,8 +144,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/textViewTitulo"
-        android:visibility="gone">
+        android:layout_below="@+id/textViewTitulo">
 
         <TextView
             android:id="@+id/textViewnombre"
@@ -279,10 +278,10 @@
         android:layout_centerInParent="true"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="20dp"
-        android:text="Continuar"
-        android:textStyle="bold"
-        android:textColor="@color/white"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/lightblue_roundcorners"
-        android:textSize="20sp" />
+        android:text="Continuar"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 </RelativeLayout>
