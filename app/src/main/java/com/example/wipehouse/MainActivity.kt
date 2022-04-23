@@ -36,12 +36,15 @@ class MainActivity : AppCompatActivity() {
             textViewparte1.setVisibility(View.GONE)
             textViewparte2.setVisibility(View.VISIBLE)
             darkbluebackground.setVisibility(View.GONE)
-            startActivity(Intent(applicationContext,Register::class.java))
         }
 
         var buttonacceder = findViewById<Button>(R.id.buttonAcceder)
         buttonacceder.setOnClickListener {
          login()
+        }
+        var buttonregistrarse = findViewById<Button>(R.id.buttonRegistrarse)
+        buttonregistrarse.setOnClickListener {
+            startActivity(Intent(applicationContext,Register::class.java))
         }
     }
 
