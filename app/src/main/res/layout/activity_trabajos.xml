@@ -19,7 +19,7 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textViewmantenimienmto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mantenimiento"
@@ -28,7 +28,7 @@
             android:textColor="#2c3340"/>
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textViewdepiscinas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="de piscinas"
@@ -306,7 +306,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/editTextNumbercortacespedprecio"
+                android:id="@+id/editTextcortacespedprecio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -357,7 +357,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/editTextNumberlimpiadorprecio"
+                android:id="@+id/editTextlimpiadorprecio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -499,8 +499,7 @@
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:text="Precio por persona"
-                            android:layout_marginBottom="10dp"
-                            />
+                            android:layout_marginBottom="10dp" />
 
                         <RelativeLayout
                             android:id="@+id/relativealtacocinaprecio"
@@ -508,7 +507,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1">
                             <EditText
-                                android:id="@+id/editTextNumberaltacocinaprecio"
+                                android:id="@+id/editTextaltacocinaprecio"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -638,8 +637,7 @@
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:text="Precio por persona"
-                            android:layout_marginBottom="10dp"
-                            />
+                            android:layout_marginBottom="10dp" />
 
                         <RelativeLayout
                             android:id="@+id/relativecocinatradicionalprecio"
@@ -647,7 +645,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1">
                             <EditText
-                                android:id="@+id/editTextNumbercocinatradicionalprecio"
+                                android:id="@+id/editTextcocinatradicionalprecio"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -786,7 +784,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1">
                             <EditText
-                                android:id="@+id/editTextNumbercocinalowcostprecio"
+                                android:id="@+id/editTextcocinalowcostprecio"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"

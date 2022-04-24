@@ -6,8 +6,26 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class Trabajos : AppCompatActivity() {
+    lateinit var editTextlimpiadorprecio : EditText
+    lateinit var editTextcortacespedprecio : EditText
+    lateinit var editTextpreciopiscinagrande : EditText
+    lateinit var editTextpreciopiscinamedianas : EditText
+    lateinit var editTextpreciopiscinapequenas : EditText
+    lateinit var editTextaltacocinadesc : EditText
+    lateinit var editTextaltacocinaplatos : EditText
+    lateinit var editTextaltacocinaprecio : EditText
+    lateinit var editTextcocinatradicionaldesc : EditText
+    lateinit var editTextcocinatradicionalplatos : EditText
+    lateinit var editTextcocinatradicionalprecio : EditText
+    lateinit var editTextcocinalowcostdesc : EditText
+    lateinit var editTextcocinalowcostplatos : EditText
+    lateinit var editTextcocinalowcostprecio : EditText
+
     var cocinero = false
     var cortacesped = false
     var limpiador = false
@@ -15,6 +33,23 @@ class Trabajos : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trabajos)
+        var empty = true
+        //edittext
+        editTextlimpiadorprecio = findViewById(R.id.editTextlimpiadorprecio)
+        editTextcortacespedprecio = findViewById(R.id.editTextcortacespedprecio)
+        editTextpreciopiscinagrande = findViewById(R.id.editTextpreciopiscinagrande)
+        editTextpreciopiscinamedianas = findViewById(R.id.editTextpreciopiscinamedianas)
+        editTextpreciopiscinapequenas = findViewById(R.id.editTextpreciopiscinapequenas)
+        editTextaltacocinadesc = findViewById(R.id.editTextaltacocinadesc)
+        editTextaltacocinaplatos = findViewById(R.id.editTextaltacocinaplatos)
+        editTextaltacocinaprecio = findViewById(R.id.editTextaltacocinaprecio)
+        editTextcocinatradicionaldesc = findViewById(R.id.editTextcocinatradicionaldesc)
+        editTextcocinatradicionalplatos = findViewById(R.id.editTextcocinatradicionalplatos)
+        editTextcocinatradicionalprecio = findViewById(R.id.editTextcocinatradicionalprecio)
+        editTextcocinalowcostdesc = findViewById(R.id.editTextcocinalowcostdesc)
+        editTextcocinalowcostplatos = findViewById(R.id.editTextcocinalowcostplatos)
+        editTextcocinalowcostprecio = findViewById(R.id.editTextcocinalowcostprecio)
+        // checkbox de cocina
         var linearaltacocina = findViewById<LinearLayout>(R.id.linearaltacocina)
         var checkBoxaltacocina = findViewById<CheckBox>(R.id.checkBoxaltacocina)
         var linearaltacocina_desc = findViewById<LinearLayout>(R.id.linearaltacocina_desc)
@@ -24,7 +59,7 @@ class Trabajos : AppCompatActivity() {
         var linearcocinalowcost = findViewById<LinearLayout>(R.id.linearcocinalowcost)
         var checkBoxcocinalowcost = findViewById<CheckBox>(R.id.checkBoxcocinalowcost)
         var linearlowcostcocina_desc = findViewById<LinearLayout>(R.id.linearcocinalowcost_desc)
-
+        // genear visibility
         var imageButtonBackArrow = findViewById<ImageButton>(R.id.imageButtonBackArrow)
         var imageViewlogo = findViewById<ImageView>(R.id.imageViewlogo)
         var linearseleccione = findViewById<LinearLayout>(R.id.linearseleccione)
@@ -162,6 +197,86 @@ class Trabajos : AppCompatActivity() {
                 linearcocinalowcost.setBackgroundResource(R.drawable.white_roundcorners_low)
                 linearlowcostcocina_desc.setVisibility(View.GONE)
             }
+        }
+
+        buttonGuardar.setOnClickListener {
+            var data = hashMapOf<String,String>()
+            if (cocinero==true){
+                if (checkBoxaltacocina.isChecked){
+                    if (editTextaltacocinadesc.text.isNotEmpty()&&editTextaltacocinaplatos.text.isNotEmpty()&&editTextaltacocinaprecio.text.isNotEmpty()){
+                        empty=false
+                        data.put("altacocina_desc",editTextaltacocinadesc.text.toString())
+                        data.put("altacocina_platos",editTextaltacocinaplatos.text.toString())
+                        data.put("altacocina_precio",editTextaltacocinaprecio.text.toString())
+                    } else {
+                        empty=true
+                    }
+                } else {
+                    data.put("altacocina_desc","")
+                    data.put("altacocina_platos","")
+                    data.put("altacocina_precio","")
+                }
+                if (checkBoxcocinatradicional.isChecked){
+                    if (editTextcocinatradicionaldesc.text.isNotEmpty()&&editTextcocinatradicionalplatos.text.isNotEmpty()&&editTextcocinatradicionalprecio.text.isNotEmpty()){
+                        data.put("cocinatradicional_desc",editTextcocinatradicionaldesc.text.toString())
+                        data.put("cocinatradicional_platos",editTextcocinatradicionalplatos.text.toString())
+                        data.put("cocinatradicional_precio",editTextcocinatradicionalprecio.text.toString())
+                        empty=false
+                    } else{
+                        empty=true
+                    }
+                } else {
+                    data.put("cocinatradicional_desc","")
+                    data.put("cocinatradicional_platos","")
+                    data.put("cocinatradicional_precio","")
+                }
+                if (checkBoxcocinalowcost.isChecked){
+                    if (editTextcocinalowcostdesc.text.isNotEmpty()&&editTextcocinalowcostplatos.text.isNotEmpty()&&editTextcocinalowcostprecio.text.isNotEmpty()){
+                        data.put("cocinalowcost_desc",editTextcocinalowcostdesc.text.toString())
+                        data.put("cocinalowcost_platos",editTextcocinalowcostplatos.text.toString())
+                        data.put("cocinalowcost_precio",editTextcocinalowcostprecio.text.toString())
+                        empty=false
+                    } else {
+                        empty=true
+                    }
+                } else {
+                    data.put("cocinalowcost_desc","")
+                    data.put("cocinalowcost_platos","")
+                    data.put("cocinalowcost_precio","")
+                }
+                if (empty==false){
+                    guardardatos(data)
+                } else {
+                    Toast.makeText(applicationContext,"Error alguno de los campos esta vacio",Toast.LENGTH_LONG).show()
+                }
+            } else if (cortacesped==true){
+                data.put("cortacesped_precio",editTextcortacespedprecio.text.toString())
+                guardardatos(data)
+            } else if (limpiador==true){
+                data.put("limpiador_precio",editTextlimpiadorprecio.text.toString())
+                guardardatos(data)
+            } else if (mantenimiento==true){
+                data.put("mantenimiento_precio_grande",editTextpreciopiscinagrande.text.toString())
+                data.put("mantenimiento_precio_mediana",editTextpreciopiscinamedianas.text.toString())
+                data.put("mantenimiento_precio_pequena",editTextpreciopiscinapequenas.text.toString())
+                guardardatos(data)
+            }
+        }
+    }
+
+    fun guardardatos(data : HashMap<String,String>){
+        var db = Firebase.firestore
+        var email = FirebaseAuth.getInstance().currentUser?.email
+        if (email != null) {
+            db.collection("trabajadores")
+                .document(email)
+                .update(data as Map<String, Any>)
+                .addOnSuccessListener { documentReference ->
+                    Toast.makeText(applicationContext,"Cambios guardados correctamente",Toast.LENGTH_LONG).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(applicationContext,"Se ha poucido un error en la operacion",Toast.LENGTH_LONG).show()
+                }
         }
     }
 }

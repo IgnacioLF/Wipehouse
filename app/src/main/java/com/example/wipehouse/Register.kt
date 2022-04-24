@@ -226,9 +226,31 @@ class Register : AppCompatActivity() {
                     .addOnSuccessListener { documentReference ->
                         var fileRef = storagereference.child("Trabajadores/"+editTextEmail.text.toString()+".jpg")
                         fileRef.putFile(imageUri).addOnSuccessListener {
-                            var intent = Intent(applicationContext,Trabajos::class.java)
-                            finishAffinity()
-                            startActivity(intent)
+                            var data = hashMapOf(
+                                "altacocina_desc" to "",
+                                "altacocina_platos" to "",
+                                "altacocina_precio" to "",
+                                "cocinatradicional_desc" to "",
+                                "cocinatradicional_platos" to "",
+                                "cocinatradicional_precio" to "",
+                                "cocinalowcost_desc" to "",
+                                "cocinalowcost_platos" to "",
+                                "limpiador_precio" to "",
+                                "cortacesped_precio" to "",
+                                "mantenimiento_precio_grande" to "",
+                                "mantenimiento_precio_mediana" to "",
+                                "mantenimiento_precio_pequena" to ""
+                            )
+                            db.collection("trabajadores").document(editTextEmail.text.toString()).set(data).addOnSuccessListener {
+                                var intent = Intent(applicationContext,Trabajos::class.java)
+                                finishAffinity()
+                                startActivity(intent)
+                            }.addOnFailureListener {
+                                FirebaseAuth.getInstance().currentUser?.delete()
+                                db.collection("trabajadores").document(editTextEmail.text.toString()).delete()
+                                db.collection("usuarios").document(editTextEmail.text.toString()).delete()
+                                error("Se ha producido un error en la operacion")
+                            }
                         }.addOnFailureListener{
                             FirebaseAuth.getInstance().currentUser?.delete()
                             db.collection("usuarios").document(editTextEmail.text.toString()).delete()
