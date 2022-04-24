@@ -5,16 +5,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-
-        android:hardwareAccelerated="false"
-        android:largeHeap="true"
-
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Wipehouse">
+        <activity
+            android:name=".User_MainActivity"
+            android:exported="true" />
         <activity
             android:name=".Trabajos"
             android:exported="true" />

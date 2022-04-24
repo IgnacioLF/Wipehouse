@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             textViewparte1.setVisibility(View.GONE)
             textViewparte2.setVisibility(View.VISIBLE)
             darkbluebackground.setVisibility(View.GONE)
-            startActivity(Intent(applicationContext,Trabajos::class.java))
+            startActivity(Intent(applicationContext,User_MainActivity::class.java))
         }
         buttonTrabajador.setOnClickListener {
             linearparte1.setVisibility(View.GONE)
