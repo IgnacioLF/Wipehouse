@@ -196,6 +196,10 @@ class Register : AppCompatActivity() {
         builder.setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialogInterface, i ->
             linearparte1.setVisibility(View.VISIBLE)
             linearparte2.setVisibility(View.INVISIBLE)
+            textViewTitulo.setVisibility(View.VISIBLE)
+            textViewTitulo2.setVisibility(View.INVISIBLE)
+            profile_image.setVisibility(View.INVISIBLE)
+            imageButtonAddimage.setVisibility(View.INVISIBLE)
             partes=1
         })
         val dialog = builder.create()
@@ -222,7 +226,9 @@ class Register : AppCompatActivity() {
                     .addOnSuccessListener { documentReference ->
                         var fileRef = storagereference.child("Trabajadores/"+editTextEmail.text.toString()+".jpg")
                         fileRef.putFile(imageUri).addOnSuccessListener {
-                            startActivity(Intent(applicationContext,MainActivity::class.java))
+                            var intent = Intent(applicationContext,Trabajos::class.java)
+                            finishAffinity()
+                            startActivity(intent)
                         }.addOnFailureListener{
                             FirebaseAuth.getInstance().currentUser?.delete()
                             db.collection("usuarios").document(editTextEmail.text.toString()).delete()
