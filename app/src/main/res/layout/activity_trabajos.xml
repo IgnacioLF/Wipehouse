@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Trabajos"
+    android:id="@+id/relativeMain">
+
+    <LinearLayout
+        android:id="@+id/titulomantenimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="35dp"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mantenimiento"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="#2c3340"/>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="de piscinas"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="#2c3340"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewLimpiador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Limpiador"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="#2c3340"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="35dp"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/textViewCortacesped"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cortacésped"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="#2c3340"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="35dp"
+        android:visibility="invisible"/>
+
+    <ImageButton
+        android:id="@+id/imageButtonBackArrow"
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        android:scaleType="fitStart"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/register_backarrow" />
+
+    <TextView
+        android:id="@+id/textViewTituloCocinero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="#2c3340"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="35dp"
+        android:text="Cocinero"
+        android:visibility="visible"/>
+
+    <ScrollView
+        android:id="@+id/scrollViewcocineromain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginTop="130dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/linearcocineromain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearaltacocina"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:id="@+id/linearaltacocinacheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewaltacoinatitulo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-Alta cocina"
+                        android:textColor="#2c3340"
+                        android:layout_marginRight="7dp"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxaltacocina"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleX="1.50"
+                        android:scaleY="1.50"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearaltacocina_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/textViewaltacocinadesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#2c3340"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        android:text="Descripcion" />
+
+                    <EditText
+                        android:id="@+id/editTextaltacocinadesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:ems="10"
+                        android:inputType="textMultiLine|text"
+                        android:lines="5"
+                        android:gravity="top|left"
+                        android:background="@drawable/white_roundcorners_low"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp" />
+
+                    <TextView
+                        android:id="@+id/textViewaltacocinaplatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#2c3340"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        android:text="Platos" />
+
+                    <EditText
+                        android:id="@+id/editTextaltacocinaplatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textMultiLine|text"
+                        android:lines="5"
+                        android:gravity="top|left"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/white_roundcorners_low"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/linearaltacocinaprecio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewaltacocinaprecio"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:textColor="#2c3340"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:text="Precio por persona"
+                            android:layout_marginBottom="10dp"
+                            />
+
+                        <RelativeLayout
+                            android:id="@+id/relativealtacocinaprecio"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <EditText
+                                android:id="@+id/editTextNumberaltacocinaprecio"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/white_roundcorners_low"
+                                android:ems="10"
+                                android:layout_centerInParent="true"
+                                android:inputType="number"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:gravity="center" />
+
+                            <TextView
+                                android:id="@+id/textVieweurosaltacocina"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="15dp"
+                                android:textColor="#2c3340"
+                                android:textSize="20sp"
+                                android:text="€" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearcocinatradicional"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:paddingRight="10dp"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:id="@+id/linearcocinatradicionalcheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewcoinatradicionaltitulo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-Cocina tradicional"
+                        android:textColor="#2c3340"
+                        android:layout_marginRight="7dp"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxcocinatradicional"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleX="1.50"
+                        android:scaleY="1.50"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearcocinatradicional_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/textViewcocinatradicionaldesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#2c3340"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        android:text="Descripcion" />
+
+                    <EditText
+                        android:id="@+id/editTextcocinatradicionaldesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:ems="10"
+                        android:inputType="textMultiLine|text"
+                        android:lines="5"
+                        android:gravity="top|left"
+                        android:background="@drawable/white_roundcorners_low"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp" />
+
+                    <TextView
+                        android:id="@+id/textViewcocinatradicionalplatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#2c3340"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        android:text="Platos" />
+
+                    <EditText
+                        android:id="@+id/editTextcocinatradicionalplatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textMultiLine|text"
+                        android:lines="5"
+                        android:gravity="top|left"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/white_roundcorners_low"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/linearcocinatradicionalprecio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewcocinatradicionalprecio"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:textColor="#2c3340"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:text="Precio por persona"
+                            android:layout_marginBottom="10dp"
+                            />
+
+                        <RelativeLayout
+                            android:id="@+id/relativecocinatradicionalprecio"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <EditText
+                                android:id="@+id/editTextNumbercocinatradicionalprecio"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/white_roundcorners_low"
+                                android:ems="10"
+                                android:layout_centerInParent="true"
+                                android:inputType="number"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:gravity="center" />
+
+                            <TextView
+                                android:id="@+id/textVieweuroscocinatradicional"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="15dp"
+                                android:textColor="#2c3340"
+                                android:textSize="20sp"
+                                android:text="€" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearcocinalowcost"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:id="@+id/linearcocinalowcostcheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewcocinalowcosttitulo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-Cocina lowcowst"
+                        android:textColor="#2c3340"
+                        android:layout_marginRight="7dp"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/checkBoxcocinalowcost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleX="1.50"
+                        android:scaleY="1.50"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearcocinalowcost_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/textViewcocinalowcostdesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#2c3340"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        android:text="Descripcion" />
+
+                    <EditText
+                        android:id="@+id/editTextcocinalowcostdesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:ems="10"
+                        android:inputType="textMultiLine|text"
+                        android:lines="5"
+                        android:gravity="top|left"
+                        android:background="@drawable/white_roundcorners_low"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp" />
+
+                    <TextView
+                        android:id="@+id/textViewcocinalowcostplatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#2c3340"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        android:text="Platos" />
+
+                    <EditText
+                        android:id="@+id/editTextcocinalowcostplatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textMultiLine|text"
+                        android:lines="5"
+                        android:gravity="top|left"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/white_roundcorners_low"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp"/>
+
+                    <LinearLayout
+                        android:id="@+id/linearcocinalowcostprecio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewcocinalowcostprecio"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:textColor="#2c3340"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:text="Precio por persona"
+                            android:layout_marginBottom="10dp"
+                            />
+
+                        <RelativeLayout
+                            android:id="@+id/relativecocinalowcostprecio"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <EditText
+                                android:id="@+id/editTextNumbercocinalowcostprecio"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/white_roundcorners_low"
+                                android:ems="10"
+                                android:layout_centerInParent="true"
+                                android:inputType="number"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:gravity="center" />
+
+                            <TextView
+                                android:id="@+id/textVieweuroscocinalowcost"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="15dp"
+                                android:textColor="#2c3340"
+                                android:textSize="20sp"
+                                android:text="€" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageViewlogo"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        app:srcCompat="@drawable/cocinero_icon" />
+
+    <TextView
+        android:id="@+id/textViewTitulo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="35dp"
+        android:gravity="center_horizontal"
+        android:text="Seleccione"
+        android:textColor="#2c3340"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/textViewTitulo1.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="#2c3340"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="75dp"
+        android:gravity="center_horizontal"
+        android:text="los trabajos"
+        android:visibility="invisible"/>
+
+    <LinearLayout
+        android:id="@+id/linearmianbotones"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginTop="130dp"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:id="@+id/linearbotonerArriba"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            >
+            <ImageButton
+                android:id="@+id/imageButtonCocinero"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                app:srcCompat="@drawable/cocinero_button"
+                android:background="@null"/>
+
+            <ImageButton
+                android:id="@+id/imageButtonCortacesped"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/cortacesped_button"
+                android:background="@null"
+                tools:ignore="NestedWeights" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearbotonesAbajo"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imageButtonLimpiador"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/limpiador_button"
+                android:background="@null"/>
+
+            <ImageButton
+                android:id="@+id/imageButtonMantenimiento"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/mantenimiento_button"
+                android:background="@null"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonContinuar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/lightblue_roundcorners"
+        android:text="Continuar"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+</RelativeLayout>
