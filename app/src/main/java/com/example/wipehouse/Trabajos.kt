@@ -279,4 +279,6 @@ class Trabajos : AppCompatActivity() {
                 }
         }
     }
+    // no back arrow
+    override fun onBackPressed() {}
 }

@@ -272,5 +272,6 @@ class Register : AppCompatActivity() {
             }
         }
     }
-
+    // no back arrow
+    override fun onBackPressed() {}
 }
