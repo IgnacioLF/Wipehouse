@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Wipehouse</string>
     <string name="alarm">alarm</string>
-    <string name="pedido">Pedido</string>
+    <string name="pedido">Pedidos</string>
     <string name="buscar">Buscar</string>
     <string name="cuenta">Cuenta</string>
     <!-- TODO: Remove or change this placeholder text -->
