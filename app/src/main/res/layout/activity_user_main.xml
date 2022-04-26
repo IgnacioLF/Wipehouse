@@ -13,25 +13,16 @@
         android:layout_height="0dp"
         android:layout_weight="0.9"/>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tablayout"
+    <nl.joery.animatedbottombar.AnimatedBottomBar
+        android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pedidos" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Buscar" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cuenta" />
-    </com.google.android.material.tabs.TabLayout>
+        android:layout_height="wrap_content"
+        app:abb_selectedTabType="text"
+        app:abb_tabColor="#2C3340"
+        app:abb_tabColorSelected="#47CAF3"
+        app:abb_indicatorColor="#47CAF3"
+        app:abb_tabs="@menu/tabs"
+        app:abb_textStyle="bold"
+        app:abb_textSize="15sp"
+        app:abb_animationInterpolator="@android:anim/overshoot_interpolator" />
 </LinearLayout>

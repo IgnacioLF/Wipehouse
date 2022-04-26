@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_pedido"
+        android:icon="@drawable/pedidosicon_nocolor"
+        android:title="@string/pedido" />
+    <item
+        android:id="@+id/tab_buscar"
+        android:icon="@drawable/lupa_nocolor"
+        android:title="@string/buscar" />
+    <item
+        android:id="@+id/tab_cuenta"
+        android:icon="@drawable/cuenta_noccolor"
+        android:title="@string/cuenta" />
+</menu>
