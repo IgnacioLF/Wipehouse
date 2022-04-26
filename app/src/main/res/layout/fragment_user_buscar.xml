@@ -6,11 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".User_buscar">
 
+    <TextView
+        android:id="@+id/textselecciona"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#2c3340"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Selecciona Trabajo" />
+
     <ScrollView
         android:id="@+id/scrollseleccion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="60dp"
         android:visibility="visible">
 
         <LinearLayout
@@ -18,7 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
             android:orientation="vertical">
 

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ScrollView
+import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,32 +49,42 @@ class User_buscar : Fragment() {
         var buttonpiscinaspequenas = vista.findViewById<Button>(R.id.buttonpiscinaspequenas)
         var buttonlimpiador = vista.findViewById<Button>(R.id.buttonlimpiador)
         var buttoncortacesped = vista.findViewById<Button>(R.id.buttoncortacesped)
+        var textselecciona = vista.findViewById<TextView>(R.id.textselecciona)
         buttonaltacocina.setOnClickListener{
             scrollseleccion.setVisibility(View.GONE)
+            textselecciona.setVisibility(View.GONE)
             scrolllist.setVisibility(View.VISIBLE) }
         buttoncocinatradicional.setOnClickListener {
             scrollseleccion.setVisibility(View.GONE)
+            textselecciona.setVisibility(View.GONE)
             scrolllist.setVisibility(View.VISIBLE) }
         buttoncocinalowcost.setOnClickListener {
             scrollseleccion.setVisibility(View.GONE)
+            textselecciona.setVisibility(View.GONE)
             scrolllist.setVisibility(View.VISIBLE) }
         buttonpiscinagrande.setOnClickListener {
             scrollseleccion.setVisibility(View.GONE)
+            textselecciona.setVisibility(View.GONE)
             scrolllist.setVisibility(View.VISIBLE) }
         buttonpiscinasmediana.setOnClickListener {
             scrollseleccion.setVisibility(View.GONE)
+            textselecciona.setVisibility(View.GONE)
             scrolllist.setVisibility(View.VISIBLE) }
         buttonpiscinaspequenas.setOnClickListener {
             scrollseleccion.setVisibility(View.GONE)
+            textselecciona.setVisibility(View.GONE)
             scrolllist.setVisibility(View.VISIBLE) }
         buttonlimpiador.setOnClickListener {
             scrollseleccion.setVisibility(View.GONE)
+            textselecciona.setVisibility(View.GONE)
             scrolllist.setVisibility(View.VISIBLE) }
         buttoncortacesped.setOnClickListener {
             scrollseleccion.setVisibility(View.GONE)
+            textselecciona.setVisibility(View.GONE)
             scrolllist.setVisibility(View.VISIBLE) }
         imageButtonbackarrow.setOnClickListener {
             scrollseleccion.setVisibility(View.VISIBLE)
+            textselecciona.setVisibility(View.VISIBLE)
             scrolllist.setVisibility(View.GONE)
         }
 
