@@ -3,15 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".User_pedidos"
-    android:background="#00789f">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    tools:context=".User_pedidos">
+    <ListView
+        android:layout_marginTop="10dp"
+        android:id="@+id/listviewpedidos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="50sp"
-        android:text="Esto son pedidos" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>

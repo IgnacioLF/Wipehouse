@@ -122,6 +122,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="10dp"
+            android:textColorHint="#808080"
             android:background="@drawable/white_roundcorners"
             android:inputType="textEmailAddress" />
 
@@ -132,6 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contraseña"
+            android:textColorHint="#808080"
             android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold"

@@ -19,6 +19,7 @@ class User_MainActivity : AppCompatActivity() {
         )
         var ViewPagerAdapter = ViewPagerAdapter(fragments,this)
         ViewPager2.setAdapter(ViewPagerAdapter)
+        ViewPager2.setCurrentItem(1);
         bottom_bar.setupWithViewPager2(ViewPager2)
 
     }

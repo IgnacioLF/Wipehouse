@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ScrollView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,8 +36,48 @@ class User_buscar : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_buscar, container, false)
+        var vista = inflater.inflate(R.layout.fragment_user_buscar, container, false)
+        var scrollseleccion = vista.findViewById<ScrollView>(R.id.scrollseleccion)
+        var scrolllist = vista.findViewById<ScrollView>(R.id.scrolllist)
+        var imageButtonbackarrow = vista.findViewById<ImageButton>(R.id.imageButtonbackarrow)
+        var buttonaltacocina = vista.findViewById<Button>(R.id.buttonaltacocina)
+        var buttoncocinatradicional = vista.findViewById<Button>(R.id.buttoncocinatradicional)
+        var buttoncocinalowcost = vista.findViewById<Button>(R.id.buttoncocinalowcost)
+        var buttonpiscinagrande = vista.findViewById<Button>(R.id.buttonpiscinagrande)
+        var buttonpiscinasmediana = vista.findViewById<Button>(R.id.buttonpiscinasmediana)
+        var buttonpiscinaspequenas = vista.findViewById<Button>(R.id.buttonpiscinaspequenas)
+        var buttonlimpiador = vista.findViewById<Button>(R.id.buttonlimpiador)
+        var buttoncortacesped = vista.findViewById<Button>(R.id.buttoncortacesped)
+        buttonaltacocina.setOnClickListener{
+            scrollseleccion.setVisibility(View.GONE)
+            scrolllist.setVisibility(View.VISIBLE) }
+        buttoncocinatradicional.setOnClickListener {
+            scrollseleccion.setVisibility(View.GONE)
+            scrolllist.setVisibility(View.VISIBLE) }
+        buttoncocinalowcost.setOnClickListener {
+            scrollseleccion.setVisibility(View.GONE)
+            scrolllist.setVisibility(View.VISIBLE) }
+        buttonpiscinagrande.setOnClickListener {
+            scrollseleccion.setVisibility(View.GONE)
+            scrolllist.setVisibility(View.VISIBLE) }
+        buttonpiscinasmediana.setOnClickListener {
+            scrollseleccion.setVisibility(View.GONE)
+            scrolllist.setVisibility(View.VISIBLE) }
+        buttonpiscinaspequenas.setOnClickListener {
+            scrollseleccion.setVisibility(View.GONE)
+            scrolllist.setVisibility(View.VISIBLE) }
+        buttonlimpiador.setOnClickListener {
+            scrollseleccion.setVisibility(View.GONE)
+            scrolllist.setVisibility(View.VISIBLE) }
+        buttoncortacesped.setOnClickListener {
+            scrollseleccion.setVisibility(View.GONE)
+            scrolllist.setVisibility(View.VISIBLE) }
+        imageButtonbackarrow.setOnClickListener {
+            scrollseleccion.setVisibility(View.VISIBLE)
+            scrolllist.setVisibility(View.GONE)
+        }
+
+        return vista
     }
 
     companion object {
