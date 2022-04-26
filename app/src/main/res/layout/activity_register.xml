@@ -11,8 +11,8 @@
         android:id="@+id/imageButtonBackArrow"
         android:layout_width="100dp"
         android:layout_height="75dp"
-        android:scaleType="fitStart"
         android:background="@android:color/transparent"
+        android:scaleType="fitStart"
         app:srcCompat="@drawable/register_backarrow" />
 
     <TextView
