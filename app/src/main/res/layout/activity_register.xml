@@ -78,36 +78,6 @@
         android:visibility="visible">
 
         <TextView
-            android:id="@+id/textViewprovincia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:text="Provincia"
-            android:textColor="#2c3340"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-        <Spinner
-            android:id="@+id/spinnerprovincia"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:textColor="@color/white"
-            android:background="@drawable/bg_spinner"
-            android:padding="10dp"
-            android:spinnerMode="dropdown"
-            android:dropDownVerticalOffset="45dp" />
-
-        <EditText
-            android:id="@+id/editTextprovincia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/blue_roundcorners_low"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:textColor="@color/white"
-            android:visibility="gone"/>
-
-        <TextView
             android:id="@+id/textViewCiudad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -118,14 +88,14 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/editTextCiudad"
+        <Spinner
+            android:id="@+id/spinnerciudad"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/blue_roundcorners_low"
-            android:ems="10"
-            android:inputType="textPersonName"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_spinner"
+            android:dropDownVerticalOffset="45dp"
             android:padding="10dp"
+            android:spinnerMode="dropdown"
             android:textColor="@color/white" />
 
         <TextView

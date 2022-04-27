@@ -34,8 +34,6 @@ class Register : AppCompatActivity() {
     lateinit var editTextDNI: EditText
     lateinit var editTextEmail: EditText
     lateinit var editTextTelefono: EditText
-    lateinit var editTextprovincia: EditText
-    lateinit var editTextCiudad: EditText
     lateinit var editTextDireccion: EditText
     lateinit var editTextCodigopostal: EditText
     lateinit var linearparte1: LinearLayout
@@ -44,7 +42,7 @@ class Register : AppCompatActivity() {
     lateinit var textViewTitulo2: TextView
     lateinit var profile_image: de.hdodenhof.circleimageview.CircleImageView
     lateinit var imageButtonAddimage: ImageButton
-    lateinit var spinnerprovincias : Spinner
+    lateinit var spinnerciudad : Spinner
     var trabajador = false
     var cliente =false
     var partes=1
@@ -61,8 +59,6 @@ class Register : AppCompatActivity() {
         editTextDNI=findViewById(R.id.editTextDNI)
         editTextEmail=findViewById(R.id.editTextEmail)
         editTextTelefono=findViewById(R.id.editTextTelefono)
-        editTextprovincia=findViewById(R.id.editTextprovincia)
-        editTextCiudad=findViewById(R.id.editTextCiudad)
         editTextDireccion=findViewById(R.id.editTextDireccion)
         editTextCodigopostal=findViewById(R.id.editTextCodigopostal)
         linearparte1=findViewById(R.id.linearparte1)
@@ -74,17 +70,13 @@ class Register : AppCompatActivity() {
         profile_image=findViewById(R.id.profile_image)
         imageButtonAddimage=findViewById(R.id.imageButtonAddimage)
         val backarrowB = findViewById<ImageButton>(R.id.imageButtonBackArrow)
-        spinnerprovincias = findViewById(R.id.spinnerprovincia)
-        var provinciaslista = arrayOf<String>("Alava","Albacete","Alicante","Almería","Asturias","Avila","Badajoz","Barcelona","Burgos","Cáceres",
-            "Cádiz","Cantabria","Castellón","Ciudad Real","Córdoba","La Coruña","Cuenca","Gerona","Granada","Guadalajara",
-            "Guipúzcoa","Huelva","Huesca","Islas Baleares","Jaén","León","Lérida","Lugo","Madrid","Málaga","Murcia","Navarra",
-            "Orense","Palencia","Las Palmas","Pontevedra","La Rioja","Salamanca","Segovia","Sevilla","Soria","Tarragona",
-            "Santa Cruz de Tenerife","Teruel","Toledo","Valencia","Valladolid","Vizcaya","Zamora","Zaragoza")
-        var spinadapter = ArrayAdapter(this,R.layout.myselectedspinner,provinciaslista)
+        spinnerciudad = findViewById(R.id.spinnerciudad)
+        var ciudadlista = arrayOf<String>("Madrid","Barcelona")
+        var spinadapter = ArrayAdapter(this,R.layout.myselectedspinner,ciudadlista)
         spinadapter.setDropDownViewResource(R.layout.mydropdownspinner)
-        spinnerprovincias.adapter = spinadapter
+        spinnerciudad.adapter = spinadapter
 
-        spinnerprovincias.onItemSelectedListener = object :
+        spinnerciudad.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -141,7 +133,8 @@ class Register : AppCompatActivity() {
                     Toast.makeText(applicationContext,"Error alguno de los campos esta vacio",Toast.LENGTH_LONG).show()
                 }
             } else if (partes==2){
-                if (editTextprovincia.text.isNotEmpty()&&editTextCiudad.text.isNotEmpty()&&editTextDireccion.text.isNotEmpty()&&editTextCodigopostal.text.isNotEmpty()&&(trabajador==true||cliente==true)){
+                //// TODO ciudad spinner not empty
+                if (editTextDireccion.text.isNotEmpty()&&editTextCodigopostal.text.isNotEmpty()&&(trabajador==true||cliente==true)){
                     if(trabajador==true){
                         partes=3
                         linearparte2.setVisibility(View.INVISIBLE)
@@ -183,8 +176,8 @@ class Register : AppCompatActivity() {
                 var user = hashMapOf(
                     "nombre" to editTextTextNombre.text.toString(),
                     "apellidos" to editTextapellidos.text.toString(),
-                    "provincia" to editTextprovincia.text.toString(),
-                    "ciudad" to editTextCiudad.text.toString(),
+                    // TODO ciudad spinner
+                //    "ciudad" to editTextCiudad.text.toString(),
                     "direccion" to editTextDireccion.text.toString(),
                     "cp" to editTextCodigopostal.text.toString(),
                     "telefono" to editTextTelefono.text.toString(),
@@ -237,8 +230,8 @@ class Register : AppCompatActivity() {
                 var user = hashMapOf(
                     "nombre" to editTextTextNombre.text.toString(),
                     "apellidos" to editTextapellidos.text.toString(),
-                    "provincia" to editTextprovincia.text.toString(),
-                    "ciudad" to editTextCiudad.text.toString(),
+                    // TODO ciudad spinner
+                  //  "ciudad" to editTextCiudad.text.toString(),
                     "direccion" to editTextDireccion.text.toString(),
                     "cp" to editTextCodigopostal.text.toString(),
                     "telefono" to editTextTelefono.text.toString(),
