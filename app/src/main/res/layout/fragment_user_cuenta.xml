@@ -11,13 +11,12 @@
         android:textColor="#2c3340"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:text="Cuenta" />
 
     <ScrollView
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:id="@+id/SrollViewMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

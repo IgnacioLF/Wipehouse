@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -42,6 +44,7 @@ class Register : AppCompatActivity() {
     lateinit var textViewTitulo2: TextView
     lateinit var profile_image: de.hdodenhof.circleimageview.CircleImageView
     lateinit var imageButtonAddimage: ImageButton
+    lateinit var spinnerprovincias : Spinner
     var trabajador = false
     var cliente =false
     var partes=1
@@ -71,7 +74,28 @@ class Register : AppCompatActivity() {
         profile_image=findViewById(R.id.profile_image)
         imageButtonAddimage=findViewById(R.id.imageButtonAddimage)
         val backarrowB = findViewById<ImageButton>(R.id.imageButtonBackArrow)
+        spinnerprovincias = findViewById(R.id.spinnerprovincia)
+        var provinciaslista = arrayOf<String>("Alava","Albacete","Alicante","Almería","Asturias","Avila","Badajoz","Barcelona","Burgos","Cáceres",
+            "Cádiz","Cantabria","Castellón","Ciudad Real","Córdoba","La Coruña","Cuenca","Gerona","Granada","Guadalajara",
+            "Guipúzcoa","Huelva","Huesca","Islas Baleares","Jaén","León","Lérida","Lugo","Madrid","Málaga","Murcia","Navarra",
+            "Orense","Palencia","Las Palmas","Pontevedra","La Rioja","Salamanca","Segovia","Sevilla","Soria","Tarragona",
+            "Santa Cruz de Tenerife","Teruel","Toledo","Valencia","Valladolid","Vizcaya","Zamora","Zaragoza")
+        var spinadapter = ArrayAdapter(this,R.layout.myselectedspinner,provinciaslista)
+        spinadapter.setDropDownViewResource(R.layout.mydropdownspinner)
+        spinnerprovincias.adapter = spinadapter
 
+        spinnerprovincias.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
         imageButtonAddimage.setOnClickListener {
             var openGalleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             launcher.launch(openGalleryIntent);

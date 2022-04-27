@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun login(){
-        var edittextemail = findViewById<EditText>(R.id.editTextTextEmailAddress)
+        var edittextemail = findViewById<EditText>(R.id.editTextEmail)
         var edittextpassword = findViewById<EditText>(R.id.editTextTextPassword)
         if (edittextemail.text.isNotEmpty()&&edittextpassword.text.isNotEmpty()){
         FirebaseAuth.getInstance().signInWithEmailAndPassword(edittextemail.text.toString(),edittextpassword.text.toString()).addOnCompleteListener {
