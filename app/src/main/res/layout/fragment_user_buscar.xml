@@ -311,17 +311,12 @@
 
     </ScrollView>
 
-    <ScrollView
+    <LinearLayout
         android:id="@+id/scrolllist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:visibility="gone">
-
-        <LinearLayout
-            android:id="@+id/linearlistmain"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
             <RelativeLayout
                 android:id="@+id/relativetop"
@@ -341,12 +336,12 @@
                 <LinearLayout
                     android:id="@+id/linearbuscador"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="30dp"
+                    android:layout_height="40dp"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"
                     android:background="@drawable/lightblue_roundcorners_low"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/editTexbuscador"
@@ -364,24 +359,21 @@
                         android:id="@+id/imageButtonbuscar"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:background="@null"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
+                        android:background="@null"
                         android:scaleType="fitCenter"
                         android:src="@drawable/lupaicon_white" />
 
                 </LinearLayout>
-
-                <ListView
-                    android:id="@+id/listviewbuscar"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@+id/linearbuscador"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
             </RelativeLayout>
-        </LinearLayout>
-    </ScrollView>
+            <ListView
+                android:id="@+id/listviewbuscar"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/linearbuscador"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+    </LinearLayout>
 
 
 </FrameLayout>

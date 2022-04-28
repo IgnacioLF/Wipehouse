@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import java.util.regex.Pattern
 import android.net.Uri as Uri
 
 
@@ -246,7 +247,13 @@ class Register : AppCompatActivity() {
                             val storageRef = storage.reference
                             val pathReference = storageRef.child("Trabajadores/"+editTextEmail.text.toString()+".jpg")
                             pathReference.downloadUrl.addOnSuccessListener {
+                                var nombreyapellido = editTextTextNombre.text.toString() + " " + editTextapellidos.text.toString()
+                                if (editTextapellidos.text.toString().contains(" ")){
+                                    var apellidosarr = Pattern.compile(" ").split(editTextapellidos.text.toString())
+                                    nombreyapellido = editTextTextNombre.text.toString() + " " + apellidosarr[0]
+                                }
                                 var data = hashMapOf(
+                                    "nombreyapellido" to nombreyapellido,
                                     "ciudad" to spinnerciudad.selectedItem.toString(),
                                     "imageurl" to it.toString(),
                                     "altacocina_desc" to "",
@@ -261,7 +268,9 @@ class Register : AppCompatActivity() {
                                     "cortacesped_precio" to "",
                                     "mantenimiento_precio_grande" to "",
                                     "mantenimiento_precio_mediana" to "",
-                                    "mantenimiento_precio_pequena" to ""
+                                    "mantenimiento_precio_pequena" to "",
+                                    // TODO puntiacion meedia bien
+                                    "puntuacion_media" to "5"
                                 )
                                 db.collection("trabajadores").document(editTextEmail.text.toString()).set(data).addOnSuccessListener {
                                     var intent = Intent(applicationContext,Trabajos::class.java)
