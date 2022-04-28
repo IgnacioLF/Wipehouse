@@ -6,7 +6,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -22,8 +21,11 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
+import android.net.Uri as Uri
 
 
 class Register : AppCompatActivity() {
@@ -47,7 +49,7 @@ class Register : AppCompatActivity() {
     var cliente =false
     var partes=1
     lateinit var storagereference: StorageReference
-    lateinit var imageUri :Uri
+    lateinit var imageUri : Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -240,29 +242,39 @@ class Register : AppCompatActivity() {
                     .addOnSuccessListener { documentReference ->
                         var fileRef = storagereference.child("Trabajadores/"+editTextEmail.text.toString()+".jpg")
                         fileRef.putFile(imageUri).addOnSuccessListener {
-                            var data = hashMapOf(
-                                "ciudad" to spinnerciudad.selectedItem.toString(),
-                                "altacocina_desc" to "",
-                                "altacocina_platos" to "",
-                                "altacocina_precio" to "",
-                                "cocinatradicional_desc" to "",
-                                "cocinatradicional_platos" to "",
-                                "cocinatradicional_precio" to "",
-                                "cocinalowcost_desc" to "",
-                                "cocinalowcost_platos" to "",
-                                "limpiador_precio" to "",
-                                "cortacesped_precio" to "",
-                                "mantenimiento_precio_grande" to "",
-                                "mantenimiento_precio_mediana" to "",
-                                "mantenimiento_precio_pequena" to ""
-                            )
-                            db.collection("trabajadores").document(editTextEmail.text.toString()).set(data).addOnSuccessListener {
-                                var intent = Intent(applicationContext,Trabajos::class.java)
-                                finishAffinity()
-                                startActivity(intent)
+                            var storage = Firebase.storage
+                            val storageRef = storage.reference
+                            val pathReference = storageRef.child("Trabajadores/"+editTextEmail.text.toString()+".jpg")
+                            pathReference.downloadUrl.addOnSuccessListener {
+                                var data = hashMapOf(
+                                    "ciudad" to spinnerciudad.selectedItem.toString(),
+                                    "imageurl" to it.toString(),
+                                    "altacocina_desc" to "",
+                                    "altacocina_platos" to "",
+                                    "altacocina_precio" to "",
+                                    "cocinatradicional_desc" to "",
+                                    "cocinatradicional_platos" to "",
+                                    "cocinatradicional_precio" to "",
+                                    "cocinalowcost_desc" to "",
+                                    "cocinalowcost_platos" to "",
+                                    "limpiador_precio" to "",
+                                    "cortacesped_precio" to "",
+                                    "mantenimiento_precio_grande" to "",
+                                    "mantenimiento_precio_mediana" to "",
+                                    "mantenimiento_precio_pequena" to ""
+                                )
+                                db.collection("trabajadores").document(editTextEmail.text.toString()).set(data).addOnSuccessListener {
+                                    var intent = Intent(applicationContext,Trabajos::class.java)
+                                    finishAffinity()
+                                    startActivity(intent)
+                                }.addOnFailureListener {
+                                    FirebaseAuth.getInstance().currentUser?.delete()
+                                    db.collection("trabajadores").document(editTextEmail.text.toString()).delete()
+                                    db.collection("usuarios").document(editTextEmail.text.toString()).delete()
+                                    error("Se ha producido un error en la operacion")
+                                }
                             }.addOnFailureListener {
                                 FirebaseAuth.getInstance().currentUser?.delete()
-                                db.collection("trabajadores").document(editTextEmail.text.toString()).delete()
                                 db.collection("usuarios").document(editTextEmail.text.toString()).delete()
                                 error("Se ha producido un error en la operacion")
                             }
