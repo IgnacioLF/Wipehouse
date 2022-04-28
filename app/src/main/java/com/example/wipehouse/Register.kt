@@ -133,7 +133,6 @@ class Register : AppCompatActivity() {
                     Toast.makeText(applicationContext,"Error alguno de los campos esta vacio",Toast.LENGTH_LONG).show()
                 }
             } else if (partes==2){
-                //// TODO ciudad spinner not empty
                 if (editTextDireccion.text.isNotEmpty()&&editTextCodigopostal.text.isNotEmpty()&&(trabajador==true||cliente==true)){
                     if(trabajador==true){
                         partes=3
@@ -176,8 +175,7 @@ class Register : AppCompatActivity() {
                 var user = hashMapOf(
                     "nombre" to editTextTextNombre.text.toString(),
                     "apellidos" to editTextapellidos.text.toString(),
-                    // TODO ciudad spinner
-                //    "ciudad" to editTextCiudad.text.toString(),
+                    "ciudad" to spinnerciudad.selectedItem.toString(),
                     "direccion" to editTextDireccion.text.toString(),
                     "cp" to editTextCodigopostal.text.toString(),
                     "telefono" to editTextTelefono.text.toString(),
@@ -230,8 +228,7 @@ class Register : AppCompatActivity() {
                 var user = hashMapOf(
                     "nombre" to editTextTextNombre.text.toString(),
                     "apellidos" to editTextapellidos.text.toString(),
-                    // TODO ciudad spinner
-                  //  "ciudad" to editTextCiudad.text.toString(),
+                    "ciudad" to spinnerciudad.selectedItem.toString(),
                     "direccion" to editTextDireccion.text.toString(),
                     "cp" to editTextCodigopostal.text.toString(),
                     "telefono" to editTextTelefono.text.toString(),
@@ -244,6 +241,7 @@ class Register : AppCompatActivity() {
                         var fileRef = storagereference.child("Trabajadores/"+editTextEmail.text.toString()+".jpg")
                         fileRef.putFile(imageUri).addOnSuccessListener {
                             var data = hashMapOf(
+                                "ciudad" to spinnerciudad.selectedItem.toString(),
                                 "altacocina_desc" to "",
                                 "altacocina_platos" to "",
                                 "altacocina_precio" to "",
