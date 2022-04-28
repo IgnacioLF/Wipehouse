@@ -20,6 +20,11 @@ class TrabajadorBuscarArrayAdapter (context : Context, viewtopaint : Int, privat
         val textViewCategoria = currentlistitem.findViewById<TextView>(R.id.textViewCategoria)
         val textViewprecio = currentlistitem.findViewById<TextView>(R.id.textViewprecio)
         val image = currentlistitem.findViewById<ImageView>(R.id.imageView_trabajador)
+        val imageViewestrella1 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella1)
+        val imageViewestrella2 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella2)
+        val imageViewestrella3 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella3)
+        val imageViewestrella4 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella4)
+        val imageViewestrella5 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella5)
         val options = RequestOptions().circleCrop()
         Log.d("imageurlpara ver :",trabajadorlist.get(position).imageurl)
         Glide.with(currentlistitem).load(trabajadorlist.get(position).imageurl).apply(options).dontAnimate().into(image)
@@ -30,7 +35,20 @@ class TrabajadorBuscarArrayAdapter (context : Context, viewtopaint : Int, privat
             "Cocina Tradicional" -> textViewprecio.text = trabajadorlist.get(position).cocinatradicional_precio + "€"
             "Cocina Lowcost" -> textViewprecio.text = trabajadorlist.get(position).cocinalowcost_precio + "€"
         }
+        when (trabajadorlist.get(position).puntucaion_media.toInt()) {
+            1 -> {imageViewestrella2.setImageResource(R.drawable.estrellaicon)
+                imageViewestrella3.setImageResource(R.drawable.estrellaicon)
+                imageViewestrella4.setImageResource(R.drawable.estrellaicon)
+                imageViewestrella5.setImageResource(R.drawable.estrellaicon)}
+            2 ->{ imageViewestrella3.setImageResource(R.drawable.estrellaicon)
+                imageViewestrella4.setImageResource(R.drawable.estrellaicon)
+                imageViewestrella5.setImageResource(R.drawable.estrellaicon)}
+            3 ->{imageViewestrella4.setImageResource(R.drawable.estrellaicon)
+                imageViewestrella5.setImageResource(R.drawable.estrellaicon)}
+            4 ->imageViewestrella5.setImageResource(R.drawable.estrellaicon)
+        }
         return currentlistitem
     }
 
 }
+
