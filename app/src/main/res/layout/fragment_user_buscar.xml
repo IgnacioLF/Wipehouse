@@ -360,6 +360,7 @@
                     android:layout_height="40dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
+                    android:gravity="center"
                     android:background="@drawable/lightblue_roundcorners_low"
                     android:orientation="horizontal">
 

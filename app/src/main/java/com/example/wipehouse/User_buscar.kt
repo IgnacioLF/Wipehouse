@@ -73,7 +73,7 @@ class User_buscar : Fragment() {
             textselecciona.setVisibility(View.GONE)
             scrolllist.setVisibility(View.VISIBLE) }
         var db = Firebase.firestore
-        db.collection("trabajadores").get().addOnSuccessListener { result ->
+      /*  db.collection("trabajadores").get().addOnSuccessListener { result ->
             for (document in result){
                 var trabajadorciudad = document.data["ciudad"].toString()
                 var imagenurl = document.data["imageurl"].toString()
@@ -97,7 +97,7 @@ class User_buscar : Fragment() {
                 val currecttrabajador=Trabajador(emailtrabajador,nombreyapellido,trabajadorciudad,imagenurl,altacocina_desc,altacocina_platos,altacocina_precio,cocinatradicional_desc,cocinatradicional_platos,cocinatradicional_precio,cocinalowcost_desc,cocinalowcost_platos,cocinalowcost_precio,limpiador_precio,cortacesped_precio,mantenimiento_precio_grande,mantenimiento_precio_mediana,mantenimiento_precio_pequena,puntuacion_media)
                 listatrabajadores.add(currecttrabajador)
             }
-        }
+        }*/
         fun closemenus(){
             linearcocineromain.setBackgroundResource(R.drawable.bluestroke_roundcorners_low)
             imageViewcocinerologo.setImageResource(R.drawable.cocinero_icon)
@@ -139,32 +139,90 @@ class User_buscar : Fragment() {
             linearbotonescocina.setVisibility(View.VISIBLE)
         }
 
+        var listatrabajadoresfiltrada=ArrayList<Trabajador>()
+
+        fun getListratrabajadoresfiltrada(categoria_precio :String,categoria_lista :String){
+            listatrabajadoresfiltrada.clear()
+            db.collection("trabajadores").whereNotEqualTo(categoria_precio,"").get().addOnSuccessListener { result ->
+                for (document in result) {
+                    var trabajadorciudad = document.data["ciudad"].toString()
+                    var imagenurl = document.data["imageurl"].toString()
+                    var altacocina_desc = document.data["altacocina_desc"].toString()
+                    var altacocina_platos = document.data["altacocina_platos"].toString()
+                    var altacocina_precio = document.data["altacocina_precio"].toString()
+                    var cocinatradicional_desc = document.data["cocinatradicional_desc"].toString()
+                    var cocinatradicional_platos =
+                        document.data["cocinatradicional_platos"].toString()
+                    var cocinatradicional_precio =
+                        document.data["cocinatradicional_precio"].toString()
+                    var cocinalowcost_desc = document.data["cocinalowcost_desc"].toString()
+                    var cocinalowcost_platos = document.data["cocinalowcost_platos"].toString()
+                    var cocinalowcost_precio = document.data["cocinalowcost_precio"].toString()
+                    var limpiador_precio = document.data["limpiador_precio"].toString()
+                    var cortacesped_precio = document.data["cortacesped_precio"].toString()
+                    var mantenimiento_precio_grande =
+                        document.data["mantenimiento_precio_grande"].toString()
+                    var mantenimiento_precio_mediana =
+                        document.data["mantenimiento_precio_mediana"].toString()
+                    var mantenimiento_precio_pequena =
+                        document.data["mantenimiento_precio_pequena"].toString()
+                    var puntuacion_media = document.data["puntuacion_media"].toString()
+                    var emailtrabajador = document.id
+                    var nombreyapellido = document.data["nombreyapellido"].toString()
+                    val currecttrabajador = Trabajador(
+                        emailtrabajador,
+                        nombreyapellido,
+                        trabajadorciudad,
+                        imagenurl,
+                        altacocina_desc,
+                        altacocina_platos,
+                        altacocina_precio,
+                        cocinatradicional_desc,
+                        cocinatradicional_platos,
+                        cocinatradicional_precio,
+                        cocinalowcost_desc,
+                        cocinalowcost_platos,
+                        cocinalowcost_precio,
+                        limpiador_precio,
+                        cortacesped_precio,
+                        mantenimiento_precio_grande,
+                        mantenimiento_precio_mediana,
+                        mantenimiento_precio_pequena,
+                        puntuacion_media
+                    )
+                    listatrabajadoresfiltrada.add(currecttrabajador)
+                }
+                listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadoresfiltrada,categoria_lista) }
+
+            }
+        }
         buttonaltacocina.setOnClickListener{
-            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Alta Cocina") }
+            getListratrabajadoresfiltrada("altacocina_precio","Alta Cocina")
             gotolista()}
         buttoncocinatradicional.setOnClickListener {
-            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Cocina Tradicional")}
+            getListratrabajadoresfiltrada("cocinatradicional_precio","Cocina Tradicional")
             gotolista()}
         buttoncocinalowcost.setOnClickListener {
-            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Cocina Lowcost") }
+            getListratrabajadoresfiltrada("cocinalowcost_precio","Cocina Lowcost")
             gotolista()}
         buttonpiscinagrande.setOnClickListener {
-            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Piscina Grande") }
+            getListratrabajadoresfiltrada("mantenimiento_precio_grande","Piscina Grande")
             gotolista()}
         buttonpiscinasmediana.setOnClickListener {
-            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Piscina Mediana") }
+            getListratrabajadoresfiltrada("mantenimiento_precio_mediana","Piscina Mediana")
             gotolista()}
         buttonpiscinaspequenas.setOnClickListener {
-            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Piscina Pequeña") }
+            getListratrabajadoresfiltrada("mantenimiento_precio_pequena","Piscina Pequeña")
             gotolista()}
         buttonlimpiador.setOnClickListener {
-            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Limpiador") }
+            getListratrabajadoresfiltrada("limpiador_precio","Limpiador")
             gotolista()}
         buttoncortacesped.setOnClickListener {
-            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Cortacesped") }
+            getListratrabajadoresfiltrada("cortacesped_precio","Cortacesped")
             gotolista()}
         imageButtonbackarrow.setOnClickListener {
             closemenus()
+            listview.adapter = null
             scrollseleccion.setVisibility(View.VISIBLE)
             textselecciona.setVisibility(View.VISIBLE)
             scrolllist.setVisibility(View.GONE) }
