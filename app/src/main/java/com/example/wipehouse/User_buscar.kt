@@ -39,6 +39,21 @@ class User_buscar : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var vista = inflater.inflate(R.layout.fragment_user_buscar, container, false)
+        // cocina
+        var linearbotonescocina = vista.findViewById<LinearLayout>(R.id.linearbotonescocina)
+        var linearcocineromain = vista.findViewById<LinearLayout>(R.id.linearcocineromain)
+        var imageViewcocinerologo = vista.findViewById<ImageView>(R.id.imageViewcocinerologo)
+        // piscias
+        var linearpiscinasmain = vista.findViewById<LinearLayout>(R.id.linearpiscinasmain)
+        var imageViewpiscinaslogo = vista.findViewById<ImageView>(R.id.imageViewpiscinaslogo)
+        var linearbotonespiscinas = vista.findViewById<LinearLayout>(R.id.linearbotonespiscinas)
+        // limpiador
+        var linearlimpiadormain = vista.findViewById<LinearLayout>(R.id.linearlimpiadormain)
+        var imageViewlimpiadorlogo = vista.findViewById<ImageView>(R.id.imageViewlimpiadorlogo)
+        // cortacesped
+        var linearcortacespedmain = vista.findViewById<LinearLayout>(R.id.linearcortacespedmain)
+        var imageViewcortacespedlogo = vista.findViewById<ImageView>(R.id.imageViewcortacespedlogo)
+
         var scrollseleccion = vista.findViewById<ScrollView>(R.id.scrollseleccion)
         var scrolllist = vista.findViewById<LinearLayout>(R.id.scrolllist)
         var imageButtonbackarrow = vista.findViewById<ImageButton>(R.id.imageButtonbackarrow)
@@ -83,6 +98,46 @@ class User_buscar : Fragment() {
                 listatrabajadores.add(currecttrabajador)
             }
         }
+        fun closemenus(){
+            linearcocineromain.setBackgroundResource(R.drawable.bluestroke_roundcorners_low)
+            imageViewcocinerologo.setImageResource(R.drawable.cocinero_icon)
+            linearbotonescocina.setVisibility(View.GONE)
+            linearcortacespedmain.setBackgroundResource(R.drawable.bluestroke_roundcorners_low)
+            imageViewcortacespedlogo.setImageResource(R.drawable.cortacesped_icon)
+            buttoncortacesped.setVisibility(View.GONE)
+            linearlimpiadormain.setBackgroundResource(R.drawable.bluestroke_roundcorners_low)
+            imageViewlimpiadorlogo.setImageResource(R.drawable.limpiador_icon)
+            buttonlimpiador.setVisibility(View.GONE)
+            linearpiscinasmain.setBackgroundResource(R.drawable.bluestroke_roundcorners_low)
+            imageViewpiscinaslogo.setImageResource(R.drawable.mantenimiento_icon)
+            linearbotonespiscinas.setVisibility(View.GONE)
+        }
+
+        linearpiscinasmain.setOnClickListener {
+            closemenus()
+            linearpiscinasmain.setBackgroundResource(R.drawable.blue_roundcorners_low)
+            imageViewpiscinaslogo.setImageResource(R.drawable.mantenimientoicon_darkblue)
+            linearbotonespiscinas.setVisibility(View.VISIBLE)
+        }
+
+        linearlimpiadormain.setOnClickListener {
+            closemenus()
+            linearlimpiadormain.setBackgroundResource(R.drawable.blue_roundcorners_low)
+            imageViewlimpiadorlogo.setImageResource(R.drawable.limpiadoricon_darkblue)
+            buttonlimpiador.setVisibility(View.VISIBLE)
+        }
+        linearcortacespedmain.setOnClickListener {
+            closemenus()
+            linearcortacespedmain.setBackgroundResource(R.drawable.blue_roundcorners_low)
+            imageViewcortacespedlogo.setImageResource(R.drawable.cortacespedicon_darkblue)
+            buttoncortacesped.setVisibility(View.VISIBLE)
+        }
+        linearcocineromain.setOnClickListener {
+            closemenus()
+            linearcocineromain.setBackgroundResource(R.drawable.blue_roundcorners_low)
+            imageViewcocinerologo.setImageResource(R.drawable.cocineroicon_darkblue)
+            linearbotonescocina.setVisibility(View.VISIBLE)
+        }
 
         buttonaltacocina.setOnClickListener{
             listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Alta Cocina") }
@@ -103,12 +158,13 @@ class User_buscar : Fragment() {
             listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Piscina Pequeña") }
             gotolista()}
         buttonlimpiador.setOnClickListener {
-            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Limpoiador") }
+            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Limpiador") }
             gotolista()}
         buttoncortacesped.setOnClickListener {
             listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Cortacesped") }
             gotolista()}
         imageButtonbackarrow.setOnClickListener {
+            closemenus()
             scrollseleccion.setVisibility(View.VISIBLE)
             textselecciona.setVisibility(View.VISIBLE)
             scrolllist.setVisibility(View.GONE) }

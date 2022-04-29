@@ -165,7 +165,8 @@ class Trabajos : AppCompatActivity() {
                 buttonGuardar.setVisibility(View.GONE)
                 mantenimiento=false
             } else {
-                // go to edit trabajador activity
+                // TODO trabajador activity
+                startActivity(Intent(applicationContext,MainActivity::class.java))
             }
         }
 

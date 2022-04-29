@@ -37,7 +37,7 @@
                 android:id="@+id/linearcocineromain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_roundcorners_low"
+                android:background="@drawable/bluestroke_roundcorners_low"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -53,7 +53,7 @@
                         android:layout_height="55dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:src="@drawable/cocineroicon_darkblue" />
+                        android:src="@drawable/cocinero_icon" />
 
                     <TextView
                         android:id="@+id/textViewtitulococinero"
@@ -66,47 +66,57 @@
                         android:textStyle="bold" />
                 </RelativeLayout>
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/buttonaltacocina"
+                <LinearLayout
+                    android:id="@+id/linearbotonescocina"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/lightblue_roundcorners"
-                    android:text="Alta Cocina"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/buttoncocinatradicional"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/lightblue_roundcorners"
-                    android:text="Cocina Tradicional"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/buttonaltacocina"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/lightblue_roundcorners"
+                        android:text="Alta Cocina"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/buttoncocinalowcost"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/lightblue_roundcorners"
-                    android:text="Cocina Lowcost"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/buttoncocinatradicional"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/lightblue_roundcorners"
+                        android:text="Cocina Tradicional"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/buttoncocinalowcost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/lightblue_roundcorners"
+                        android:text="Cocina Lowcost"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -114,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/blue_roundcorners_low"
+                android:background="@drawable/bluestroke_roundcorners_low"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -130,7 +140,7 @@
                         android:layout_height="55dp"
                         android:layout_alignParentLeft="true"
                         android:layout_centerInParent="true"
-                        android:src="@drawable/mantenimientoicon_darkblue" />
+                        android:src="@drawable/mantenimiento_icon" />
 
                     <LinearLayout
                         android:id="@+id/lineartitulomantenimiento"
@@ -163,54 +173,63 @@
 
                 </RelativeLayout>
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/buttonpiscinagrande"
+                <LinearLayout
+                    android:id="@+id/linearbotonespiscinas"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/lightblue_roundcorners"
-                    android:text="Grandes >33m²"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/buttonpiscinasmediana"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/lightblue_roundcorners"
-                    android:text="Medianas 33m²"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/buttonpiscinagrande"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/lightblue_roundcorners"
+                        android:text="Grandes >33m²"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/buttonpiscinaspequenas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/lightblue_roundcorners"
-                    android:text="Pequeñas 19m²"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/buttonpiscinasmediana"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/lightblue_roundcorners"
+                        android:text="Medianas 33m²"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/buttonpiscinaspequenas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/lightblue_roundcorners"
+                        android:text="Pequeñas 19m²"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearlimpiadormain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_roundcorners_low"
+                android:background="@drawable/bluestroke_roundcorners_low"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp">
 
@@ -227,7 +246,7 @@
                         android:layout_height="55dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:src="@drawable/limpiadoricon_darkblue" />
+                        android:src="@drawable/limpiador_icon" />
 
                     <TextView
                         android:id="@+id/textViewtitulolimpaidor"
@@ -252,7 +271,8 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 
@@ -260,7 +280,7 @@
                 android:id="@+id/linearcortacespedmain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_roundcorners_low"
+                android:background="@drawable/bluestroke_roundcorners_low"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp">
@@ -278,7 +298,7 @@
                         android:layout_height="55dp"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:src="@drawable/cortacespedicon_darkblue" />
+                        android:src="@drawable/cortacesped_icon" />
 
                     <TextView
                         android:id="@+id/textViewtitulocortacesped"
@@ -303,7 +323,8 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -340,7 +361,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/lightblue_roundcorners_low"
-                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <EditText
