@@ -34,6 +34,11 @@ class TrabajadorBuscarArrayAdapter (context : Context, viewtopaint : Int, privat
             "Alta Cocina" -> textViewprecio.text = trabajadorlist.get(position).altacocina_precio + "€"
             "Cocina Tradicional" -> textViewprecio.text = trabajadorlist.get(position).cocinatradicional_precio + "€"
             "Cocina Lowcost" -> textViewprecio.text = trabajadorlist.get(position).cocinalowcost_precio + "€"
+            "Piscina Grande" -> textViewprecio.text = trabajadorlist.get(position).mantenimiento_precio_grande + "€"
+            "Piscina Mediana" -> textViewprecio.text = trabajadorlist.get(position).mantenimiento_precio_mediana + "€"
+            "Piscina Pequeña" -> textViewprecio.text = trabajadorlist.get(position).mantenimiento_precio_pequena + "€"
+            "Limpiador" -> textViewprecio.text = trabajadorlist.get(position).limpiador_precio + "€"
+            "Cortacesped" -> textViewprecio.text = trabajadorlist.get(position).cortacesped_precio + "€"
         }
         when (trabajadorlist.get(position).puntucaion_media.toInt()) {
             1 -> {imageViewestrella2.setImageResource(R.drawable.estrellaicon)

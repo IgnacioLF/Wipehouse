@@ -94,14 +94,19 @@ class User_buscar : Fragment() {
             listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Cocina Lowcost") }
             gotolista()}
         buttonpiscinagrande.setOnClickListener {
+            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Piscina Grande") }
             gotolista()}
         buttonpiscinasmediana.setOnClickListener {
+            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Piscina Mediana") }
             gotolista()}
         buttonpiscinaspequenas.setOnClickListener {
+            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Piscina Pequeña") }
             gotolista()}
         buttonlimpiador.setOnClickListener {
+            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Limpoiador") }
             gotolista()}
         buttoncortacesped.setOnClickListener {
+            listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadores,"Cortacesped") }
             gotolista()}
         imageButtonbackarrow.setOnClickListener {
             scrollseleccion.setVisibility(View.VISIBLE)
