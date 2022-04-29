@@ -86,7 +86,7 @@ class User_cuenta : Fragment() {
             editTextCodigopostal.setText(document.data?.get("cp")?.toString())
             editTextDireccion.setText(document.data?.get("direccion")?.toString())
             editTextDNI.setText(document.data?.get("dni")?.toString())
-            editTextTelefono.setText(document.data?.get("nombre")?.toString())
+            editTextTelefono.setText(document.data?.get("telefono")?.toString())
         }
         buttonModificar.setOnClickListener {
             // TODO modicar trabajos nombre y apellido y ciudad

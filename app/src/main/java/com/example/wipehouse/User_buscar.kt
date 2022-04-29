@@ -1,5 +1,6 @@
 package com.example.wipehouse
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -226,6 +227,21 @@ class User_buscar : Fragment() {
             scrollseleccion.setVisibility(View.VISIBLE)
             textselecciona.setVisibility(View.VISIBLE)
             scrolllist.setVisibility(View.GONE) }
+
+
+            var editTextfecha = vista.findViewById<EditText>(R.id.editTextfecha)
+
+        fun showDatePickerDialog() {
+            val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
+                val selectedDate = day.toString() + " / " + (month + 1) + " / " + year
+                editTextfecha.setText(selectedDate)
+            })
+
+
+            getActivity()?.let { newFragment.show(it.getSupportFragmentManager(), "datePicker") }
+        }
+        editTextfecha.setOnClickListener { showDatePickerDialog() }
+
         return vista
     }
 

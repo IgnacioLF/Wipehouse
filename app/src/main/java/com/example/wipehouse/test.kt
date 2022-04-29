@@ -1,8 +1,10 @@
 package com.example.wipehouse
 
+import android.app.DatePickerDialog
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.ImageView
 import com.google.firebase.auth.FirebaseAuth
 import com.bumptech.glide.Glide
@@ -19,6 +21,8 @@ import com.bumptech.glide.request.RequestOptions
 
 
 class test : AppCompatActivity() {
+
+    lateinit var etPlannedDate : EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
@@ -28,8 +32,21 @@ class test : AppCompatActivity() {
         val storageRef = storage.reference
         val pathReference = storageRef.child("Trabajadores/"+email+".jpg")
 
+        etPlannedDate = findViewById(R.id.etPlannedDate)
+        etPlannedDate.setOnClickListener {
+            showDatePickerDialog()
+        }
+
         val options = RequestOptions().circleCrop()
         Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/wipehouse-ffdd1.appspot.com/o/Trabajadores%2Flabuena%40gmail.com.jpg?alt=media&token=8235fbdc-1ae3-4ac1-9417-664e77289264").apply(options).dontAnimate().into(image)
     }
-    
+
+    private fun showDatePickerDialog() {
+        val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
+            val selectedDate = day.toString() + " / " + (month + 1) + " / " + year
+            etPlannedDate.setText(selectedDate)
+        })
+
+        newFragment.show(supportFragmentManager, "datePicker")
+    }
 }

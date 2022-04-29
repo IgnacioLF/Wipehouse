@@ -17,14 +17,29 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            app:srcCompat="@drawable/blue_circle" />
+            app:srcCompat="@drawable/blue_circle"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/imageViewlabuena"
             android:layout_width="190dp"
             android:layout_height="190dp"
             android:layout_centerInParent="true"
-            app:srcCompat="@drawable/ejemplo" />
+            app:srcCompat="@drawable/ejemplo"
+            android:visibility="gone"/>
+
+        <EditText
+            android:id="@+id/etPlannedDate"
+            android:hint="fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:focusable="false"
+            android:textColor="@color/blue"
+            android:text="test"
+            android:clickable="true"
+            android:maxLines="1" />
+
 
     </RelativeLayout>
 
