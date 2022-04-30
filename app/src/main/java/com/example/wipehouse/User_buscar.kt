@@ -304,7 +304,8 @@ class User_buscar : Fragment() {
                                 "cantidad" to editTextcantidadde.text.toString(),
                                 "fecha" to editTextfecha.text.toString(),
                                 "hora_inicio" to editTexthorainicio.text.toString(),
-                                "puntuacion" to "")
+                                "puntuacion" to "",
+                                "estado" to "Pendiente")
                             db.collection("pedidos")
                                 .document(idpedido)
                                 .set(pedido)
@@ -361,8 +362,6 @@ class User_buscar : Fragment() {
             textselecciona.setVisibility(View.VISIBLE)
             scrolllist.setVisibility(View.GONE) }
 
-
-
         fun showDatePickerDialog() {
             val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
                 val selectedDate = day.toString() + " / " + (month + 1) + " / " + year
@@ -371,7 +370,6 @@ class User_buscar : Fragment() {
             getActivity()?.let { newFragment.show(it.getSupportFragmentManager(), "datePicker") }
         }
         editTextfecha.setOnClickListener { showDatePickerDialog() }
-
 
         fun getTime(editText: EditText, context: Context){
             val cal = Calendar.getInstance()
@@ -390,8 +388,6 @@ class User_buscar : Fragment() {
         editTexthorainicio.setOnClickListener {
             context?.let { it1 -> getTime(editTexthorainicio, it1) }
         }
-
-
         return vista
     }
 

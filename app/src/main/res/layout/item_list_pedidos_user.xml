@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativemain">
+
+    <RelativeLayout
+        android:id="@+id/relative_conteenedor_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        >
+        <ImageView
+            android:id="@+id/imageViewcirculo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/blue_circle" />
+        <ImageView
+            android:id="@+id/imageView_trabajador"
+            android:layout_width="73dp"
+            android:layout_height="73dp"
+            android:layout_centerInParent="true"
+            app:srcCompat="@drawable/ejemplo" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textViewEstado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/relative_conteenedor_image"
+        android:text="Rechazado"
+        android:textColor="@color/rechazado"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textViewNombreyapellido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_toRightOf="@+id/relative_conteenedor_image"
+        android:layout_centerVertical="true"
+        android:text="Jose PpAndres"
+        android:textColor="#2c3340"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textViewcantidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="63dp"
+        android:layout_toRightOf="@+id/relative_conteenedor_image"
+        android:text="2 Personas"
+        android:textColor="#2c3340"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textViewfecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_toRightOf="@+id/relative_conteenedor_image"
+        android:text="00/00/00000"
+        android:textColor="#2c3340"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonvalorar"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/greenstroke_roundcorners_low"
+        android:text="Valorar"
+        android:textColor="@color/aceptado"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textViewprecio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lightblue"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:text="00€" />
+</RelativeLayout>

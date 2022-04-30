@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#00789f</color>
     <color name="lightblue">#47c9f3</color>
+    <color name="pendiente">#ce6b03</color>
+    <color name="aceptado">#70a83b</color>
+    <color name="rechazado">#bf0811</color>
+    <color name="realizado">#006b33 </color>
 </resources>
