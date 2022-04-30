@@ -9,9 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
@@ -46,6 +48,7 @@ class User_buscar : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        var currentemailuser = FirebaseAuth.getInstance().currentUser?.email
         var vista = inflater.inflate(R.layout.fragment_user_buscar, container, false)
         val options = RequestOptions().circleCrop()
         // cocina
@@ -98,6 +101,15 @@ class User_buscar : Fragment() {
         var linearcantidadde = vista.findViewById<LinearLayout>(R.id.linearcantidadde)
         var imageButtonbackarrowrelizarpedido = vista.findViewById<ImageButton>(R.id.imageButtonbackarrowrelizarpedido)
         var textViewpreciofinal = vista.findViewById<TextView>(R.id.textViewpreciofinal)
+        var buttonrealizarpedido = vista.findViewById<Button>(R.id.buttonrealizarpedido)
+
+        fun mensajepopup(accion: String, mensaje: String) {
+            val builder = context?.let { AlertDialog.Builder(it) }
+            builder?.setTitle(accion)
+            builder?.setMessage(mensaje)
+            builder?.setPositiveButton("Aceptar", null)
+            builder?.create()?.show()
+        }
 
         fun gotolista(){
             scrollseleccion.setVisibility(View.GONE)
@@ -211,7 +223,7 @@ class User_buscar : Fragment() {
                 listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadoresfiltrada,categoria_lista) }
                 listview.setOnItemClickListener { parent, view, position, id ->
                     var precioporitem = 0
-                    textViewpreciofinal.text = "0€"
+                    var preciofinal = 0
                     scrolllist.setVisibility(View.GONE)
                     scrollrealizarpedido.setVisibility(View.VISIBLE)
                     textViewNombreyapellido.text = listatrabajadoresfiltrada.get(position).nombreyapellido
@@ -275,9 +287,44 @@ class User_buscar : Fragment() {
                         }
                     }
                     editTextcantidadde.addTextChangedListener {
-                        if (editTextcantidadde.text.isNotEmpty()&&categoria_lista.contains("Piscina")==false){
-                            var preciofinal = Integer. parseInt(editTextcantidadde.text.toString())*precioporitem
+                        if (editTextcantidadde.text.isNotEmpty()){
+                            preciofinal = Integer. parseInt(editTextcantidadde.text.toString())*precioporitem
                             textViewpreciofinal.text = preciofinal.toString() + "€"
+                        }
+                    }
+                    buttonrealizarpedido.setOnClickListener {
+                        if ((editTextcantidadde.text.isNotEmpty()||categoria_lista.contains("Piscina"))&&editTextfecha.text.isNotEmpty()&&editTexthorainicio.text.isNotEmpty()){
+                            var fechasinbarras =editTextfecha.text.toString().replace("/","-")
+                            var idpedido = currentemailuser + "#"+ listatrabajadoresfiltrada.get(position).email +"#"+fechasinbarras+"#"+editTexthorainicio.text.toString()
+                            var pedido = hashMapOf(
+                                "email_cliente" to currentemailuser,
+                                "email_trabajador" to listatrabajadoresfiltrada.get(position).email,
+                                "tipo" to categoria_lista,
+                                "precio" to preciofinal,
+                                "cantidad" to editTextcantidadde.text.toString(),
+                                "fecha" to editTextfecha.text.toString(),
+                                "hora_inicio" to editTexthorainicio.text.toString(),
+                                "puntuacion" to "")
+                            db.collection("pedidos")
+                                .document(idpedido)
+                                .set(pedido)
+                                .addOnSuccessListener {
+                                    mensajepopup("Pedido Realizado","El pedido se realizo con exito puede comprobar su estado en pedidos")
+                                    closemenus()
+                                    listview.adapter = null
+                                    scrollseleccion.setVisibility(View.VISIBLE)
+                                    textselecciona.setVisibility(View.VISIBLE)
+                                    editTextcantidadde.setText("")
+                                    editTextfecha.setText("")
+                                    editTexthorainicio.setText("")
+                                    textViewpreciofinal.text = "0€"
+                                    scrolllist.setVisibility(View.GONE)
+                                    scrollrealizarpedido.setVisibility(View.GONE)
+                                }.addOnFailureListener {
+                                    mensajepopup("Error al realizar pedido","Ocurrio un error al relizar el pedido compruebe los campos y pruebe otra vez")
+                                }
+                        } else{
+                            Toast.makeText(context,"Error alguno de los campos esta vacio",Toast.LENGTH_LONG).show()
                         }
                     }
                 }
