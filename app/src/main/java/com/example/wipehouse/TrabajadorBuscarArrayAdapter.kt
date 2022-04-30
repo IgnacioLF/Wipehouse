@@ -26,7 +26,6 @@ class TrabajadorBuscarArrayAdapter (context : Context, viewtopaint : Int, privat
         val imageViewestrella4 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella4)
         val imageViewestrella5 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella5)
         val options = RequestOptions().circleCrop()
-        Log.d("imageurlpara ver :",trabajadorlist.get(position).imageurl)
         Glide.with(currentlistitem).load(trabajadorlist.get(position).imageurl).apply(options).dontAnimate().into(image)
         textViewNombreyapellido.text = trabajadorlist.get(position).nombreyapellido
         textViewCategoria.text = categoria

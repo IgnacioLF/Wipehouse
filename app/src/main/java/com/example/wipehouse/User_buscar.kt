@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
@@ -44,6 +46,7 @@ class User_buscar : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var vista = inflater.inflate(R.layout.fragment_user_buscar, container, false)
+        val options = RequestOptions().circleCrop()
         // cocina
         var linearbotonescocina = vista.findViewById<LinearLayout>(R.id.linearbotonescocina)
         var linearcocineromain = vista.findViewById<LinearLayout>(R.id.linearcocineromain)
@@ -72,7 +75,28 @@ class User_buscar : Fragment() {
         var buttoncortacesped = vista.findViewById<Button>(R.id.buttoncortacesped)
         var textselecciona = vista.findViewById<TextView>(R.id.textselecciona)
         var listview = vista.findViewById<ListView>(R.id.listviewbuscar)
-        var listatrabajadores=ArrayList<Trabajador>()
+        var scrollrealizarpedido = vista.findViewById<ScrollView>(R.id.scrollrealizarpedido)
+        // scroll realizar pedido data
+        var imageView_trabajador = vista.findViewById<ImageView>(R.id.imageView_trabajador)
+        var imageViewestrella1 = vista.findViewById<ImageView>(R.id.imageViewestrella1)
+        var imageViewestrella2 = vista.findViewById<ImageView>(R.id.imageViewestrella2)
+        var imageViewestrella3 = vista.findViewById<ImageView>(R.id.imageViewestrella3)
+        var imageViewestrella4 = vista.findViewById<ImageView>(R.id.imageViewestrella4)
+        var imageViewestrella5 = vista.findViewById<ImageView>(R.id.imageViewestrella5)
+        var textViewNombreyapellido = vista.findViewById<TextView>(R.id.textViewNombreyapellido)
+        var textViewCategoria = vista.findViewById<TextView>(R.id.textViewCategoria)
+        var textViewprecio = vista.findViewById<TextView>(R.id.textViewprecio)
+        var linneardescripcion = vista.findViewById<LinearLayout>(R.id.linneardescripcion)
+        var textViewdescripcion = vista.findViewById<TextView>(R.id.textViewdescripcion)
+        var linnearplatos = vista.findViewById<LinearLayout>(R.id.linnearplatos)
+        var textViewplatos = vista.findViewById<TextView>(R.id.textViewplatos)
+        var textViewncantidaddetit = vista.findViewById<TextView>(R.id.textViewncantidaddetit)
+        var editTextcantidadde = vista.findViewById<EditText>(R.id.editTextcantidadde)
+        var editTextfecha = vista.findViewById<EditText>(R.id.editTextfecha)
+        var editTexthorainicio = vista.findViewById<EditText>(R.id.editTexthorainicio)
+        var linearcantidadde = vista.findViewById<LinearLayout>(R.id.linearcantidadde)
+        var imageButtonbackarrowrelizarpedido = vista.findViewById<ImageButton>(R.id.imageButtonbackarrowrelizarpedido)
+
         fun gotolista(){
             scrollseleccion.setVisibility(View.GONE)
             textselecciona.setVisibility(View.GONE)
@@ -92,7 +116,17 @@ class User_buscar : Fragment() {
             imageViewpiscinaslogo.setImageResource(R.drawable.mantenimiento_icon)
             linearbotonespiscinas.setVisibility(View.GONE)
         }
-
+        imageButtonbackarrowrelizarpedido.setOnClickListener {
+            closemenus()
+            listview.adapter = null
+            scrollseleccion.setVisibility(View.VISIBLE)
+            textselecciona.setVisibility(View.VISIBLE)
+            editTextcantidadde.setText("")
+            editTextfecha.setText("")
+            editTexthorainicio.setText("")
+            scrolllist.setVisibility(View.GONE)
+            scrollrealizarpedido.setVisibility(View.GONE)
+        }
         linearpiscinasmain.setOnClickListener {
             closemenus()
             linearpiscinasmain.setBackgroundResource(R.drawable.blue_roundcorners_low)
@@ -173,7 +207,62 @@ class User_buscar : Fragment() {
                     listatrabajadoresfiltrada.add(currecttrabajador)
                 }
                 listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadoresfiltrada,categoria_lista) }
+                listview.setOnItemClickListener { parent, view, position, id ->
+                    scrolllist.setVisibility(View.GONE)
+                    scrollrealizarpedido.setVisibility(View.VISIBLE)
+                    textViewNombreyapellido.text = listatrabajadoresfiltrada.get(position).nombreyapellido
+                    Glide.with(vista).load(listatrabajadoresfiltrada.get(position).imageurl).apply(options).dontAnimate().into(imageView_trabajador)
+                    when (listatrabajadoresfiltrada.get(position).puntucaion_media.toInt()) {
+                        1 -> {imageViewestrella2.setImageResource(R.drawable.estrellaicon)
+                            imageViewestrella3.setImageResource(R.drawable.estrellaicon)
+                            imageViewestrella4.setImageResource(R.drawable.estrellaicon)
+                            imageViewestrella5.setImageResource(R.drawable.estrellaicon)}
+                        2 ->{ imageViewestrella3.setImageResource(R.drawable.estrellaicon)
+                            imageViewestrella4.setImageResource(R.drawable.estrellaicon)
+                            imageViewestrella5.setImageResource(R.drawable.estrellaicon)}
+                        3 ->{imageViewestrella4.setImageResource(R.drawable.estrellaicon)
+                            imageViewestrella5.setImageResource(R.drawable.estrellaicon)}
+                        4 ->imageViewestrella5.setImageResource(R.drawable.estrellaicon)
+                    }
+                    textViewCategoria.text=categoria_lista
+                    when (categoria_lista) {
+                        "Alta Cocina" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).altacocina_precio + "€"
+                        "Cocina Tradicional" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).cocinatradicional_precio + "€"
+                        "Cocina Lowcost" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).cocinalowcost_precio + "€"
+                        "Piscina Grande" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).mantenimiento_precio_grande + "€"
+                        "Piscina Mediana" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).mantenimiento_precio_mediana + "€"
+                        "Piscina Pequeña" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).mantenimiento_precio_pequena + "€"
+                        "Limpiador" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).limpiador_precio + "€"
+                        "Cortacesped" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).cortacesped_precio + "€"
+                    }
+                    if (categoria_lista.contains("Cocina")){
+                        linneardescripcion.setVisibility(View.VISIBLE)
+                        linnearplatos.setVisibility(View.VISIBLE)
+                        when (categoria_lista) {
+                            "Alta Cocina" -> {textViewdescripcion.text = listatrabajadoresfiltrada.get(position).altacocina_desc
+                                textViewplatos.text =listatrabajadoresfiltrada.get(position).altacocina_platos}
+                            "Cocina Tradicional" -> {textViewdescripcion.text = listatrabajadoresfiltrada.get(position).cocinatradicional_desc
+                                textViewplatos.text =listatrabajadoresfiltrada.get(position).cocinatradicional_platos}
+                            "Cocina Lowcost" -> {textViewdescripcion.text = listatrabajadoresfiltrada.get(position).cocinalowcost_desc
+                                textViewplatos.text =listatrabajadoresfiltrada.get(position).cocinalowcost_platos}
+                        }
+                        linearcantidadde.setVisibility(View.VISIBLE)
+                        textViewncantidaddetit.text = "Nº de personas"
+                    } else {
+                        linneardescripcion.setVisibility(View.GONE)
+                        linnearplatos.setVisibility(View.GONE)
+                        if (categoria_lista.contains("Piscina")){
+                            linearcantidadde.setVisibility(View.GONE)
+                        } else{
+                            linearcantidadde.setVisibility(View.VISIBLE)
+                            when(categoria_lista){
+                                "Limpiador" -> textViewncantidaddetit.text = "Número de horas"
+                                "Cortacesped" -> textViewncantidaddetit.text = "Número de m²"
+                            }
+                        }
+                    }
 
+                }
             }
         }
         buttonaltacocina.setOnClickListener{
@@ -208,7 +297,7 @@ class User_buscar : Fragment() {
             scrolllist.setVisibility(View.GONE) }
 
 
-        var editTextfecha = vista.findViewById<EditText>(R.id.editTextfecha)
+
         fun showDatePickerDialog() {
             val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
                 val selectedDate = day.toString() + " / " + (month + 1) + " / " + year
@@ -218,7 +307,7 @@ class User_buscar : Fragment() {
         }
         editTextfecha.setOnClickListener { showDatePickerDialog() }
 
-        var editTexthorainicio = vista.findViewById<EditText>(R.id.editTexthorainicio)
+
         fun getTime(editText: EditText, context: Context){
             val cal = Calendar.getInstance()
             val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->

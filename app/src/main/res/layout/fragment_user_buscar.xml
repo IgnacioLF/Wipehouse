@@ -17,14 +17,14 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:text="Selecciona Trabajo"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 
     <ScrollView
         android:id="@+id/scrollseleccion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="60dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/linearseleccion"
@@ -398,23 +398,31 @@
     </LinearLayout>
 
     <ScrollView
-        android:id="@+id/relativerealizarpedido"
+        android:id="@+id/scrollrealizarpedido"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@+id/linearmainrelizarpedido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <RelativeLayout
                 android:id="@+id/relativeitemlistiamge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp">
 
+                <ImageButton
+                    android:id="@+id/imageButtonbackarrowrelizarpedido"
+                    android:layout_width="100dp"
+                    android:layout_height="75dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@null"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/register_backarrow" />
 
                 <RelativeLayout
                     android:id="@+id/relative_conteenedor_image"
@@ -422,7 +430,7 @@
                     android:layout_height="150dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="35dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp">
@@ -490,11 +498,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/linearpuntuacion"
-                    android:layout_marginTop="29dp"
+                    android:layout_marginTop="52dp"
                     android:layout_toRightOf="@+id/relative_conteenedor_image"
                     android:text="Jose Andres"
                     android:textColor="#2c3340"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -503,10 +511,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@+id/relative_conteenedor_image"
-                    android:paddingBottom="34dp"
-                    android:text="Alta Cocina"
+                    android:paddingBottom="52dp"
+                    android:text="Cocina tradicional"
                     android:textColor="@color/lightblue"
-                    android:textSize="20sp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -514,8 +522,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="150dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/lightblue_roundcorners_low"
                     android:padding="3dp"
                     android:text="00€"
@@ -524,243 +532,245 @@
                     android:textStyle="bold" />
 
             </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/linneardescripcion"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@drawable/blue_roundcorners_low"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:id="@+id/textViewdescripciontit"
+                <LinearLayout
+                    android:id="@+id/linneardescripcion"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="-Descripcion"
-                    android:textColor="#2c3340"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginBottom="5dp"
-                    android:textSize="23sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textViewdescripcion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#2c3340"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:layout_marginBottom="10dp"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac gravida lacus, etsemper elit. In hac habitasse platea dictumst. Aliquam commodo" />
-            </LinearLayout>
+                    android:background="@drawable/blue_roundcorners_low"
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
-            <LinearLayout
-                android:id="@+id/linnearplatos"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@drawable/blue_roundcorners_low"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp">
+                    <TextView
+                        android:id="@+id/textViewdescripciontit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="-Descripcion"
+                        android:textColor="#2c3340"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/textViewplatostit"
+                    <TextView
+                        android:id="@+id/textViewdescripcion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac gravida lacus, etsemper elit. In hac habitasse platea dictumst. Aliquam commodo"
+                        android:textColor="#2c3340"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linnearplatos"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="-Platos"
-                    android:textColor="#2c3340"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginBottom="5dp"
-                    android:textSize="23sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textViewplatos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#2c3340"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:layout_marginBottom="10dp"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac gravida lacus, etsemper elit dasd qaadadr reqweq" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearrelizarpedido"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@drawable/blue_roundcorners_low"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:id="@+id/textViewrelizarpedidotit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="-Realizar pedido"
-                    android:textColor="#2c3340"
-                    android:layout_margin="10dp"
-                    android:textSize="23sp"
-                    android:textStyle="bold"/>
-
-                <LinearLayout
-                    android:id="@+id/linearnpersonas"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:background="@drawable/blue_roundcorners_low"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textViewnpersonastit"
-                        android:layout_width="0dp"
+                        android:id="@+id/textViewplatostit"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
-                        android:gravity="end"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="7dp"
                         android:layout_marginRight="10dp"
-                        android:text="Nº de personas"
+                        android:layout_marginBottom="5dp"
+                        android:text="-Platos"
+                        android:textColor="#2c3340"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewplatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ac gravida lacus, etsemper elit dasd qaadadr reqweq"
                         android:textColor="#2c3340"
                         android:textSize="17sp"
-                        android:textStyle="bold"/>
-
-                    <EditText
-                        android:id="@+id/editTextnpersonas"
-                        android:layout_width="0dp"
-                        android:layout_marginRight="50dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.45"
-                        android:ems="10"
-                        android:padding="7dp"
-                        android:gravity="center"
-                        android:background="@drawable/white_roundcorners"
-                        android:inputType="number" />
-
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linearnfecha"
-                    android:layout_marginTop="10dp"
+                    android:id="@+id/linearrelizarpedido"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textViewnfechatit"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
-                        android:gravity="end"
-                        android:layout_marginRight="10dp"
-                        android:text="Fecha"
-                        android:textColor="#2c3340"
-                        android:textSize="17sp"
-                        android:textStyle="bold"/>
-
-                    <EditText
-                        android:id="@+id/editTextfecha"
-                        android:layout_width="0dp"
-                        android:layout_marginRight="50dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.45"
-                        android:ems="10"
-                        android:padding="7dp"
-                        android:focusable="false"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:background="@drawable/white_roundcorners"
-                        android:inputType="date" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linearhora"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textViewnhoratit"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.6"
-                        android:gravity="end"
-                        android:layout_marginRight="10dp"
-                        android:text="Hora inicio"
-                        android:textColor="#2c3340"
-                        android:textSize="17sp"
-                        android:textStyle="bold"/>
-
-                    <EditText
-                        android:id="@+id/editTexthorainicio"
-                        android:layout_width="0dp"
-                        android:layout_marginRight="50dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.45"
-                        android:ems="10"
-                        android:padding="7dp"
-                        android:focusable="false"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:background="@drawable/white_roundcorners"
-                        android:inputType="number" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearpreciofinal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
-
-                    <TextView
-                        android:id="@+id/textViewpreciofinaltit"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="Precio Final"
-                        android:gravity="end"
-                        android:layout_marginRight="54dp"
-                        android:textColor="@color/white"
-                        android:textSize="25sp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/textViewpreciofinal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.36"
-                        android:text="00€"
-                        android:layout_marginRight="10dp"
-                        android:textColor="@color/white"
-                        android:textSize="25sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/buttonrealizarpedido"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="50dp"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/lightblue_roundcorners"
-                    android:text="Realizar Pedido"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    android:background="@drawable/blue_roundcorners_low"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewrelizarpedidotit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="-Realizar pedido"
+                        android:textColor="#2c3340"
+                        android:textSize="23sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/linearcantidadde"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewncantidaddetit"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.6"
+                            android:gravity="end"
+                            android:text="Nº de personas"
+                            android:textColor="#2c3340"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextcantidadde"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="0.45"
+                            android:background="@drawable/white_roundcorners"
+                            android:ems="10"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:padding="7dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearnfecha"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewnfechatit"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.6"
+                            android:gravity="end"
+                            android:text="Fecha"
+                            android:textColor="#2c3340"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextfecha"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="0.45"
+                            android:background="@drawable/white_roundcorners"
+                            android:clickable="true"
+                            android:ems="10"
+                            android:focusable="false"
+                            android:gravity="center"
+                            android:inputType="date"
+                            android:padding="7dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearhora"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewnhoratit"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.6"
+                            android:gravity="end"
+                            android:text="Hora inicio"
+                            android:textColor="#2c3340"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTexthorainicio"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="0.45"
+                            android:background="@drawable/white_roundcorners"
+                            android:clickable="true"
+                            android:ems="10"
+                            android:focusable="false"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:padding="7dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearpreciofinal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewpreciofinaltit"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="54dp"
+                            android:layout_weight="0.5"
+                            android:gravity="end"
+                            android:text="Precio Final"
+                            android:textColor="@color/white"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textViewpreciofinal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="0.36"
+                            android:text="00€"
+                            android:textColor="@color/white"
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/buttonrealizarpedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/lightblue_roundcorners"
+                        android:text="Realizar Pedido"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
