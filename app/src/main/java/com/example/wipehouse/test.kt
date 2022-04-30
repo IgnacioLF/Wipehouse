@@ -1,6 +1,8 @@
 package com.example.wipehouse
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.content.Context
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,9 +17,8 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import java.lang.System.load
 import com.bumptech.glide.request.RequestOptions
-
-
-
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class test : AppCompatActivity() {
@@ -33,14 +34,29 @@ class test : AppCompatActivity() {
         val pathReference = storageRef.child("Trabajadores/"+email+".jpg")
 
         etPlannedDate = findViewById(R.id.etPlannedDate)
+
         etPlannedDate.setOnClickListener {
-            showDatePickerDialog()
+            getTime(etPlannedDate,this)
         }
 
         val options = RequestOptions().circleCrop()
         Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/wipehouse-ffdd1.appspot.com/o/Trabajadores%2Flabuena%40gmail.com.jpg?alt=media&token=8235fbdc-1ae3-4ac1-9417-664e77289264").apply(options).dontAnimate().into(image)
     }
 
+
+    fun getTime(editText: EditText, context: Context){
+        val cal = Calendar.getInstance()
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+            var finalminute = minute.toString()
+            if (minute.toString().length==1){
+                finalminute="0"+minute
+            }
+            val selectedtime = hour.toString() + ":" + finalminute
+            editText.setText(selectedtime) }
+        TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+    }
     private fun showDatePickerDialog() {
         val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
             val selectedDate = day.toString() + " / " + (month + 1) + " / " + year

@@ -1,6 +1,8 @@
 package com.example.wipehouse
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.*
+import kotlin.collections.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,31 +78,6 @@ class User_buscar : Fragment() {
             textselecciona.setVisibility(View.GONE)
             scrolllist.setVisibility(View.VISIBLE) }
         var db = Firebase.firestore
-      /*  db.collection("trabajadores").get().addOnSuccessListener { result ->
-            for (document in result){
-                var trabajadorciudad = document.data["ciudad"].toString()
-                var imagenurl = document.data["imageurl"].toString()
-                var altacocina_desc = document.data["altacocina_desc"].toString()
-                var altacocina_platos = document.data["altacocina_platos"].toString()
-                var altacocina_precio = document.data["altacocina_precio"].toString()
-                var cocinatradicional_desc = document.data["cocinatradicional_desc"].toString()
-                var cocinatradicional_platos = document.data["cocinatradicional_platos"].toString()
-                var cocinatradicional_precio = document.data["cocinatradicional_precio"].toString()
-                var cocinalowcost_desc = document.data["cocinalowcost_desc"].toString()
-                var cocinalowcost_platos = document.data["cocinalowcost_platos"].toString()
-                var cocinalowcost_precio = document.data["cocinalowcost_precio"].toString()
-                var limpiador_precio = document.data["limpiador_precio"].toString()
-                var cortacesped_precio = document.data["cortacesped_precio"].toString()
-                var mantenimiento_precio_grande = document.data["mantenimiento_precio_grande"].toString()
-                var mantenimiento_precio_mediana = document.data["mantenimiento_precio_mediana"].toString()
-                var mantenimiento_precio_pequena = document.data["mantenimiento_precio_pequena"].toString()
-                var puntuacion_media = document.data["puntuacion_media"].toString()
-                var emailtrabajador = document.id
-                var nombreyapellido = document.data["nombreyapellido"].toString()
-                val currecttrabajador=Trabajador(emailtrabajador,nombreyapellido,trabajadorciudad,imagenurl,altacocina_desc,altacocina_platos,altacocina_precio,cocinatradicional_desc,cocinatradicional_platos,cocinatradicional_precio,cocinalowcost_desc,cocinalowcost_platos,cocinalowcost_precio,limpiador_precio,cortacesped_precio,mantenimiento_precio_grande,mantenimiento_precio_mediana,mantenimiento_precio_pequena,puntuacion_media)
-                listatrabajadores.add(currecttrabajador)
-            }
-        }*/
         fun closemenus(){
             linearcocineromain.setBackgroundResource(R.drawable.bluestroke_roundcorners_low)
             imageViewcocinerologo.setImageResource(R.drawable.cocinero_icon)
@@ -229,18 +208,35 @@ class User_buscar : Fragment() {
             scrolllist.setVisibility(View.GONE) }
 
 
-            var editTextfecha = vista.findViewById<EditText>(R.id.editTextfecha)
-
+        var editTextfecha = vista.findViewById<EditText>(R.id.editTextfecha)
         fun showDatePickerDialog() {
             val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
                 val selectedDate = day.toString() + " / " + (month + 1) + " / " + year
                 editTextfecha.setText(selectedDate)
             })
-
-
             getActivity()?.let { newFragment.show(it.getSupportFragmentManager(), "datePicker") }
         }
         editTextfecha.setOnClickListener { showDatePickerDialog() }
+
+        var editTexthorainicio = vista.findViewById<EditText>(R.id.editTexthorainicio)
+        fun getTime(editText: EditText, context: Context){
+            val cal = Calendar.getInstance()
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+                var finalminute = minute.toString()
+                if (minute.toString().length==1){
+                    finalminute="0"+minute
+                }
+                val selectedtime = hour.toString() + ":" + finalminute
+                editText.setText(selectedtime) }
+            TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(
+                Calendar.MINUTE), true).show()
+        }
+        editTexthorainicio.setOnClickListener {
+            context?.let { it1 -> getTime(editTexthorainicio, it1) }
+        }
+
 
         return vista
     }

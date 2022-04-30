@@ -38,7 +38,9 @@
             android:textColor="@color/blue"
             android:text="test"
             android:clickable="true"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:visibility="visible"/>
+
 
 
     </RelativeLayout>
