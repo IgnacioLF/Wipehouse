@@ -551,7 +551,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="5dp"
-                        android:text="-Descripcion"
+                        android:text="-Descripción"
                         android:textColor="#2c3340"
                         android:textSize="23sp"
                         android:textStyle="bold" />

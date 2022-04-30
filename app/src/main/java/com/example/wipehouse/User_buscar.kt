@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.firestore.ktx.firestore
@@ -96,6 +97,7 @@ class User_buscar : Fragment() {
         var editTexthorainicio = vista.findViewById<EditText>(R.id.editTexthorainicio)
         var linearcantidadde = vista.findViewById<LinearLayout>(R.id.linearcantidadde)
         var imageButtonbackarrowrelizarpedido = vista.findViewById<ImageButton>(R.id.imageButtonbackarrowrelizarpedido)
+        var textViewpreciofinal = vista.findViewById<TextView>(R.id.textViewpreciofinal)
 
         fun gotolista(){
             scrollseleccion.setVisibility(View.GONE)
@@ -208,6 +210,8 @@ class User_buscar : Fragment() {
                 }
                 listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadoresfiltrada,categoria_lista) }
                 listview.setOnItemClickListener { parent, view, position, id ->
+                    var precioporitem = 0
+                    textViewpreciofinal.text = "0€"
                     scrolllist.setVisibility(View.GONE)
                     scrollrealizarpedido.setVisibility(View.VISIBLE)
                     textViewNombreyapellido.text = listatrabajadoresfiltrada.get(position).nombreyapellido
@@ -226,14 +230,22 @@ class User_buscar : Fragment() {
                     }
                     textViewCategoria.text=categoria_lista
                     when (categoria_lista) {
-                        "Alta Cocina" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).altacocina_precio + "€"
-                        "Cocina Tradicional" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).cocinatradicional_precio + "€"
-                        "Cocina Lowcost" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).cocinalowcost_precio + "€"
-                        "Piscina Grande" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).mantenimiento_precio_grande + "€"
-                        "Piscina Mediana" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).mantenimiento_precio_mediana + "€"
-                        "Piscina Pequeña" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).mantenimiento_precio_pequena + "€"
-                        "Limpiador" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).limpiador_precio + "€"
-                        "Cortacesped" -> textViewprecio.text = listatrabajadoresfiltrada.get(position).cortacesped_precio + "€"
+                        "Alta Cocina" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).altacocina_precio + "€"
+                        precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).altacocina_precio)}
+                        "Cocina Tradicional" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).cocinatradicional_precio + "€"
+                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).cocinatradicional_precio)}
+                        "Cocina Lowcost" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).cocinalowcost_precio + "€"
+                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).cocinalowcost_precio)}
+                        "Piscina Grande" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).mantenimiento_precio_grande + "€"
+                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).mantenimiento_precio_grande)}
+                        "Piscina Mediana" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).mantenimiento_precio_mediana + "€"
+                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).mantenimiento_precio_mediana)}
+                        "Piscina Pequeña" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).mantenimiento_precio_pequena + "€"
+                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).mantenimiento_precio_pequena)}
+                        "Limpiador" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).limpiador_precio + "€"
+                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).limpiador_precio)}
+                        "Cortacesped" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).cortacesped_precio + "€"
+                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).cortacesped_precio)}
                     }
                     if (categoria_lista.contains("Cocina")){
                         linneardescripcion.setVisibility(View.VISIBLE)
@@ -253,6 +265,7 @@ class User_buscar : Fragment() {
                         linnearplatos.setVisibility(View.GONE)
                         if (categoria_lista.contains("Piscina")){
                             linearcantidadde.setVisibility(View.GONE)
+                            textViewpreciofinal.text = precioporitem.toString() + "€"
                         } else{
                             linearcantidadde.setVisibility(View.VISIBLE)
                             when(categoria_lista){
@@ -261,7 +274,12 @@ class User_buscar : Fragment() {
                             }
                         }
                     }
-
+                    editTextcantidadde.addTextChangedListener {
+                        if (editTextcantidadde.text.isNotEmpty()&&categoria_lista.contains("Piscina")==false){
+                            var preciofinal = Integer. parseInt(editTextcantidadde.text.toString())*precioporitem
+                            textViewpreciofinal.text = preciofinal.toString() + "€"
+                        }
+                    }
                 }
             }
         }
