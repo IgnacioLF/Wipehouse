@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +37,29 @@ class User_pedidos : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_pedidos, container, false)
+        val vista = inflater.inflate(R.layout.fragment_user_pedidos, container, false)
+        var listviewpedidos = vista.findViewById<ListView>(R.id.listviewpedidos)
+        var db = Firebase.firestore
+        var listpedidos = ArrayList<Pedido>()
+        db.collection("pedidos").get().addOnSuccessListener { result ->
+            for (document in result) {
+                var email_cliente = document.data["email_cliente"].toString()
+                var email_trabajador = document.data["email_trabajador"].toString()
+                var tipo = document.data["tipo"].toString()
+                var precio = document.data["precio"].toString()
+                var cantidad = document.data["cantidad"].toString()
+                var fecha = document.data["fecha"].toString()
+                var hora_inicio = document.data["hora_inicio"].toString()
+                var puntuacion = document.data["puntuacion"].toString()
+                var estado = document.data["estado"].toString()
+                var imageurl_trabajador = document.data["imageurl_trabajador"].toString()
+                var nombreyapellido_trabajdor = document.data["nombreyapellido_trabajdor"].toString()
+                var currentpedido = Pedido(email_cliente,email_trabajador,tipo,precio, cantidad, fecha, hora_inicio, puntuacion, estado,imageurl_trabajador,nombreyapellido_trabajdor)
+                listpedidos.add(currentpedido)
+            }
+        }
+        listviewpedidos.adapter = context?.let { PedidosUserArrayAdapter(it,R.layout.item_list_pedidos_user,listpedidos) }
+        return vista
     }
 
     companion object {

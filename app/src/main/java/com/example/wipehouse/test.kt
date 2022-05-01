@@ -6,6 +6,7 @@ import android.content.Context
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import com.google.firebase.auth.FirebaseAuth
@@ -17,6 +18,7 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import java.lang.System.load
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.firestore.ktx.firestore
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,20 +29,27 @@ class test : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
+        Log.d("errorimagen:","aqaaaaa")
         var email = FirebaseAuth.getInstance().currentUser?.email
         var image = findViewById<ImageView>(R.id.imageViewlabuena)
         var storage = Firebase.storage
         val storageRef = storage.reference
         val pathReference = storageRef.child("Trabajadores/"+email+".jpg")
+        var db = Firebase.firestore
+        var urlimagetrabajador = ""
 
-        etPlannedDate = findViewById(R.id.etPlannedDate)
+        db.collection("trabajadores").document("cocinero2@gmail.com").get().addOnSuccessListener {result ->
+            urlimagetrabajador= result.data?.get("imageurl").toString()
 
-        etPlannedDate.setOnClickListener {
-            getTime(etPlannedDate,this)
+        }.addOnFailureListener {
+            Log.d("errorimagen:",it.toString())
         }
 
+        Log.d("errorimagen:",urlimagetrabajador + " algooo")
+        Glide.with(this).load(urlimagetrabajador).dontAnimate().into(image)
+
         val options = RequestOptions().circleCrop()
-        Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/wipehouse-ffdd1.appspot.com/o/Trabajadores%2Flabuena%40gmail.com.jpg?alt=media&token=8235fbdc-1ae3-4ac1-9417-664e77289264").apply(options).dontAnimate().into(image)
+       // Glide.with(this).load("https://firebasestorage.googleapis.com/v0/b/wipehouse-ffdd1.appspot.com/o/Trabajadores%2Flabuena%40gmail.com.jpg?alt=media&token=8235fbdc-1ae3-4ac1-9417-664e77289264").apply(options).dontAnimate().into(image)
     }
 
 

@@ -278,6 +278,7 @@ class User_buscar : Fragment() {
                         if (categoria_lista.contains("Piscina")){
                             linearcantidadde.setVisibility(View.GONE)
                             textViewpreciofinal.text = precioporitem.toString() + "€"
+                            preciofinal=Integer. parseInt(precioporitem.toString())
                         } else{
                             linearcantidadde.setVisibility(View.VISIBLE)
                             when(categoria_lista){
@@ -305,7 +306,9 @@ class User_buscar : Fragment() {
                                 "fecha" to editTextfecha.text.toString(),
                                 "hora_inicio" to editTexthorainicio.text.toString(),
                                 "puntuacion" to "",
-                                "estado" to "Pendiente")
+                                "estado" to "Pendiente",
+                                "imageurl_trabajador" to listatrabajadoresfiltrada.get(position).imageurl,
+                                "nombreyapellido_trabajdor" to listatrabajadoresfiltrada.get(position).nombreyapellido)
                             db.collection("pedidos")
                                 .document(idpedido)
                                 .set(pedido)
