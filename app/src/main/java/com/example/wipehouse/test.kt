@@ -38,6 +38,8 @@ class test : AppCompatActivity() {
         var db = Firebase.firestore
         var urlimagetrabajador = ""
 
+
+
         db.collection("trabajadores").document("cocinero2@gmail.com").get().addOnSuccessListener {result ->
             urlimagetrabajador= result.data?.get("imageurl").toString()
 

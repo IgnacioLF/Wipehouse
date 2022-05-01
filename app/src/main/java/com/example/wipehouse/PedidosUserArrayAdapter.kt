@@ -1,20 +1,25 @@
 package com.example.wipehouse
 
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlin.math.log
+import android.content.DialogInterface
+import android.print.PrintAttributes
+import android.view.Gravity
+import android.widget.*
+
+import android.widget.RatingBar.OnRatingBarChangeListener
+import androidx.core.view.marginTop
+
 
 class PedidosUserArrayAdapter (context : Context, viewtopaint : Int, private val pedidoslist : ArrayList<Pedido>): ArrayAdapter<Pedido>(context,viewtopaint,pedidoslist){
 
@@ -29,6 +34,7 @@ class PedidosUserArrayAdapter (context : Context, viewtopaint : Int, private val
         val textViewEstado = currentlistitem.findViewById<TextView>(R.id.textViewEstado)
         val imageView_trabajador = currentlistitem.findViewById<ImageView>(R.id.imageView_trabajador)
         val options = RequestOptions().circleCrop()
+        var db = Firebase.firestore
         Glide.with(currentlistitem).load(pedidoslist.get(position).imageurl_trabajador).apply(options).dontAnimate().into(imageView_trabajador)
         textViewEstado.text = pedidoslist.get(position).estado
         textViewfecha.text = pedidoslist.get(position).fecha
@@ -54,7 +60,51 @@ class PedidosUserArrayAdapter (context : Context, viewtopaint : Int, private val
             buttonvalorar.setVisibility(View.VISIBLE)
         }
         buttonvalorar.setOnClickListener {
-            textViewNombreyapellido.text = "valorado xd"
+            val popDialog: AlertDialog.Builder = AlertDialog.Builder(context)
+            val linearLayout = LinearLayout(context)
+            val rating = RatingBar(context)
+            val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            rating.layoutParams = lp
+            rating.numStars = 5
+            rating.stepSize = 1f
+            linearLayout.addView(rating)
+            linearLayout.gravity= Gravity.CENTER
+            popDialog.setTitle("Valora el trabajo realizado")
+            popDialog.setView(linearLayout)
+
+            rating.onRatingBarChangeListener =
+                OnRatingBarChangeListener { ratingBar, v, b -> println("Rated val:$v") }
+            popDialog.setPositiveButton(android.R.string.ok,
+                DialogInterface.OnClickListener { dialog, which ->
+                    if (rating.progress.toString().equals("0")){
+                        Toast.makeText(context,"Debe incluir alemnos 1 estrella en su valoración", Toast.LENGTH_LONG).show()
+                    } else {
+                        var fechasinbarras = pedidoslist.get(position).fecha.replace("/", "-")
+                        var idpedido =
+                            pedidoslist.get(position).email_cliente + "#" + pedidoslist.get(position).email_trabajdor + "#" + fechasinbarras + "#" + pedidoslist.get(
+                                position
+                            ).hora_inicio
+                        db.collection("pedidos").document(idpedido)
+                            .update("puntuacion", rating.progress.toString()).addOnSuccessListener {
+                            dialog.dismiss()
+                            buttonvalorar.setVisibility(View.GONE)
+                        }.addOnFailureListener {
+                            Toast.makeText(
+                                context,
+                                "Error no se pudo realizar la operación",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            dialog.cancel()
+                        }
+                    }
+                }) // Button Cancel
+                .setNegativeButton("Cancel",
+                    DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
+            popDialog.create()
+            popDialog.show()
         }
         return currentlistitem
     }
