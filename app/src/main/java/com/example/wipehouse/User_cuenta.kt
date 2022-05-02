@@ -44,7 +44,6 @@ class User_cuenta : Fragment() {
         var  view = inflater.inflate(R.layout.fragment_user_cuenta, container, false)
         var editTextTextNombre=view.findViewById<EditText>(R.id.editTextTextNombre)
         var editTextapellidos=view.findViewById<EditText>(R.id.editTextapellidos)
-        var editTextTextContraseña=view.findViewById<EditText>(R.id.editTextTextContraseña)
         var editTextDNI=view.findViewById<EditText>(R.id.editTextDNI)
         var editTextTelefono=view.findViewById<EditText>(R.id.editTextTelefono)
         var editTextDireccion=view.findViewById<EditText>(R.id.editTextDireccion)

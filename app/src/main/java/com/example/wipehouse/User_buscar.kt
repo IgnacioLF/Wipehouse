@@ -224,6 +224,11 @@ class User_buscar : Fragment() {
                 listview.setOnItemClickListener { parent, view, position, id ->
                     var precioporitem = 0
                     var preciofinal = 0
+                    imageViewestrella1.setImageResource(R.drawable.estrellaicon_selected)
+                    imageViewestrella2.setImageResource(R.drawable.estrellaicon_selected)
+                    imageViewestrella3.setImageResource(R.drawable.estrellaicon_selected)
+                    imageViewestrella4.setImageResource(R.drawable.estrellaicon_selected)
+                    imageViewestrella5.setImageResource(R.drawable.estrellaicon_selected)
                     scrolllist.setVisibility(View.GONE)
                     scrollrealizarpedido.setVisibility(View.VISIBLE)
                     textViewNombreyapellido.text = listatrabajadoresfiltrada.get(position).nombreyapellido

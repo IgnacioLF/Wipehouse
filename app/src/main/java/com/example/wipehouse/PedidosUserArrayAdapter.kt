@@ -89,6 +89,19 @@ class PedidosUserArrayAdapter (context : Context, viewtopaint : Int, private val
                             ).hora_inicio
                         db.collection("pedidos").document(idpedido)
                             .update("puntuacion", rating.progress.toString()).addOnSuccessListener {
+                                var contcantpedidos = 0
+                                var contestrellatotal = 0
+                                var puntuacionmedia = 0
+                                db.collection("pedidos").whereEqualTo("email_trabajador",pedidoslist.get(position).email_trabajdor).get().addOnSuccessListener { result ->
+                                    for (document in result){
+                                        if (document.data["puntuacion"].toString().equals("")==false){
+                                            contcantpedidos = contcantpedidos + 1
+                                            contestrellatotal = contestrellatotal + Integer. parseInt(document.data["puntuacion"].toString())
+                                        }
+                                    }
+                                    puntuacionmedia =  contestrellatotal /contcantpedidos
+                                    db.collection("trabajadores").document(pedidoslist.get(position).email_trabajdor).update("puntuacion_media",puntuacionmedia)
+                                }
                             dialog.dismiss()
                             buttonvalorar.setVisibility(View.GONE)
                         }.addOnFailureListener {

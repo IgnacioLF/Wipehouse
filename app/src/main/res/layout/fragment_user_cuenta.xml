@@ -70,28 +70,6 @@
                 android:background="@drawable/blue_roundcorners_low"
                 android:padding="10dp"
                 android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/textViewContraseña"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Contraseña"
-                android:textStyle="bold"
-                android:textColor="#2c3340"
-                android:textSize="20sp"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="10dp"/>
-
-            <EditText
-                android:id="@+id/editTextTextContraseña"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:textColor="@color/white"
-                android:background="@drawable/blue_roundcorners_low"
-                android:padding="10dp"
-                android:inputType="textPassword" />
-
             <TextView
                 android:id="@+id/textViewDNI"
                 android:layout_width="match_parent"
@@ -113,26 +91,6 @@
                 android:background="@drawable/blue_roundcorners_low"
                 android:padding="10dp"/>
 
-            <TextView
-                android:id="@+id/textViewemail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Correo Electronico"
-                android:textStyle="bold"
-                android:textColor="#2c3340"
-                android:textSize="20sp"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="10dp"/>
-
-            <EditText
-                android:id="@+id/editTextEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/white"
-                android:background="@drawable/blue_roundcorners_low"
-                android:padding="10dp"/>
 
             <TextView
                 android:id="@+id/textViewTelefono"
