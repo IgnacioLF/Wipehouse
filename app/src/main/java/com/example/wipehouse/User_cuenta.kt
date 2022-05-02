@@ -1,5 +1,6 @@
 package com.example.wipehouse
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,7 +46,6 @@ class User_cuenta : Fragment() {
         var editTextapellidos=view.findViewById<EditText>(R.id.editTextapellidos)
         var editTextTextContraseña=view.findViewById<EditText>(R.id.editTextTextContraseña)
         var editTextDNI=view.findViewById<EditText>(R.id.editTextDNI)
-        var editTextEmail=view.findViewById<EditText>(R.id.editTextEmail)
         var editTextTelefono=view.findViewById<EditText>(R.id.editTextTelefono)
         var editTextDireccion=view.findViewById<EditText>(R.id.editTextDireccion)
         var editTextCodigopostal=view.findViewById<EditText>(R.id.editTextCodigopostal)
@@ -53,6 +53,7 @@ class User_cuenta : Fragment() {
            currentuseremail= FirebaseAuth.getInstance().currentUser?.email.toString()
         var spinnerciudad = view.findViewById<Spinner>(R.id.spinnerciudad)
         var buttonModificar = view.findViewById<Button>(R.id.buttonModificar)
+        var buttonLogout = view.findViewById<Button>(R.id.buttonLogout)
         var ciudadlista = arrayOf<String>("Madrid","Barcelona")
         var spinadapter = context?.let { ArrayAdapter(it,R.layout.myselectedspinner,ciudadlista) }
         if (spinadapter != null) {
@@ -108,6 +109,10 @@ class User_cuenta : Fragment() {
             } else {
                 Toast.makeText(context,"Error alguno de los campos esta vacio",Toast.LENGTH_LONG).show()
             }
+        }
+        buttonLogout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(context,MainActivity::class.java))
         }
         return view
     }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -40,8 +41,10 @@ class User_pedidos : Fragment() {
         val vista = inflater.inflate(R.layout.fragment_user_pedidos, container, false)
         var listviewpedidos = vista.findViewById<ListView>(R.id.listviewpedidos)
         var db = Firebase.firestore
+        var emailcurrentuser = FirebaseAuth.getInstance().currentUser?.email
         var listpedidos = ArrayList<Pedido>()
-        db.collection("pedidos").get().addOnSuccessListener { result ->
+
+        db.collection("pedidos").whereEqualTo("email_cliente",emailcurrentuser).get().addOnSuccessListener { result ->
             for (document in result) {
                 var email_cliente = document.data["email_cliente"].toString()
                 var email_trabajador = document.data["email_trabajador"].toString()

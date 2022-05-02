@@ -23,6 +23,11 @@ class MainActivity : AppCompatActivity() {
         var textViewparte1 = findViewById<TextView>(R.id.textViewparte1)
         var textViewparte2 = findViewById<TextView>(R.id.textViewparte2)
         var darkbluebackground = findViewById<ImageView>(R.id.imageViewfondo_darkblue)
+        val user = FirebaseAuth.getInstance().currentUser
+        // TODO diferenciar entre trabajador y empleado
+        if (user != null) {
+            startActivity(Intent(applicationContext,User_MainActivity::class.java))
+        }
         buttonCliente.setOnClickListener {
             linearparte1.setVisibility(View.GONE)
             linearparte2.setVisibility(View.VISIBLE)
@@ -55,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         if (edittextemail.text.isNotEmpty()&&edittextpassword.text.isNotEmpty()){
         FirebaseAuth.getInstance().signInWithEmailAndPassword(edittextemail.text.toString(),edittextpassword.text.toString()).addOnCompleteListener {
             if (it.isSuccessful){
-                startActivity(Intent(applicationContext,test::class.java))
+                startActivity(Intent(applicationContext,User_MainActivity::class.java))
             }else{
                 errorlogin()
             }
