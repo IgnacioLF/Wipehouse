@@ -20,7 +20,6 @@ class TrabajadorBuscarArrayAdapter (context : Context, viewtopaint : Int, privat
         val textViewCategoria = currentlistitem.findViewById<TextView>(R.id.textViewCategoria)
         val textViewprecio = currentlistitem.findViewById<TextView>(R.id.textViewprecio)
         val image = currentlistitem.findViewById<ImageView>(R.id.imageView_trabajador)
-        val imageViewestrella1 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella1)
         val imageViewestrella2 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella2)
         val imageViewestrella3 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella3)
         val imageViewestrella4 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella4)

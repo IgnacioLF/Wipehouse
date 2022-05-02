@@ -300,7 +300,7 @@ class User_buscar : Fragment() {
                     }
                     buttonrealizarpedido.setOnClickListener {
                         if ((editTextcantidadde.text.isNotEmpty()||categoria_lista.contains("Piscina"))&&editTextfecha.text.isNotEmpty()&&editTexthorainicio.text.isNotEmpty()){
-                            var fechasinbarras =editTextfecha.text.toString().replace("/","-")
+                            var fechasinbarras =editTextfecha.text.toString().replace("/","-").replace(" ","")
                             var idpedido = currentemailuser + "#"+ listatrabajadoresfiltrada.get(position).email +"#"+fechasinbarras+"#"+editTexthorainicio.text.toString()
                             var pedido = hashMapOf(
                                 "email_cliente" to currentemailuser,

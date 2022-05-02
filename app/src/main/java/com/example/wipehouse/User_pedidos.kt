@@ -1,6 +1,7 @@
 package com.example.wipehouse
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,9 @@ import android.widget.ListView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,6 +61,30 @@ class User_pedidos : Fragment() {
                 var estado = document.data["estado"].toString()
                 var imageurl_trabajador = document.data["imageurl_trabajador"].toString()
                 var nombreyapellido_trabajdor = document.data["nombreyapellido_trabajdor"].toString()
+
+
+
+                val sdf = SimpleDateFormat("d/M/y")
+                val currentDate = sdf.format(Date())
+                var splitpedidotime = hora_inicio.split(":")
+                var currenttimeall =  Calendar.getInstance().time
+                var splitcurrenttimeall = currenttimeall.toString().split(" ")
+                var splittesttime = splitcurrenttimeall[3].split(":")
+                var currenthours = splittesttime[0]
+                var currentminute = splittesttime[1]
+                var currentemailuser = FirebaseAuth.getInstance().currentUser?.email
+                var fechasinespacios =fecha.replace(" ","")
+                val sdf2 = SimpleDateFormat("dd/MM/yyyy")
+                val fechadelitem = sdf2.parse(fechasinespacios)
+                val fechaactual = sdf2.parse(currentDate)
+                if (estado.equals("Aceptado")&&(fechaactual.after(fechadelitem) || (fecha.replace(" ","")==currentDate&&(currenthours>splitpedidotime[0]||(currenthours==splitpedidotime[0]&&currentminute>splitpedidotime[1]))))){
+                    var fechasinbarras =fecha.replace("/","-").replace(" ","")
+                    var documentid = currentemailuser + "#"+ email_trabajador +"#"+fechasinbarras+"#"+hora_inicio
+                    db.collection("pedidos").document(documentid).update("estado","Realizado")
+                    estado = "Realizado"
+                }
+
+
                 var currentpedido = Pedido(email_cliente,email_trabajador,tipo,precio, cantidad, fecha, hora_inicio, puntuacion, estado,imageurl_trabajador,nombreyapellido_trabajdor)
                 listpedidos.add(currentpedido)
             }
