@@ -25,9 +25,21 @@ class MainActivity : AppCompatActivity() {
         var textViewparte2 = findViewById<TextView>(R.id.textViewparte2)
         var darkbluebackground = findViewById<ImageView>(R.id.imageViewfondo_darkblue)
         val user = FirebaseAuth.getInstance().currentUser
-        // TODO diferenciar entre trabajador y empleado
+        var currentemailuser = FirebaseAuth.getInstance().currentUser?.email
+        var db = Firebase.firestore
         if (user != null) {
-            startActivity(Intent(applicationContext,User_MainActivity::class.java))
+            if (currentemailuser != null) {
+                db.collection("trabajadores").document(currentemailuser).get().addOnCompleteListener {
+                    if (it.isSuccessful){
+                        var document = it.getResult()
+                        if (document.exists()){
+                            startActivity(Intent(applicationContext,Trabajador_MainActivity::class.java))
+                        } else{
+                            startActivity(Intent(applicationContext,User_MainActivity::class.java))
+                        }
+                    }
+                }
+            }
         }
         buttonCliente.setOnClickListener {
             linearparte1.setVisibility(View.GONE)

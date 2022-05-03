@@ -27,7 +27,7 @@
         app:abb_tabColor="#2C3340"
         app:abb_tabColorSelected="#47CAF3"
         app:abb_indicatorColor="#47CAF3"
-        app:abb_tabs="@menu/tabs"
+        app:abb_tabs="@menu/tabs_trabajador"
         app:abb_textStyle="bold"
         app:abb_textSize="15sp"
         app:abb_animationInterpolator="@android:anim/overshoot_interpolator" />
