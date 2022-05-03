@@ -237,6 +237,25 @@ class User_buscar : Fragment() {
                     }
                 }
                 listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadoresfiltrada,categoria_lista) }
+                var listaonclick = ArrayList<Trabajador>()
+                var listafiltrar = ArrayList<Trabajador>()
+                imageButtonbuscar.setOnClickListener {
+                    listafiltrar.clear()
+                    listview.adapter = null
+                    for (i in listatrabajadoresfiltrada.indices) {
+                        if (listatrabajadoresfiltrada.get(i).nombreyapellido.lowercase().contains(editTexbuscador.text.toString().lowercase())) {
+                            listafiltrar.add(listatrabajadoresfiltrada.get(i)) }
+                    }
+                    listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1, R.layout.item_list_trabajador_buscar, listafiltrar, categoria_lista) }
+                    listaonclick = listafiltrar
+                }
+
+                if (listafiltrar.isEmpty()){
+                    listaonclick = listatrabajadoresfiltrada
+                } else{
+                    listaonclick = listafiltrar
+                }
+
                 listview.setOnItemClickListener { parent, view, position, id ->
                     var precioporitem = 0
                     var preciofinal = 0
@@ -247,9 +266,9 @@ class User_buscar : Fragment() {
                     imageViewestrella5.setImageResource(R.drawable.estrellaicon_selected)
                     scrolllist.setVisibility(View.GONE)
                     scrollrealizarpedido.setVisibility(View.VISIBLE)
-                    textViewNombreyapellido.text = listatrabajadoresfiltrada.get(position).nombreyapellido
-                    Glide.with(vista).load(listatrabajadoresfiltrada.get(position).imageurl).apply(options).dontAnimate().into(imageView_trabajador)
-                    when (listatrabajadoresfiltrada.get(position).puntucaion_media.toInt()) {
+                    textViewNombreyapellido.text = listaonclick.get(position).nombreyapellido
+                    Glide.with(vista).load(listaonclick.get(position).imageurl).apply(options).dontAnimate().into(imageView_trabajador)
+                    when (listaonclick.get(position).puntucaion_media.toInt()) {
                         1 -> {imageViewestrella2.setImageResource(R.drawable.estrellaicon)
                             imageViewestrella3.setImageResource(R.drawable.estrellaicon)
                             imageViewestrella4.setImageResource(R.drawable.estrellaicon)
@@ -263,33 +282,33 @@ class User_buscar : Fragment() {
                     }
                     textViewCategoria.text=categoria_lista
                     when (categoria_lista) {
-                        "Alta Cocina" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).altacocina_precio + "€"
-                        precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).altacocina_precio)}
-                        "Cocina Tradicional" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).cocinatradicional_precio + "€"
-                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).cocinatradicional_precio)}
-                        "Cocina Lowcost" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).cocinalowcost_precio + "€"
-                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).cocinalowcost_precio)}
-                        "Piscina Grande" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).mantenimiento_precio_grande + "€"
-                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).mantenimiento_precio_grande)}
-                        "Piscina Mediana" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).mantenimiento_precio_mediana + "€"
-                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).mantenimiento_precio_mediana)}
-                        "Piscina Pequeña" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).mantenimiento_precio_pequena + "€"
-                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).mantenimiento_precio_pequena)}
-                        "Limpiador" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).limpiador_precio + "€"
-                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).limpiador_precio)}
-                        "Cortacesped" -> {textViewprecio.text = listatrabajadoresfiltrada.get(position).cortacesped_precio + "€"
-                            precioporitem=Integer. parseInt(listatrabajadoresfiltrada.get(position).cortacesped_precio)}
+                        "Alta Cocina" -> {textViewprecio.text = listaonclick.get(position).altacocina_precio + "€"
+                        precioporitem=Integer. parseInt(listaonclick.get(position).altacocina_precio)}
+                        "Cocina Tradicional" -> {textViewprecio.text = listaonclick.get(position).cocinatradicional_precio + "€"
+                            precioporitem=Integer. parseInt(listaonclick.get(position).cocinatradicional_precio)}
+                        "Cocina Lowcost" -> {textViewprecio.text = listaonclick.get(position).cocinalowcost_precio + "€"
+                            precioporitem=Integer. parseInt(listaonclick.get(position).cocinalowcost_precio)}
+                        "Piscina Grande" -> {textViewprecio.text = listaonclick.get(position).mantenimiento_precio_grande + "€"
+                            precioporitem=Integer. parseInt(listaonclick.get(position).mantenimiento_precio_grande)}
+                        "Piscina Mediana" -> {textViewprecio.text = listaonclick.get(position).mantenimiento_precio_mediana + "€"
+                            precioporitem=Integer. parseInt(listaonclick.get(position).mantenimiento_precio_mediana)}
+                        "Piscina Pequeña" -> {textViewprecio.text = listaonclick.get(position).mantenimiento_precio_pequena + "€"
+                            precioporitem=Integer. parseInt(listaonclick.get(position).mantenimiento_precio_pequena)}
+                        "Limpiador" -> {textViewprecio.text = listaonclick.get(position).limpiador_precio + "€"
+                            precioporitem=Integer. parseInt(listaonclick.get(position).limpiador_precio)}
+                        "Cortacesped" -> {textViewprecio.text = listaonclick.get(position).cortacesped_precio + "€"
+                            precioporitem=Integer. parseInt(listaonclick.get(position).cortacesped_precio)}
                     }
                     if (categoria_lista.contains("Cocina")){
                         linneardescripcion.setVisibility(View.VISIBLE)
                         linnearplatos.setVisibility(View.VISIBLE)
                         when (categoria_lista) {
-                            "Alta Cocina" -> {textViewdescripcion.text = listatrabajadoresfiltrada.get(position).altacocina_desc
-                                textViewplatos.text =listatrabajadoresfiltrada.get(position).altacocina_platos}
-                            "Cocina Tradicional" -> {textViewdescripcion.text = listatrabajadoresfiltrada.get(position).cocinatradicional_desc
-                                textViewplatos.text =listatrabajadoresfiltrada.get(position).cocinatradicional_platos}
-                            "Cocina Lowcost" -> {textViewdescripcion.text = listatrabajadoresfiltrada.get(position).cocinalowcost_desc
-                                textViewplatos.text =listatrabajadoresfiltrada.get(position).cocinalowcost_platos}
+                            "Alta Cocina" -> {textViewdescripcion.text = listaonclick.get(position).altacocina_desc
+                                textViewplatos.text =listaonclick.get(position).altacocina_platos}
+                            "Cocina Tradicional" -> {textViewdescripcion.text = listaonclick.get(position).cocinatradicional_desc
+                                textViewplatos.text =listaonclick.get(position).cocinatradicional_platos}
+                            "Cocina Lowcost" -> {textViewdescripcion.text = listaonclick.get(position).cocinalowcost_desc
+                                textViewplatos.text =listaonclick.get(position).cocinalowcost_platos}
                         }
                         linearcantidadde.setVisibility(View.VISIBLE)
                         textViewncantidaddetit.text = "Nº de personas"
@@ -317,10 +336,10 @@ class User_buscar : Fragment() {
                     buttonrealizarpedido.setOnClickListener {
                         if ((editTextcantidadde.text.isNotEmpty()||categoria_lista.contains("Piscina"))&&editTextfecha.text.isNotEmpty()&&editTexthorainicio.text.isNotEmpty()){
                             var fechasinbarras =editTextfecha.text.toString().replace("/","-").replace(" ","")
-                            var idpedido = currentemailuser + "#"+ listatrabajadoresfiltrada.get(position).email +"#"+fechasinbarras+"#"+editTexthorainicio.text.toString()
+                            var idpedido = currentemailuser + "#"+ listaonclick.get(position).email +"#"+fechasinbarras+"#"+editTexthorainicio.text.toString()
                             var pedido = hashMapOf(
                                 "email_cliente" to currentemailuser,
-                                "email_trabajador" to listatrabajadoresfiltrada.get(position).email,
+                                "email_trabajador" to listaonclick.get(position).email,
                                 "tipo" to categoria_lista,
                                 "precio" to preciofinal,
                                 "cantidad" to editTextcantidadde.text.toString(),
@@ -328,8 +347,8 @@ class User_buscar : Fragment() {
                                 "hora_inicio" to editTexthorainicio.text.toString(),
                                 "puntuacion" to "",
                                 "estado" to "Pendiente",
-                                "imageurl_trabajador" to listatrabajadoresfiltrada.get(position).imageurl,
-                                "nombreyapellido_trabajdor" to listatrabajadoresfiltrada.get(position).nombreyapellido)
+                                "imageurl_trabajador" to listaonclick.get(position).imageurl,
+                                "nombreyapellido_trabajdor" to listaonclick.get(position).nombreyapellido)
                             db.collection("pedidos")
                                 .document(idpedido)
                                 .set(pedido)
@@ -353,15 +372,7 @@ class User_buscar : Fragment() {
                         }
                     }
                 }
-                imageButtonbuscar.setOnClickListener {
-                    var listafiltrar = ArrayList<Trabajador>()
-                    listview.adapter = null
-                    for (i in listatrabajadoresfiltrada.indices) {
-                        if (listatrabajadoresfiltrada.get(i).nombreyapellido.contains(editTexbuscador.text.toString())) {
-                            listafiltrar.add(listatrabajadoresfiltrada.get(i)) }
-                    }
-                    listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1, R.layout.item_list_trabajador_buscar, listafiltrar, categoria_lista) }
-                }
+
             }
         }
         buttonaltacocina.setOnClickListener{
