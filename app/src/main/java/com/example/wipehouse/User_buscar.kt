@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -102,7 +103,15 @@ class User_buscar : Fragment() {
         var imageButtonbackarrowrelizarpedido = vista.findViewById<ImageButton>(R.id.imageButtonbackarrowrelizarpedido)
         var textViewpreciofinal = vista.findViewById<TextView>(R.id.textViewpreciofinal)
         var buttonrealizarpedido = vista.findViewById<Button>(R.id.buttonrealizarpedido)
+        var db = Firebase.firestore
 
+        var currentciudad = ""
+        if (currentemailuser != null) {
+            db.collection("usuarios").document(currentemailuser).get().addOnSuccessListener {
+                    document ->
+                currentciudad = document.data?.get("ciudad").toString()
+            }
+        }
         fun mensajepopup(accion: String, mensaje: String) {
             val builder = context?.let { AlertDialog.Builder(it) }
             builder?.setTitle(accion)
@@ -115,7 +124,7 @@ class User_buscar : Fragment() {
             scrollseleccion.setVisibility(View.GONE)
             textselecciona.setVisibility(View.GONE)
             scrolllist.setVisibility(View.VISIBLE) }
-        var db = Firebase.firestore
+
         fun closemenus(){
             linearcocineromain.setBackgroundResource(R.drawable.bluestroke_roundcorners_low)
             imageViewcocinerologo.setImageResource(R.drawable.cocinero_icon)
@@ -173,52 +182,55 @@ class User_buscar : Fragment() {
             listatrabajadoresfiltrada.clear()
             db.collection("trabajadores").whereNotEqualTo(categoria_precio,"").get().addOnSuccessListener { result ->
                 for (document in result) {
-                    var trabajadorciudad = document.data["ciudad"].toString()
-                    var imagenurl = document.data["imageurl"].toString()
-                    var altacocina_desc = document.data["altacocina_desc"].toString()
-                    var altacocina_platos = document.data["altacocina_platos"].toString()
-                    var altacocina_precio = document.data["altacocina_precio"].toString()
-                    var cocinatradicional_desc = document.data["cocinatradicional_desc"].toString()
-                    var cocinatradicional_platos =
-                        document.data["cocinatradicional_platos"].toString()
-                    var cocinatradicional_precio =
-                        document.data["cocinatradicional_precio"].toString()
-                    var cocinalowcost_desc = document.data["cocinalowcost_desc"].toString()
-                    var cocinalowcost_platos = document.data["cocinalowcost_platos"].toString()
-                    var cocinalowcost_precio = document.data["cocinalowcost_precio"].toString()
-                    var limpiador_precio = document.data["limpiador_precio"].toString()
-                    var cortacesped_precio = document.data["cortacesped_precio"].toString()
-                    var mantenimiento_precio_grande =
-                        document.data["mantenimiento_precio_grande"].toString()
-                    var mantenimiento_precio_mediana =
-                        document.data["mantenimiento_precio_mediana"].toString()
-                    var mantenimiento_precio_pequena =
-                        document.data["mantenimiento_precio_pequena"].toString()
-                    var puntuacion_media = document.data["puntuacion_media"].toString()
-                    var emailtrabajador = document.id
-                    var nombreyapellido = document.data["nombreyapellido"].toString()
-                    val currecttrabajador = Trabajador(
-                        emailtrabajador,
-                        nombreyapellido,
-                        trabajadorciudad,
-                        imagenurl,
-                        altacocina_desc,
-                        altacocina_platos,
-                        altacocina_precio,
-                        cocinatradicional_desc,
-                        cocinatradicional_platos,
-                        cocinatradicional_precio,
-                        cocinalowcost_desc,
-                        cocinalowcost_platos,
-                        cocinalowcost_precio,
-                        limpiador_precio,
-                        cortacesped_precio,
-                        mantenimiento_precio_grande,
-                        mantenimiento_precio_mediana,
-                        mantenimiento_precio_pequena,
-                        puntuacion_media
-                    )
-                    listatrabajadoresfiltrada.add(currecttrabajador)
+                    if (currentciudad.equals(document.data["ciudad"].toString())) {
+                        var trabajadorciudad = document.data["ciudad"].toString()
+                        var imagenurl = document.data["imageurl"].toString()
+                        var altacocina_desc = document.data["altacocina_desc"].toString()
+                        var altacocina_platos = document.data["altacocina_platos"].toString()
+                        var altacocina_precio = document.data["altacocina_precio"].toString()
+                        var cocinatradicional_desc =
+                            document.data["cocinatradicional_desc"].toString()
+                        var cocinatradicional_platos =
+                            document.data["cocinatradicional_platos"].toString()
+                        var cocinatradicional_precio =
+                            document.data["cocinatradicional_precio"].toString()
+                        var cocinalowcost_desc = document.data["cocinalowcost_desc"].toString()
+                        var cocinalowcost_platos = document.data["cocinalowcost_platos"].toString()
+                        var cocinalowcost_precio = document.data["cocinalowcost_precio"].toString()
+                        var limpiador_precio = document.data["limpiador_precio"].toString()
+                        var cortacesped_precio = document.data["cortacesped_precio"].toString()
+                        var mantenimiento_precio_grande =
+                            document.data["mantenimiento_precio_grande"].toString()
+                        var mantenimiento_precio_mediana =
+                            document.data["mantenimiento_precio_mediana"].toString()
+                        var mantenimiento_precio_pequena =
+                            document.data["mantenimiento_precio_pequena"].toString()
+                        var puntuacion_media = document.data["puntuacion_media"].toString()
+                        var emailtrabajador = document.id
+                        var nombreyapellido = document.data["nombreyapellido"].toString()
+                        val currecttrabajador = Trabajador(
+                            emailtrabajador,
+                            nombreyapellido,
+                            trabajadorciudad,
+                            imagenurl,
+                            altacocina_desc,
+                            altacocina_platos,
+                            altacocina_precio,
+                            cocinatradicional_desc,
+                            cocinatradicional_platos,
+                            cocinatradicional_precio,
+                            cocinalowcost_desc,
+                            cocinalowcost_platos,
+                            cocinalowcost_precio,
+                            limpiador_precio,
+                            cortacesped_precio,
+                            mantenimiento_precio_grande,
+                            mantenimiento_precio_mediana,
+                            mantenimiento_precio_pequena,
+                            puntuacion_media
+                        )
+                        listatrabajadoresfiltrada.add(currecttrabajador)
+                    }
                 }
                 listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadoresfiltrada,categoria_lista) }
                 listview.setOnItemClickListener { parent, view, position, id ->
