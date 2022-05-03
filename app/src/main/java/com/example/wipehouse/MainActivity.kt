@@ -9,6 +9,7 @@ import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.sql.BatchUpdateException
 
@@ -55,12 +56,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun login(){
+        var db = Firebase.firestore
         var edittextemail = findViewById<EditText>(R.id.editTextEmail)
         var edittextpassword = findViewById<EditText>(R.id.editTextTextPassword)
         if (edittextemail.text.isNotEmpty()&&edittextpassword.text.isNotEmpty()){
         FirebaseAuth.getInstance().signInWithEmailAndPassword(edittextemail.text.toString(),edittextpassword.text.toString()).addOnCompleteListener {
             if (it.isSuccessful){
-                startActivity(Intent(applicationContext,User_MainActivity::class.java))
+                db.collection("trabajadores").document(edittextemail.text.toString()).get().addOnCompleteListener {
+                    if (it.isSuccessful){
+                        var document = it.getResult()
+                        if (document.exists()){
+                            startActivity(Intent(applicationContext,Trabajador_MainActivity::class.java))
+                        } else{
+                            startActivity(Intent(applicationContext,User_MainActivity::class.java))
+                        }
+                    } else {
+                        errorlogin()
+                    }
+                }
             }else{
                 errorlogin()
             }
