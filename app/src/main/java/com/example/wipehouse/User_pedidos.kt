@@ -84,6 +84,13 @@ class User_pedidos : Fragment() {
                     estado = "Realizado"
                 }
 
+                if (estado.equals("Pendiente")&&(fechaactual.after(fechadelitem) || (fecha.replace(" ","")==currentDate&&(currenthours>splitpedidotime[0]||(currenthours==splitpedidotime[0]&&currentminute>splitpedidotime[1]))))){
+                    var fechasinbarras =fecha.replace("/","-").replace(" ","")
+                    var documentid = currentemailuser + "#"+ email_trabajador +"#"+fechasinbarras+"#"+hora_inicio
+                    db.collection("pedidos").document(documentid).update("estado","Caducado")
+                    estado = "Caducado"
+                }
+
 
                 var currentpedido = Pedido(email_cliente,email_trabajador,tipo,precio, cantidad, fecha, hora_inicio, puntuacion, estado,imageurl_trabajador,nombreyapellido_trabajdor)
                 listpedidos.add(currentpedido)

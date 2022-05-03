@@ -13,4 +13,5 @@
     <color name="aceptado">#70a83b</color>
     <color name="rechazado">#bf0811</color>
     <color name="realizado">#006b33 </color>
+    <color name="caducado">#A5316B</color>
 </resources>

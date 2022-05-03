@@ -39,21 +39,6 @@ class PedidosUserArrayAdapter (context : Context, viewtopaint : Int, private val
         val imageView_trabajador = currentlistitem.findViewById<ImageView>(R.id.imageView_trabajador)
         val options = RequestOptions().circleCrop()
         var db = Firebase.firestore
-      /*  val sdf = SimpleDateFormat("d/M/y")
-        val currentDate = sdf.format(Date())
-        var splitpedidotime = pedidoslist.get(position).hora_inicio.split(":")
-        var currenttimeall =  Calendar.getInstance().time
-        var splitcurrenttimeall = currenttimeall.toString().split(" ")
-        var splittesttime = splitcurrenttimeall[3].split(":")
-        var currenthours = splittesttime[0]
-        var currentminute = splittesttime[1]
-        var currentemailuser = FirebaseAuth.getInstance().currentUser?.email
-        if (pedidoslist.get(position).estado.equals("Aceptado")&&(pedidoslist.get(position).fecha.replace(" ","")<currentDate || (pedidoslist.get(position).fecha.replace(" ","")==currentDate&&(currenthours>splitpedidotime[0]||(currenthours==splitpedidotime[0]&&currentminute>splitpedidotime[1]))))){
-            var fechasinbarras =pedidoslist.get(position).fecha.replace("/","-").replace(" ","")
-            var documentid = currentemailuser + "#"+ pedidoslist.get(position).email_trabajdor +"#"+fechasinbarras+"#"+pedidoslist.get(position).hora_inicio
-            db.collection("pedidos").document(documentid).update("estado","Realizado")
-        }*/
-
 
         Glide.with(currentlistitem).load(pedidoslist.get(position).imageurl_trabajador).apply(options).dontAnimate().into(imageView_trabajador)
         textViewEstado.text = pedidoslist.get(position).estado
@@ -65,6 +50,7 @@ class PedidosUserArrayAdapter (context : Context, viewtopaint : Int, private val
             "Aceptado" -> textViewEstado.setTextColor(Color.parseColor("#70a83b"))
             "Rechazado" -> textViewEstado.setTextColor(Color.parseColor("#bf0811"))
             "Realizado" -> textViewEstado.setTextColor(Color.parseColor("#006b33"))
+            "Caducado" -> textViewEstado.setTextColor(Color.parseColor("#A5316B"))
         }
         when (pedidoslist.get(position).tipo){
             "Alta Cocina" -> textViewcantidade.text = pedidoslist.get(position).cantidad + " Personas"
