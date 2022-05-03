@@ -52,6 +52,10 @@ class User_buscar : Fragment() {
         var currentemailuser = FirebaseAuth.getInstance().currentUser?.email
         var vista = inflater.inflate(R.layout.fragment_user_buscar, container, false)
         val options = RequestOptions().circleCrop()
+        //buscador
+        var imageButtonbuscar = vista.findViewById<ImageButton>(R.id.imageButtonbuscar)
+        var editTexbuscador = vista.findViewById<EditText>(R.id.editTexbuscador)
+
         // cocina
         var linearbotonescocina = vista.findViewById<LinearLayout>(R.id.linearbotonescocina)
         var linearcocineromain = vista.findViewById<LinearLayout>(R.id.linearcocineromain)
@@ -348,6 +352,15 @@ class User_buscar : Fragment() {
                             Toast.makeText(context,"Error alguno de los campos esta vacio",Toast.LENGTH_LONG).show()
                         }
                     }
+                }
+                imageButtonbuscar.setOnClickListener {
+                    var listafiltrar = ArrayList<Trabajador>()
+                    listview.adapter = null
+                    for (i in listatrabajadoresfiltrada.indices) {
+                        if (listatrabajadoresfiltrada.get(i).nombreyapellido.contains(editTexbuscador.text.toString())) {
+                            listafiltrar.add(listatrabajadoresfiltrada.get(i)) }
+                    }
+                    listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1, R.layout.item_list_trabajador_buscar, listafiltrar, categoria_lista) }
                 }
             }
         }
