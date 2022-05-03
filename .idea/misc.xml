@@ -5,7 +5,11 @@
       <map>
         <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_register.xml" value="0.2828125" />
+        <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_trabajador_main.xml" value="0.17147922998986828" />
         <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_user_main.xml" value="0.27445652173913043" />
+        <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/fragment_trabajador_aceptados.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/fragment_trabajador_cuenta.xml" value="0.22" />
+        <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/fragment_trabajador_pedidos.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/fragment_user_buscar.xml" value="0.25" />
         <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/fragment_user_cuenta.xml" value="0.271286231884058" />
         <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/fragment_user_pedidos.xml" value="0.25" />

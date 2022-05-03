@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wipehouse">
         <activity
+            android:name=".Trabajador_MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".User_MainActivity"
             android:exported="true" />
         <activity

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".User_MainActivity"
+    android:orientation="vertical">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9"/>
+
+    <View
+        android:id="@+id/viewline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#50808080"/>
+
+    <nl.joery.animatedbottombar.AnimatedBottomBar
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:abb_selectedTabType="text"
+        app:abb_tabColor="#2C3340"
+        app:abb_tabColorSelected="#47CAF3"
+        app:abb_indicatorColor="#47CAF3"
+        app:abb_tabs="@menu/tabs"
+        app:abb_textStyle="bold"
+        app:abb_textSize="15sp"
+        app:abb_animationInterpolator="@android:anim/overshoot_interpolator" />
+
+</LinearLayout>
