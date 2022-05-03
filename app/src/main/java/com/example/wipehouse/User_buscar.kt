@@ -49,13 +49,12 @@ class User_buscar : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var currentemailuser = FirebaseAuth.getInstance().currentUser?.email
         var vista = inflater.inflate(R.layout.fragment_user_buscar, container, false)
+        var currentemailuser = FirebaseAuth.getInstance().currentUser?.email
         val options = RequestOptions().circleCrop()
         //buscador
         var imageButtonbuscar = vista.findViewById<ImageButton>(R.id.imageButtonbuscar)
         var editTexbuscador = vista.findViewById<EditText>(R.id.editTexbuscador)
-
         // cocina
         var linearbotonescocina = vista.findViewById<LinearLayout>(R.id.linearbotonescocina)
         var linearcocineromain = vista.findViewById<LinearLayout>(R.id.linearcocineromain)
@@ -144,14 +143,10 @@ class User_buscar : Fragment() {
             linearbotonespiscinas.setVisibility(View.GONE)
         }
         imageButtonbackarrowrelizarpedido.setOnClickListener {
-            closemenus()
-            listview.adapter = null
-            scrollseleccion.setVisibility(View.VISIBLE)
-            textselecciona.setVisibility(View.VISIBLE)
             editTextcantidadde.setText("")
             editTextfecha.setText("")
             editTexthorainicio.setText("")
-            scrolllist.setVisibility(View.GONE)
+            scrolllist.setVisibility(View.VISIBLE)
             scrollrealizarpedido.setVisibility(View.GONE)
         }
         linearpiscinasmain.setOnClickListener {
