@@ -5,11 +5,7 @@
       <map>
         <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_register.xml" value="0.2828125" />
-        <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_trabajador_main.xml" value="0.17147922998986828" />
         <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_user_main.xml" value="0.27445652173913043" />
-        <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/fragment_trabajador_aceptados.xml" value="0.17831813576494426" />
-        <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/fragment_trabajador_cuenta.xml" value="0.22" />
-        <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/fragment_trabajador_pedidos.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/fragment_user_buscar.xml" value="0.25" />
         <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/fragment_user_cuenta.xml" value="0.271286231884058" />
         <entry key="..\:/Users/ilopez/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/fragment_user_pedidos.xml" value="0.25" />
@@ -28,9 +24,13 @@
         <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/drawable/greenstroke_roundcorners_low.xml" value="0.3671875" />
         <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
         <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/drawable/lightblue_roundcorners.xml" value="0.3671875" />
+        <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/drawable/white_roundcorners.xml" value="0.3828125" />
+        <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/drawable/white_roundcorners_low.xml" value="0.3828125" />
         <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_main.xml" value="0.26856884057971014" />
+        <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_main_sinerror.xml" value="0.27708333333333335" />
         <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_register.xml" value="0.2703804347826087" />
         <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_test.xml" value="0.2658514492753623" />
+        <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_trabajador_main.xml" value="0.3432971014492754" />
         <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_trabajos.xml" value="0.2703804347826087" />
         <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/activity_user_main.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/bg_spinner.xml" value="0.36666666666666664" />
@@ -45,6 +45,8 @@
         <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/item_list_trabajador_buscar.xml" value="0.36141304347826086" />
         <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/mydropdownspinner.xml" value="0.2630208333333333" />
         <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/layout/myselectedspinner.xml" value="0.2630208333333333" />
+        <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/menu/tabs_trabajador.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/menu/tabs_user.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/sozzza/AndroidStudioProjects/Wipehouse/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.328125" />
       </map>
     </option>
