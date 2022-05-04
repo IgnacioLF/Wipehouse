@@ -165,11 +165,12 @@ class Trabajos : AppCompatActivity() {
                 buttonGuardar.setVisibility(View.GONE)
                 mantenimiento=false
             } else {
-                // TODO trabajador activity
-                startActivity(Intent(applicationContext,MainActivity::class.java))
+                startActivity(Intent(this,Trabajador_MainActivity::class.java))
             }
         }
-
+        buttonFinalizar.setOnClickListener {
+            startActivity(Intent(this,Trabajador_MainActivity::class.java))
+        }
         checkBoxaltacocina.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 linearaltacocina.setBackgroundResource(R.drawable.blue_roundcorners_low)

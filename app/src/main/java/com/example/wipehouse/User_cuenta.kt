@@ -89,7 +89,6 @@ class User_cuenta : Fragment() {
             editTextTelefono.setText(document.data?.get("telefono")?.toString())
         }
         buttonModificar.setOnClickListener {
-            // TODO modicar trabajos nombre y apellido y ciudad
             if (editTextTextNombre.text.isNotEmpty()&&editTextapellidos.text.isNotEmpty()&&editTextCodigopostal.text.isNotEmpty()&&editTextDireccion.text.isNotEmpty()&&editTextDNI.text.isNotEmpty()&&editTextTelefono.text.isNotEmpty()){
                 val datauser = hashMapOf(
                     "nombre" to editTextTextNombre.text.toString(),

@@ -93,7 +93,7 @@ class Register : AppCompatActivity() {
         }
         imageButtonAddimage.setOnClickListener {
             var openGalleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            launcher.launch(openGalleryIntent);
+            launcher.launch(openGalleryIntent)
         }
 
         imageButtonCliente.setOnClickListener {
