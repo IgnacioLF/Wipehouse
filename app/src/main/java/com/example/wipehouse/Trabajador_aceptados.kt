@@ -5,6 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +41,32 @@ class Trabajador_aceptados : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trabajador_aceptados, container, false)
+        var vista = inflater.inflate(R.layout.fragment_trabajador_aceptados, container, false)
+        var listviewpedidos = vista.findViewById<ListView>(R.id.listviewaceptados)
+        var db = Firebase.firestore
+        var emailcurrentuser = FirebaseAuth.getInstance().currentUser?.email
+        var listpedidos = ArrayList<Pedido>()
+        db.collection("pedidos").whereEqualTo("email_trabajador",emailcurrentuser).get().addOnSuccessListener { result ->
+            for (document in result) {
+               if (document.data["estado"].toString().equals("Aceptado")) {
+                   var email_cliente = document.data["email_cliente"].toString()
+                   var email_trabajador = document.data["email_trabajador"].toString()
+                   var tipo = document.data["tipo"].toString()
+                   var precio = document.data["precio"].toString()
+                   var cantidad = document.data["cantidad"].toString()
+                   var fecha = document.data["fecha"].toString()
+                   var hora_inicio = document.data["hora_inicio"].toString()
+                   var puntuacion = document.data["puntuacion"].toString()
+                   var estado = document.data["estado"].toString()
+                   var imageurl_trabajador = document.data["imageurl_trabajador"].toString()
+                   var nombreyapellido_trabajdor = document.data["nombreyapellido_trabajdor"].toString()
+                   var currentpedido = Pedido(email_cliente, email_trabajador, tipo, precio, cantidad, fecha, hora_inicio, puntuacion, estado, imageurl_trabajador, nombreyapellido_trabajdor)
+                   listpedidos.add(currentpedido)
+               }
+            }
+        }
+        listviewpedidos.adapter = context?.let { PedidosUserArrayAdapter(it,R.layout.item_list_pedidos_user,listpedidos) }
+        return vista
     }
 
     companion object {

@@ -37,10 +37,12 @@ class PedidosUserArrayAdapter (context : Context, viewtopaint : Int, private val
         val textViewNombreyapellido = currentlistitem.findViewById<TextView>(R.id.textViewNombreyapellido)
         val textViewEstado = currentlistitem.findViewById<TextView>(R.id.textViewEstado)
         val imageView_trabajador = currentlistitem.findViewById<ImageView>(R.id.imageView_trabajador)
+        val textViewtipo = currentlistitem.findViewById<TextView>(R.id.textViewtipo)
         val options = RequestOptions().circleCrop()
         var db = Firebase.firestore
 
         Glide.with(currentlistitem).load(pedidoslist.get(position).imageurl_trabajador).apply(options).dontAnimate().into(imageView_trabajador)
+        textViewtipo.text = pedidoslist.get(position).tipo
         textViewEstado.text = pedidoslist.get(position).estado
         textViewfecha.text = pedidoslist.get(position).fecha
         textViewprecio.text = pedidoslist.get(position).precio + "€"
@@ -56,9 +58,12 @@ class PedidosUserArrayAdapter (context : Context, viewtopaint : Int, private val
             "Alta Cocina" -> textViewcantidade.text = pedidoslist.get(position).cantidad + " Personas"
             "Cocina Tradicional" -> textViewcantidade.text = pedidoslist.get(position).cantidad + " Personas"
             "Cocina Lowcost" -> textViewcantidade.text = pedidoslist.get(position).cantidad + " Personas"
-            "Piscina Grande" -> textViewcantidade.text = "Pisciana Grande"
-            "Piscina Mediana" -> textViewcantidade.text = "Piscina Mediana"
-            "Piscina Pequeña" -> textViewcantidade.text = "Piscina Pequeña"
+            "Piscina Grande" -> {textViewcantidade.text = "Pisciana Grande"
+                textViewtipo.text = "Mantenimiento de piscinas"}
+            "Piscina Mediana" -> {textViewcantidade.text = "Piscina Mediana"
+                textViewtipo.text = "Mantenimiento de piscinas"}
+            "Piscina Pequeña" -> {textViewcantidade.text = "Piscina Pequeña"
+                textViewtipo.text = "Mantenimiento de piscinas"}
             "Limpiador" -> textViewcantidade.text = pedidoslist.get(position).cantidad + " Horas"
             "Cortacesped" -> textViewcantidade.text = pedidoslist.get(position).cantidad + " Metros²"
         }

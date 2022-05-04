@@ -142,7 +142,6 @@ class Trabajador_cuenta : Fragment() {
                     "dni" to editTextDNI.text.toString()
                 )
                 db.collection("usuarios").document(currentuseremail).set(datauser).addOnSuccessListener {
-                   // Toast.makeText(context,"Cambios guardados correctamente",Toast.LENGTH_LONG).show()
                    if (this::imageUri.isInitialized) {
                        var storagereference = FirebaseStorage.getInstance().getReference()
                        var fileRef =
@@ -166,9 +165,8 @@ class Trabajador_cuenta : Fragment() {
                                db.collection("pedidos").whereEqualTo("email_trabajador",currentuseremail).get().addOnSuccessListener { result ->
                                    for (document in result){
                                        db.collection("pedidos").document(document.id).update(
-                                           "ciudad", spinnerciudad.selectedItem.toString(),
                                            "imageurl_trabajador",newimageurl,
-                                           "nombreyapellido",nombreyapellido)
+                                           "nombreyapellido_trabajador",nombreyapellido)
                                    }
                                    Toast.makeText(context,"Cambios guardados correctamente",Toast.LENGTH_LONG).show()
                                }
@@ -187,9 +185,7 @@ class Trabajador_cuenta : Fragment() {
                                "nombreyapellido",nombreyapellido)
                        db.collection("pedidos").whereEqualTo("email_trabajador",currentuseremail).get().addOnSuccessListener { result ->
                            for (document in result){
-                               db.collection("pedidos").document(document.id).update(
-                                   "ciudad", spinnerciudad.selectedItem.toString(),
-                                   "nombreyapellido",nombreyapellido)
+                               db.collection("pedidos").document(document.id).update("nombreyapellido_trabajador",nombreyapellido)
                            }
                            Toast.makeText(context,"Cambios guardados correctamente",Toast.LENGTH_LONG).show()
                        }

@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
+import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
@@ -107,12 +108,20 @@ class User_buscar : Fragment() {
         var textViewpreciofinal = vista.findViewById<TextView>(R.id.textViewpreciofinal)
         var buttonrealizarpedido = vista.findViewById<Button>(R.id.buttonrealizarpedido)
         var db = Firebase.firestore
+        var nombreyapellido_user = ""
+        var direccion_user = ""
 
         var currentciudad = ""
         if (currentemailuser != null) {
             db.collection("usuarios").document(currentemailuser).get().addOnSuccessListener {
                     document ->
                 currentciudad = document.data?.get("ciudad").toString()
+                nombreyapellido_user = document.data?.get("nombre").toString() + " " + document.data?.get("apellidos").toString()
+                if (document.data?.get("apellidos").toString().contains(" ")){
+                    var apellidosarr = Pattern.compile(" ").split(document.data?.get("apellidos").toString())
+                    nombreyapellido_user = document.data?.get("nombre").toString() + " " + apellidosarr[0]
+                }
+                direccion_user = document.data?.get("direccion").toString()
             }
         }
         fun mensajepopup(accion: String, mensaje: String) {
@@ -343,7 +352,9 @@ class User_buscar : Fragment() {
                                 "puntuacion" to "",
                                 "estado" to "Pendiente",
                                 "imageurl_trabajador" to listaonclick.get(position).imageurl,
-                                "nombreyapellido_trabajdor" to listaonclick.get(position).nombreyapellido)
+                                "nombreyapellido_trabajdor" to listaonclick.get(position).nombreyapellido,
+                                "nombreyapellido_cliente" to nombreyapellido_user,
+                                "dirreccion_user" to direccion_user)
                             db.collection("pedidos")
                                 .document(idpedido)
                                 .set(pedido)
