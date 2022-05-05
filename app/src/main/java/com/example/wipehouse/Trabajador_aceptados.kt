@@ -46,7 +46,7 @@ class Trabajador_aceptados : Fragment() {
         var db = Firebase.firestore
         var emailcurrentuser = FirebaseAuth.getInstance().currentUser?.email
         var listpedidos = ArrayList<Pedido>()
-      /*  db.collection("pedidos").whereEqualTo("email_trabajador",emailcurrentuser).get().addOnSuccessListener { result ->
+        db.collection("pedidos").whereEqualTo("email_trabajador",emailcurrentuser).get().addOnSuccessListener { result ->
             for (document in result) {
                if (document.data["estado"].toString().equals("Aceptado")) {
                    var email_cliente = document.data["email_cliente"].toString()
@@ -60,12 +60,14 @@ class Trabajador_aceptados : Fragment() {
                    var estado = document.data["estado"].toString()
                    var imageurl_trabajador = document.data["imageurl_trabajador"].toString()
                    var nombreyapellido_trabajdor = document.data["nombreyapellido_trabajdor"].toString()
-                   var currentpedido = Pedido(email_cliente, email_trabajador, tipo, precio, cantidad, fecha, hora_inicio, puntuacion, estado, imageurl_trabajador, nombreyapellido_trabajdor)
+                   var nombreyapellido_cliente = document.data["nombreyapellido_cliente"].toString()
+                   var direccion_cliente = document.data["direccion_cliente"].toString()
+                   var currentpedido = Pedido(email_cliente, email_trabajador, tipo, precio, cantidad, fecha, hora_inicio, puntuacion, estado, imageurl_trabajador, nombreyapellido_trabajdor,nombreyapellido_cliente,direccion_cliente)
                    listpedidos.add(currentpedido)
                }
             }
         }
-        listviewpedidos.adapter = context?.let { PedidosUserArrayAdapter(it,R.layout.item_list_pedidos_user,listpedidos) }*/
+        listviewpedidos.adapter = context?.let { PedidosTrabajadorArrayAdapter(it,R.layout.item_list_pedidos_trabajador,listpedidos)}
         return vista
     }
 
