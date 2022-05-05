@@ -6,7 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ListView
+import android.widget.RelativeLayout
+import android.widget.TextView
+import androidx.core.view.isEmpty
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -47,6 +52,10 @@ class User_pedidos : Fragment() {
         var db = Firebase.firestore
         var emailcurrentuser = FirebaseAuth.getInstance().currentUser?.email
         var listpedidos = ArrayList<Pedido>()
+        var imageViewlogoloading = vista.findViewById<ImageView>(R.id.imageViewlogoloading)
+        var relativeloading = vista.findViewById<RelativeLayout>(R.id.relativeloading)
+        var textViewisempty = vista.findViewById<TextView>(R.id.textViewisempty)
+        Glide.with(this).load(R.drawable.loading_logo).into(imageViewlogoloading)
 
         db.collection("pedidos").whereEqualTo("email_cliente",emailcurrentuser).get().addOnSuccessListener { result ->
             for (document in result) {
@@ -97,8 +106,13 @@ class User_pedidos : Fragment() {
                 var currentpedido = Pedido(email_cliente,email_trabajador,tipo,precio, cantidad, fecha, hora_inicio, puntuacion, estado,imageurl_trabajador,nombreyapellido_trabajdor,nombreyapellido_cliente,direccion_cliente)
                 listpedidos.add(currentpedido)
             }
+            listviewpedidos.adapter = context?.let { PedidosUserArrayAdapter(it,R.layout.item_list_pedidos_user,listpedidos) }
+            listviewpedidos.setVisibility(View.VISIBLE)
+            relativeloading.setVisibility(View.GONE)
+            listviewpedidos.setEmptyView(textViewisempty)
+
         }
-        listviewpedidos.adapter = context?.let { PedidosUserArrayAdapter(it,R.layout.item_list_pedidos_user,listpedidos) }
+
         return vista
     }
 
