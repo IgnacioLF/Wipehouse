@@ -354,7 +354,7 @@ class User_buscar : Fragment() {
                                 "imageurl_trabajador" to listaonclick.get(position).imageurl,
                                 "nombreyapellido_trabajdor" to listaonclick.get(position).nombreyapellido,
                                 "nombreyapellido_cliente" to nombreyapellido_user,
-                                "dirreccion_user" to direccion_user)
+                                "direccion_cliente" to direccion_user)
                             db.collection("pedidos")
                                 .document(idpedido)
                                 .set(pedido)

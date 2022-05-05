@@ -61,6 +61,8 @@ class User_pedidos : Fragment() {
                 var estado = document.data["estado"].toString()
                 var imageurl_trabajador = document.data["imageurl_trabajador"].toString()
                 var nombreyapellido_trabajdor = document.data["nombreyapellido_trabajdor"].toString()
+                var nombreyapellido_cliente = document.data["nombreyapellido_cliente"].toString()
+                var direccion_cliente = document.data["direccion_cliente"].toString()
 
 
 
@@ -92,7 +94,7 @@ class User_pedidos : Fragment() {
                 }
 
 
-                var currentpedido = Pedido(email_cliente,email_trabajador,tipo,precio, cantidad, fecha, hora_inicio, puntuacion, estado,imageurl_trabajador,nombreyapellido_trabajdor)
+                var currentpedido = Pedido(email_cliente,email_trabajador,tipo,precio, cantidad, fecha, hora_inicio, puntuacion, estado,imageurl_trabajador,nombreyapellido_trabajdor,nombreyapellido_cliente,direccion_cliente)
                 listpedidos.add(currentpedido)
             }
         }

@@ -5,6 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +41,64 @@ class Trabajador_pedidos : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trabajador_pedidos, container, false)
+        var vista = inflater.inflate(R.layout.fragment_trabajador_pedidos, container, false)
+        var listviewpedidos = vista.findViewById<ListView>(R.id.listviewpedidos)
+        var db = Firebase.firestore
+        var emailcurrentuser = FirebaseAuth.getInstance().currentUser?.email
+        var listpedidos = ArrayList<Pedido>()
+
+        db.collection("pedidos").whereEqualTo("email_trabajador",emailcurrentuser).get().addOnSuccessListener { result ->
+            for (document in result) {
+                var email_cliente = document.data["email_cliente"].toString()
+                var email_trabajador = document.data["email_trabajador"].toString()
+                var tipo = document.data["tipo"].toString()
+                var precio = document.data["precio"].toString()
+                var cantidad = document.data["cantidad"].toString()
+                var fecha = document.data["fecha"].toString()
+                var hora_inicio = document.data["hora_inicio"].toString()
+                var puntuacion = document.data["puntuacion"].toString()
+                var estado = document.data["estado"].toString()
+                var imageurl_trabajador = document.data["imageurl_trabajador"].toString()
+                var nombreyapellido_trabajdor = document.data["nombreyapellido_trabajdor"].toString()
+                var nombreyapellido_cliente = document.data["nombreyapellido_cliente"].toString()
+                var direccion_cliente = document.data["direccion_cliente"].toString()
+
+
+
+                val sdf = SimpleDateFormat("d/M/y")
+                val currentDate = sdf.format(Date())
+                var splitpedidotime = hora_inicio.split(":")
+                var currenttimeall =  Calendar.getInstance().time
+                var splitcurrenttimeall = currenttimeall.toString().split(" ")
+                var splittesttime = splitcurrenttimeall[3].split(":")
+                var currenthours = splittesttime[0]
+                var currentminute = splittesttime[1]
+                var currentemailuser = FirebaseAuth.getInstance().currentUser?.email
+                var fechasinespacios =fecha.replace(" ","")
+                val sdf2 = SimpleDateFormat("dd/MM/yyyy")
+                val fechadelitem = sdf2.parse(fechasinespacios)
+                val fechaactual = sdf2.parse(currentDate)
+                if (estado.equals("Aceptado")&&(fechaactual.after(fechadelitem) || (fecha.replace(" ","")==currentDate&&(currenthours>splitpedidotime[0]||(currenthours==splitpedidotime[0]&&currentminute>splitpedidotime[1]))))){
+                    var fechasinbarras =fecha.replace("/","-").replace(" ","")
+                    var documentid = currentemailuser + "#"+ email_trabajador +"#"+fechasinbarras+"#"+hora_inicio
+                    db.collection("pedidos").document(documentid).update("estado","Realizado")
+                    estado = "Realizado"
+                }
+
+                if (estado.equals("Pendiente")&&(fechaactual.after(fechadelitem) || (fecha.replace(" ","")==currentDate&&(currenthours>splitpedidotime[0]||(currenthours==splitpedidotime[0]&&currentminute>splitpedidotime[1]))))){
+                    var fechasinbarras =fecha.replace("/","-").replace(" ","")
+                    var documentid = currentemailuser + "#"+ email_trabajador +"#"+fechasinbarras+"#"+hora_inicio
+                    db.collection("pedidos").document(documentid).update("estado","Caducado")
+                    estado = "Caducado"
+                }
+
+
+                var currentpedido = Pedido(email_cliente,email_trabajador,tipo,precio, cantidad, fecha, hora_inicio, puntuacion, estado,imageurl_trabajador,nombreyapellido_trabajdor,nombreyapellido_cliente,direccion_cliente)
+                listpedidos.add(currentpedido)
+            }
+            listviewpedidos.adapter = context?.let { PedidosTrabajadorArrayAdapter(it,R.layout.item_list_pedidos_trabajador,listpedidos) }
+        }
+        return vista
     }
 
     companion object {
