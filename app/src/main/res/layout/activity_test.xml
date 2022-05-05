@@ -7,10 +7,18 @@
     tools:context=".test">
 
 
+    <ImageView
+        android:id="@+id/imageViewloading"
+        android:layout_width="200dp"
+        android:layout_centerInParent="true"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/logorender" />
+
     <RelativeLayout
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/imageView4"

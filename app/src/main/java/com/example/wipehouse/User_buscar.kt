@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isEmpty
 import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -110,6 +111,10 @@ class User_buscar : Fragment() {
         var db = Firebase.firestore
         var nombreyapellido_user = ""
         var direccion_user = ""
+        var imageViewlogoloading = vista.findViewById<ImageView>(R.id.imageViewlogoloading)
+        var relativeloading = vista.findViewById<RelativeLayout>(R.id.relativeloading)
+        var textViewisempty = vista.findViewById<TextView>(R.id.textViewisempty)
+        Glide.with(this).load(R.drawable.loading_logo).into(imageViewlogoloading)
 
         var currentciudad = ""
         if (currentemailuser != null) {
@@ -135,7 +140,9 @@ class User_buscar : Fragment() {
         fun gotolista(){
             scrollseleccion.setVisibility(View.GONE)
             textselecciona.setVisibility(View.GONE)
-            scrolllist.setVisibility(View.VISIBLE) }
+            scrolllist.setVisibility(View.VISIBLE)
+            relativeloading.setVisibility(View.VISIBLE)
+            listview.setVisibility(View.GONE)}
 
         fun closemenus(){
             linearcocineromain.setBackgroundResource(R.drawable.bluestroke_roundcorners_low)
@@ -241,6 +248,9 @@ class User_buscar : Fragment() {
                     }
                 }
                 listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1,R.layout.item_list_trabajador_buscar,listatrabajadoresfiltrada,categoria_lista) }
+                relativeloading.setVisibility(View.GONE)
+                listview.setVisibility(View.VISIBLE)
+                listview.setEmptyView(textViewisempty)
                 var listaonclick = ArrayList<Trabajador>()
                 var listafiltrar = ArrayList<Trabajador>()
                 imageButtonbuscar.setOnClickListener {

@@ -7,6 +7,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.animation.AnimationUtils
 import android.widget.EditText
 import android.widget.ImageView
 import com.google.firebase.auth.FirebaseAuth
@@ -37,9 +38,8 @@ class test : AppCompatActivity() {
         val pathReference = storageRef.child("Trabajadores/"+email+".jpg")
         var db = Firebase.firestore
         var urlimagetrabajador = ""
-
-
-
+        var imageViewloading = findViewById<ImageView>(R.id.imageViewloading)
+        Glide.with(this).load(R.drawable.loading_logo).into(imageViewloading)
         db.collection("trabajadores").document("cocinero2@gmail.com").get().addOnSuccessListener {result ->
             urlimagetrabajador= result.data?.get("imageurl").toString()
 

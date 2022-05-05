@@ -389,12 +389,38 @@
 
                 </LinearLayout>
             </RelativeLayout>
-            <ListView
+
+        <RelativeLayout
+            android:id="@+id/relativeloading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+            <ImageView
+                android:id="@+id/imageViewlogoloading"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/logorender" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textViewisempty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#2c3340"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:text="No se han podido encontrar resultados" />
+
+        <ListView
                 android:id="@+id/listviewbuscar"
                 android:layout_marginTop="10dp"
                 android:layout_below="@+id/linearbuscador"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
     </LinearLayout>
 
     <ScrollView
