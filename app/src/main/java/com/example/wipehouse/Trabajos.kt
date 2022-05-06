@@ -25,6 +25,8 @@ class Trabajos : AppCompatActivity() {
     lateinit var editTextcocinalowcostdesc : EditText
     lateinit var editTextcocinalowcostplatos : EditText
     lateinit var editTextcocinalowcostprecio : EditText
+    var db = Firebase.firestore
+    var email = FirebaseAuth.getInstance().currentUser?.email
 
     var cocinero = false
     var cortacesped = false
@@ -78,6 +80,34 @@ class Trabajos : AppCompatActivity() {
         var imageButtonCortacesped = findViewById<ImageButton>(R.id.imageButtonCortacesped)
         var imageButtonLimpiador = findViewById<ImageButton>(R.id.imageButtonLimpiador)
         var imageButtonCocinero = findViewById<ImageButton>(R.id.imageButtonCocinero)
+
+        email?.let { db.collection("trabajadores").document(it).get().addOnSuccessListener { document ->
+            editTextlimpiadorprecio.setText(document.data?.get("limpiador_precio").toString())
+            editTextcortacespedprecio.setText(document.data?.get("cortacesped_precio").toString())
+            editTextpreciopiscinagrande.setText(document.data?.get("mantenimiento_precio_grande").toString())
+            editTextpreciopiscinamedianas.setText(document.data?.get("mantenimiento_precio_mediana").toString())
+            editTextpreciopiscinapequenas.setText(document.data?.get("mantenimiento_precio_pequena").toString())
+            if (document.data?.get("altacocina_precio").toString().equals("")==false){
+                checkBoxaltacocina.setChecked(true)
+                editTextaltacocinadesc.setText(document.data?.get("altacocina_desc").toString())
+                editTextaltacocinaplatos.setText(document.data?.get("altacocina_platos").toString())
+                editTextaltacocinaprecio.setText(document.data?.get("altacocina_precio").toString())
+            }
+            if (document.data?.get("cocinatradicional_precio").toString().equals("")==false){
+                checkBoxcocinatradicional.setChecked(true)
+                editTextcocinatradicionaldesc.setText(document.data?.get("cocinatradicional_desc").toString())
+                editTextcocinatradicionalplatos.setText(document.data?.get("cocinatradicional_platos").toString())
+                editTextcocinatradicionalprecio.setText(document.data?.get("cocinatradicional_precio").toString())
+            }
+            if (document.data?.get("cocinalowcost_precio").toString().equals("")==false){
+                checkBoxcocinalowcost.setChecked(true)
+                editTextcocinalowcostdesc.setText(document.data?.get("cocinalowcost_desc").toString())
+                editTextcocinalowcostplatos.setText(document.data?.get("cocinalowcost_platos").toString())
+                editTextcocinalowcostprecio.setText(document.data?.get("cocinalowcost_precio").toString())
+
+            }
+        } }
+
 
         imageButtonCocinero.setOnClickListener {
             linearmianbotones.setVisibility(View.GONE)
@@ -267,11 +297,9 @@ class Trabajos : AppCompatActivity() {
     }
 
     fun guardardatos(data : HashMap<String,String>){
-        var db = Firebase.firestore
-        var email = FirebaseAuth.getInstance().currentUser?.email
         if (email != null) {
             db.collection("trabajadores")
-                .document(email)
+                .document(email!!)
                 .update(data as Map<String, Any>)
                 .addOnSuccessListener { documentReference ->
                     Toast.makeText(applicationContext,"Cambios guardados correctamente",Toast.LENGTH_LONG).show()
