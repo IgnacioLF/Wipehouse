@@ -46,6 +46,8 @@ class Register : AppCompatActivity() {
     lateinit var profile_image: de.hdodenhof.circleimageview.CircleImageView
     lateinit var imageButtonAddimage: ImageButton
     lateinit var spinnerciudad : Spinner
+    lateinit var relativeloading : RelativeLayout
+    lateinit var buttonContinuar : Button
     var trabajador = false
     var cliente =false
     var partes=1
@@ -55,6 +57,8 @@ class Register : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        buttonContinuar=findViewById(R.id.buttonContinuar)
+        relativeloading=findViewById(R.id.relativeloading)
         storagereference= FirebaseStorage.getInstance().getReference()
         editTextTextNombre=findViewById(R.id.editTextTextNombre)
         editTextapellidos=findViewById(R.id.editTextapellidos)
@@ -72,6 +76,7 @@ class Register : AppCompatActivity() {
         textViewTitulo2=findViewById(R.id.textViewTitulo2)
         profile_image=findViewById(R.id.profile_image)
         imageButtonAddimage=findViewById(R.id.imageButtonAddimage)
+        var imageViewlogoloading =  findViewById<ImageView>(R.id.imageViewlogoloading)
         val backarrowB = findViewById<ImageButton>(R.id.imageButtonBackArrow)
         spinnerciudad = findViewById(R.id.spinnerciudad)
         var ciudadlista = arrayOf<String>("Madrid","Barcelona")
@@ -79,6 +84,7 @@ class Register : AppCompatActivity() {
         spinadapter.setDropDownViewResource(R.layout.mydropdownspinner)
         spinnerciudad.adapter = spinadapter
 
+        Glide.with(this).load(R.drawable.loading_logo).into(imageViewlogoloading)
         spinnerciudad.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
@@ -114,6 +120,8 @@ class Register : AppCompatActivity() {
             } else if (partes==2){
                 linearparte1.setVisibility(View.VISIBLE)
                 linearparte2.setVisibility(View.INVISIBLE)
+                relativeloading.setVisibility(View.INVISIBLE)
+                buttonContinuar.isEnabled = true
                 partes=1
             } else if (partes==3){
                 linearparte2.setVisibility(View.VISIBLE)
@@ -121,11 +129,13 @@ class Register : AppCompatActivity() {
                 textViewTitulo2.setVisibility(View.INVISIBLE)
                 profile_image.setVisibility(View.INVISIBLE)
                 imageButtonAddimage.setVisibility(View.INVISIBLE)
+                relativeloading.setVisibility(View.INVISIBLE)
+                buttonContinuar.isEnabled = true
                 partes=2
             }
         }
 
-        val buttonContinuar=findViewById<Button>(R.id.buttonContinuar)
+
         buttonContinuar.setOnClickListener {
             if (partes==1){
                 if (editTextTextNombre.text.isNotEmpty()&&editTextapellidos.text.isNotEmpty()&&editTextTextContraseña.text.isNotEmpty()&&editTextDNI.text.isNotEmpty()&&editTextEmail.text.isNotEmpty()&&editTextTelefono.text.isNotEmpty()){
@@ -144,7 +154,11 @@ class Register : AppCompatActivity() {
                         textViewTitulo2.setVisibility(View.VISIBLE)
                         profile_image.setVisibility(View.VISIBLE)
                         imageButtonAddimage.setVisibility(View.VISIBLE)
+
                     }else{
+                        linearparte2.setVisibility(View.INVISIBLE)
+                        relativeloading.setVisibility(View.VISIBLE)
+                        buttonContinuar.isEnabled = false
                         registerCliente()
                     }
                 } else {
@@ -152,6 +166,10 @@ class Register : AppCompatActivity() {
                 }
             } else if (partes==3){
                 if (::imageUri.isInitialized){
+                    relativeloading.setVisibility(View.VISIBLE)
+                    buttonContinuar.isEnabled = false
+                    profile_image.setVisibility(View.INVISIBLE)
+                    imageButtonAddimage.setVisibility(View.INVISIBLE)
                     registerTrabajador()
                 } else {
                     Toast.makeText(applicationContext,"Error necesitas subir una imagen",Toast.LENGTH_LONG).show()
@@ -218,6 +236,8 @@ class Register : AppCompatActivity() {
             textViewTitulo2.setVisibility(View.INVISIBLE)
             profile_image.setVisibility(View.INVISIBLE)
             imageButtonAddimage.setVisibility(View.INVISIBLE)
+            relativeloading.setVisibility(View.INVISIBLE)
+            buttonContinuar.isEnabled = true
             partes=1
         })
         val dialog = builder.create()

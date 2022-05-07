@@ -42,7 +42,7 @@ class User_cuenta : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var  view = inflater.inflate(R.layout.fragment_user_cuenta, container, false)
+        var view = inflater.inflate(R.layout.fragment_user_cuenta, container, false)
         var editTextTextNombre=view.findViewById<EditText>(R.id.editTextTextNombre)
         var editTextapellidos=view.findViewById<EditText>(R.id.editTextapellidos)
         var editTextDNI=view.findViewById<EditText>(R.id.editTextDNI)

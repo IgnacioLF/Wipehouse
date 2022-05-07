@@ -107,7 +107,6 @@ class Trabajador_cuenta : Fragment() {
             imageurltrabajador = document.data?.get("imageurl").toString()
             Glide.with(this).load(imageurltrabajador).apply(options).dontAnimate().into(imageViewtrabajadorfoto)
             imageViewtrabajadorfoto.setVisibility(View.VISIBLE)
-            Log.d("imageurl",imageurltrabajador)
         }
         buttonLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
