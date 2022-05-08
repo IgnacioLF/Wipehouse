@@ -21,5 +21,19 @@ class Trabajador_MainActivity : AppCompatActivity() {
         ViewPager2.setAdapter(ViewPagerAdapter)
         ViewPager2.setCurrentItem(1);
         bottom_bar.setupWithViewPager2(ViewPager2)
+
+        var myPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                var frrr = getSupportFragmentManager().getFragments().get(0)
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                if(position==0){
+                    fragmentTransaction.remove(frrr).commit()
+                }
+                if (position==1){
+                    fragmentTransaction.remove(frrr).commit()
+                }
+            }
+        }
+        ViewPager2.registerOnPageChangeCallback(myPageChangeCallback)
     }
 }

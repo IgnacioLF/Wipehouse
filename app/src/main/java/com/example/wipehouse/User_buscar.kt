@@ -369,6 +369,10 @@ class User_buscar : Fragment() {
                                 .document(idpedido)
                                 .set(pedido)
                                 .addOnSuccessListener {
+                                    // reloading user_pedidos_fragment
+                                    var frrr = getParentFragmentManager().getFragments().get(0)
+                                    getParentFragmentManager().beginTransaction().remove(frrr).commit()
+
                                     mensajepopup("Pedido Realizado","El pedido se realizo con exito puede comprobar su estado en pedidos")
                                     closemenus()
                                     listview.adapter = null
