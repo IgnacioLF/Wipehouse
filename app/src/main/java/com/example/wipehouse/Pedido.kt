@@ -13,4 +13,12 @@ class Pedido (var email_cliente:String,
               var nombreyapellido_trabajdor:String,
               var nombreyapellido_cliente :String,
               var direccion_cliente :String) {
+
+    fun changeEstado(newestado: String){
+        this.estado = newestado
+    }
+
+    fun changePuntuacion(newpuntuacion :String){
+        this.puntuacion = newpuntuacion
+    }
 }

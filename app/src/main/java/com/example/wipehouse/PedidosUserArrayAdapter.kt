@@ -93,7 +93,7 @@ class PedidosUserArrayAdapter (context : Context, viewtopaint : Int, private val
                     if (rating.progress.toString().equals("0")){
                         Toast.makeText(context,"Debe incluir alemnos 1 estrella en su valoración", Toast.LENGTH_LONG).show()
                     } else {
-                        var fechasinbarras = pedidoslist.get(position).fecha.replace("/", "-")
+                        var fechasinbarras = pedidoslist.get(position).fecha.replace("/", "-").replace(" ","")
                         var idpedido =
                             pedidoslist.get(position).email_cliente + "#" + pedidoslist.get(position).email_trabajdor + "#" + fechasinbarras + "#" + pedidoslist.get(
                                 position
@@ -114,6 +114,7 @@ class PedidosUserArrayAdapter (context : Context, viewtopaint : Int, private val
                                     db.collection("trabajadores").document(pedidoslist.get(position).email_trabajdor).update("puntuacion_media",puntuacionmedia)
                                 }
                             dialog.dismiss()
+                                pedidoslist.get(position).changePuntuacion(rating.progress.toString())
                             buttonvalorar.setVisibility(View.GONE)
                         }.addOnFailureListener {
                             Toast.makeText(

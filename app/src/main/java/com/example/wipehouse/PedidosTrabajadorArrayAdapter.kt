@@ -85,6 +85,7 @@ class PedidosTrabajadorArrayAdapter (context : Context, viewtopaint : Int, priva
                             db.collection("pedidos").document(document.id).update("estado","Aceptado").addOnSuccessListener {
                                 buttonrechazar.setVisibility(View.GONE)
                                 buttonaceptar.setVisibility(View.GONE)
+                                pedidoslist.get(position).changeEstado("Aceptado")
                                 textViewEstado.text = "Aceptado"
                                 textViewEstado.setTextColor(Color.parseColor("#70a83b"))
                             }.addOnFailureListener {
@@ -115,6 +116,7 @@ class PedidosTrabajadorArrayAdapter (context : Context, viewtopaint : Int, priva
                             db.collection("pedidos").document(document.id).update("estado","Rechazado").addOnSuccessListener {
                                 buttonrechazar.setVisibility(View.GONE)
                                 buttonaceptar.setVisibility(View.GONE)
+                                pedidoslist.get(position).changeEstado("Rechazado")
                                 textViewEstado.text = "Rechazado"
                                 textViewEstado.setTextColor(Color.parseColor("#bf0811"))
                             }.addOnFailureListener {
