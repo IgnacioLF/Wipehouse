@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".User_pedidos">
+    tools:context=".User_pedidos"
+    android:id="@+id/user_pedidos">
     <TextView
         android:id="@+id/textselecciona"
         android:layout_width="match_parent"

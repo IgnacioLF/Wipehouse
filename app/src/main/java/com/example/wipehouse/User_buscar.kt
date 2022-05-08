@@ -52,6 +52,8 @@ class User_buscar : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var vista = inflater.inflate(R.layout.fragment_user_buscar, container, false)
+      //  FragmentUtil.refreshFragment(context)
+       // val currentFragment = getParentFragmentManager().findFragmentById(R.id.user_buscar)
         var currentemailuser = FirebaseAuth.getInstance().currentUser?.email
         val options = RequestOptions().circleCrop()
         //buscador
