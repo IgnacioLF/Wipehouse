@@ -1,5 +1,6 @@
 package com.example.wipehouse
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,23 +20,36 @@ class User_MainActivity : AppCompatActivity() {
             User_buscar(),
             User_cuenta()
         )
+
         var ViewPagerAdapter = ViewPagerAdapter(fragments,this)
+
         ViewPager2.setAdapter(ViewPagerAdapter)
+
         ViewPager2.setCurrentItem(1);
+
         bottom_bar.setupWithViewPager2(ViewPager2)
+       // ViewPager2.offscreenPageLimit= 0
 
         var myPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 Toast.makeText(this@User_MainActivity, "Selected position: ${position}", Toast.LENGTH_SHORT).show()
                 if(position==0){
-                    Log.d("ento ne el if:", "si--------------------------")
-              //      FragmentUtil.refreshFragment(this)
-                    val frag = User_pedidos()
+                    var frrr = getSupportFragmentManager().getFragments().get(0)
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
-                    fragmentTransaction.detach(frag)
-                    fragmentTransaction.attach(frag)
+                    fragmentTransaction.remove(frrr)
                     fragmentTransaction.commit()
-
+                }
+                if (position==1){
+                    var frrr = getSupportFragmentManager().getFragments().get(0)
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.remove(frrr)
+                    fragmentTransaction.commit()
+                }
+                if (position==2){
+                    var frrr = getSupportFragmentManager().getFragments().get(0)
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.remove(frrr)
+                    fragmentTransaction.commit()
                 }
             }
         }
