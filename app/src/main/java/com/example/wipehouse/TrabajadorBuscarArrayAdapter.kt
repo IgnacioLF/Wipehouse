@@ -19,6 +19,7 @@ class TrabajadorBuscarArrayAdapter (context : Context, viewtopaint : Int, privat
         val textViewCategoria = currentlistitem.findViewById<TextView>(R.id.textViewCategoria)
         val textViewprecio = currentlistitem.findViewById<TextView>(R.id.textViewprecio)
         val imageview_trabajador = currentlistitem.findViewById<ImageView>(R.id.imageView_trabajador)
+        val imageViewestrella1 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella1)
         val imageViewestrella2 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella2)
         val imageViewestrella3 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella3)
         val imageViewestrella4 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella4)
@@ -38,6 +39,11 @@ class TrabajadorBuscarArrayAdapter (context : Context, viewtopaint : Int, privat
             "Cortacesped" -> textViewprecio.text = trabajadorlist.get(position).cortacesped_precio + "€"
         }
         when (trabajadorlist.get(position).puntucaion_media.toInt()) {
+            0 -> {imageViewestrella1.setImageResource(R.drawable.estrellaicon)
+                imageViewestrella2.setImageResource(R.drawable.estrellaicon)
+                imageViewestrella3.setImageResource(R.drawable.estrellaicon)
+                imageViewestrella4.setImageResource(R.drawable.estrellaicon)
+                imageViewestrella5.setImageResource(R.drawable.estrellaicon)}
             1 -> {imageViewestrella2.setImageResource(R.drawable.estrellaicon)
                 imageViewestrella3.setImageResource(R.drawable.estrellaicon)
                 imageViewestrella4.setImageResource(R.drawable.estrellaicon)

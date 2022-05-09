@@ -104,16 +104,13 @@ class PedidosUserArrayAdapter (context : Context, viewtopaint : Int, private val
                                     }
                                     puntuacionmedia =  contestrellatotal /contcantpedidos
                                     db.collection("trabajadores").document(pedidoslist.get(position).email_trabajdor).update("puntuacion_media",puntuacionmedia)
+                                    Toast.makeText(context, "Valoración realizada con exito", Toast.LENGTH_LONG).show()
                                 }
                             dialog.dismiss()
                                 pedidoslist.get(position).changePuntuacion(rating.progress.toString())
                             buttonvalorar.setVisibility(View.GONE)
                         }.addOnFailureListener {
-                            Toast.makeText(
-                                context,
-                                "Error no se pudo realizar la operación",
-                                Toast.LENGTH_LONG
-                            ).show()
+                            Toast.makeText(context, "Error no se pudo realizar la operación", Toast.LENGTH_LONG).show()
                             dialog.cancel()
                         }
                     }

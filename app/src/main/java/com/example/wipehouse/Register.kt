@@ -106,26 +106,6 @@ class Register : AppCompatActivity() {
             imageButtonTrabajador.setImageResource(R.drawable.trabajador_button_on_selected)
         }
         backarrowB.setOnClickListener {
-      /*
-            if(partes==1){
-                startActivity(Intent(applicationContext,MainActivity::class.java))
-            } else if (partes==2){
-                linearparte1.setVisibility(View.VISIBLE)
-                linearparte2.setVisibility(View.INVISIBLE)
-                relativeloading.setVisibility(View.INVISIBLE)
-                buttonContinuar.isEnabled = true
-                partes=1
-            } else if (partes==3){
-                linearparte2.setVisibility(View.VISIBLE)
-                textViewTitulo.setVisibility(View.VISIBLE)
-                textViewTitulo2.setVisibility(View.INVISIBLE)
-                profile_image.setVisibility(View.INVISIBLE)
-                imageButtonAddimage.setVisibility(View.INVISIBLE)
-                relativeloading.setVisibility(View.INVISIBLE)
-                buttonContinuar.isEnabled = true
-                partes=2
-            }
-            */
             when (partes){
                 1 -> {startActivity(Intent(applicationContext,MainActivity::class.java))}
                 2 -> {linearparte1.setVisibility(View.VISIBLE)
@@ -145,46 +125,6 @@ class Register : AppCompatActivity() {
         }
 
         buttonContinuar.setOnClickListener {
-            /*
-            if (partes==1){
-                if (editTextTextNombre.text.isNotEmpty()&&editTextapellidos.text.isNotEmpty()&&editTextTextContraseña.text.isNotEmpty()&&editTextDNI.text.isNotEmpty()&&editTextEmail.text.isNotEmpty()&&editTextTelefono.text.isNotEmpty()){
-                    linearparte1.setVisibility(View.INVISIBLE)
-                    linearparte2.setVisibility(View.VISIBLE)
-                    partes=2
-                } else {
-                    Toast.makeText(applicationContext,"Error alguno de los campos esta vacio",Toast.LENGTH_LONG).show()
-                }
-            } else if (partes==2){
-                if (editTextDireccion.text.isNotEmpty()&&editTextCodigopostal.text.isNotEmpty()&&(trabajador==true||cliente==true)){
-                    if(trabajador==true){
-                        partes=3
-                        linearparte2.setVisibility(View.INVISIBLE)
-                        textViewTitulo.setVisibility(View.INVISIBLE)
-                        textViewTitulo2.setVisibility(View.VISIBLE)
-                        profile_image.setVisibility(View.VISIBLE)
-                        imageButtonAddimage.setVisibility(View.VISIBLE)
-
-                    }else{
-                        linearparte2.setVisibility(View.INVISIBLE)
-                        relativeloading.setVisibility(View.VISIBLE)
-                        buttonContinuar.isEnabled = false
-                        registerCliente()
-                    }
-                } else {
-                    Toast.makeText(applicationContext,"Error alguno de los campos esta vacio",Toast.LENGTH_LONG).show()
-                }
-            } else if (partes==3){
-                if (::imageUri.isInitialized){
-                    relativeloading.setVisibility(View.VISIBLE)
-                    buttonContinuar.isEnabled = false
-                    profile_image.setVisibility(View.INVISIBLE)
-                    imageButtonAddimage.setVisibility(View.INVISIBLE)
-                    registerTrabajador()
-                } else {
-                    Toast.makeText(applicationContext,"Error necesitas subir una imagen",Toast.LENGTH_LONG).show()
-                }
-            }
-            */
             when (partes) {
                 1 -> {if (editTextTextNombre.text.isNotEmpty()&&editTextapellidos.text.isNotEmpty()&&editTextTextContraseña.text.isNotEmpty()&&editTextDNI.text.isNotEmpty()&&editTextEmail.text.isNotEmpty()&&editTextTelefono.text.isNotEmpty()){
                         linearparte1.setVisibility(View.INVISIBLE)
@@ -334,8 +274,7 @@ class Register : AppCompatActivity() {
                                     "mantenimiento_precio_grande" to "",
                                     "mantenimiento_precio_mediana" to "",
                                     "mantenimiento_precio_pequena" to "",
-                                    // TODO puntiacion meedia bien
-                                    "puntuacion_media" to "5"
+                                    "puntuacion_media" to "0"
                                 )
                                 db.collection("trabajadores").document(editTextEmail.text.toString()).set(data).addOnSuccessListener {
                                     var intent = Intent(applicationContext,Trabajos::class.java)

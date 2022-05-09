@@ -283,6 +283,11 @@ class User_buscar : Fragment() {
                     textViewNombreyapellido.text = listaonclick.get(position).nombreyapellido
                     Glide.with(vista).load(listaonclick.get(position).imageurl).apply(options).dontAnimate().into(imageView_trabajador)
                     when (listaonclick.get(position).puntucaion_media.toInt()) {
+                        0 -> {imageViewestrella1.setImageResource(R.drawable.estrellaicon)
+                            imageViewestrella2.setImageResource(R.drawable.estrellaicon)
+                            imageViewestrella3.setImageResource(R.drawable.estrellaicon)
+                            imageViewestrella4.setImageResource(R.drawable.estrellaicon)
+                            imageViewestrella5.setImageResource(R.drawable.estrellaicon)}
                         1 -> {imageViewestrella2.setImageResource(R.drawable.estrellaicon)
                             imageViewestrella3.setImageResource(R.drawable.estrellaicon)
                             imageViewestrella4.setImageResource(R.drawable.estrellaicon)
