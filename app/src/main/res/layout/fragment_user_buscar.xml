@@ -373,6 +373,7 @@
                         android:ems="10"
                         android:gravity="center"
                         android:hint="Buscar Nombre"
+                        android:maxLength="60"
                         android:inputType="textPersonName"
                         android:padding="10dp"
                         android:textColor="@color/white" />

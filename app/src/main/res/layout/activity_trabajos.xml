@@ -137,6 +137,7 @@
                     android:ems="10"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
+                    android:maxLength="3"
                     android:paddingBottom="5dp"
                     android:background="@drawable/white_roundcorners_low"
                     android:inputType="number" />
@@ -198,6 +199,7 @@
                     android:ems="10"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
+                    android:maxLength="3"
                     android:paddingBottom="5dp"
                     android:background="@drawable/white_roundcorners_low"
                     android:inputType="number" />
@@ -259,6 +261,7 @@
                     android:ems="10"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
+                    android:maxLength="3"
                     android:paddingBottom="5dp"
                     android:background="@drawable/white_roundcorners_low"
                     android:inputType="number" />
@@ -313,6 +316,7 @@
                 android:inputType="number"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
+                android:maxLength="3"
                 android:textColor="@color/white"
                 android:paddingBottom="10dp"
                 android:background="@drawable/blue_roundcorners_low"/>
@@ -364,6 +368,7 @@
                 android:inputType="number"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
+                android:maxLength="3"
                 android:textColor="@color/white"
                 android:paddingBottom="10dp"
                 android:background="@drawable/blue_roundcorners_low"/>
@@ -455,6 +460,7 @@
                         android:ems="10"
                         android:inputType="textMultiLine|text"
                         android:lines="5"
+                        android:maxLength="300"
                         android:gravity="top|left"
                         android:background="@drawable/white_roundcorners_low"
                         android:paddingLeft="10dp"
@@ -477,6 +483,7 @@
                         android:ems="10"
                         android:inputType="textMultiLine|text"
                         android:lines="5"
+                        android:maxLength="100"
                         android:gravity="top|left"
                         android:layout_marginBottom="5dp"
                         android:background="@drawable/white_roundcorners_low"
@@ -513,6 +520,7 @@
                                 android:layout_gravity="center"
                                 android:background="@drawable/white_roundcorners_low"
                                 android:ems="10"
+                                android:maxLength="3"
                                 android:layout_centerInParent="true"
                                 android:inputType="number"
                                 android:paddingTop="5dp"
@@ -594,6 +602,7 @@
                         android:inputType="textMultiLine|text"
                         android:lines="5"
                         android:gravity="top|left"
+                        android:maxLength="300"
                         android:background="@drawable/white_roundcorners_low"
                         android:paddingLeft="10dp"
                         android:paddingTop="5dp" />
@@ -615,6 +624,7 @@
                         android:ems="10"
                         android:inputType="textMultiLine|text"
                         android:lines="5"
+                        android:maxLength="100"
                         android:gravity="top|left"
                         android:layout_marginBottom="5dp"
                         android:background="@drawable/white_roundcorners_low"
@@ -651,6 +661,7 @@
                                 android:layout_gravity="center"
                                 android:background="@drawable/white_roundcorners_low"
                                 android:ems="10"
+                                android:maxLength="3"
                                 android:layout_centerInParent="true"
                                 android:inputType="number"
                                 android:paddingTop="5dp"
@@ -731,6 +742,7 @@
                         android:ems="10"
                         android:inputType="textMultiLine|text"
                         android:lines="5"
+                        android:maxLength="300"
                         android:gravity="top|left"
                         android:background="@drawable/white_roundcorners_low"
                         android:paddingLeft="10dp"
@@ -753,6 +765,7 @@
                         android:ems="10"
                         android:inputType="textMultiLine|text"
                         android:lines="5"
+                        android:maxLength="100"
                         android:gravity="top|left"
                         android:layout_marginBottom="5dp"
                         android:background="@drawable/white_roundcorners_low"
@@ -775,8 +788,7 @@
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:text="Precio por persona"
-                            android:layout_marginBottom="10dp"
-                            />
+                            android:layout_marginBottom="10dp" />
 
                         <RelativeLayout
                             android:id="@+id/relativecocinalowcostprecio"
@@ -790,6 +802,7 @@
                                 android:layout_gravity="center"
                                 android:background="@drawable/white_roundcorners_low"
                                 android:ems="10"
+                                android:maxLength="3"
                                 android:layout_centerInParent="true"
                                 android:inputType="number"
                                 android:paddingTop="5dp"
