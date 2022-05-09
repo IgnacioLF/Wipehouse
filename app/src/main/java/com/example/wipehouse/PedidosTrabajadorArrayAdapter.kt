@@ -66,8 +66,6 @@ class PedidosTrabajadorArrayAdapter (context : Context, viewtopaint : Int, priva
             buttonrechazar.setVisibility(View.VISIBLE)
             buttonaceptar.setVisibility(View.VISIBLE)
         }
-
-
         buttonaceptar.setOnClickListener {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("¿Quieres aceptar el pedido?")
@@ -130,7 +128,6 @@ class PedidosTrabajadorArrayAdapter (context : Context, viewtopaint : Int, priva
             val dialog = builder.create()
             dialog.show()
         }
-
         return currentlistitem
     }
 }

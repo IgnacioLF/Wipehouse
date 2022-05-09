@@ -3,15 +3,12 @@ package com.example.wipehouse
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.sql.BatchUpdateException
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,10 +20,13 @@ class MainActivity : AppCompatActivity() {
         var linearparte2 = findViewById<LinearLayout>(R.id.linearparte2)
         var textViewparte1 = findViewById<TextView>(R.id.textViewparte1)
         var textViewparte2 = findViewById<TextView>(R.id.textViewparte2)
+        var buttonacceder = findViewById<Button>(R.id.buttonAcceder)
+        var buttonregistrarse = findViewById<Button>(R.id.buttonRegistrarse)
         var darkbluebackground = findViewById<ImageView>(R.id.imageViewfondo_darkblue)
         val user = FirebaseAuth.getInstance().currentUser
         var currentemailuser = FirebaseAuth.getInstance().currentUser?.email
         var db = Firebase.firestore
+        // mantener usuario logeado y detectar si es trabajador/cliente
         if (user != null) {
             if (currentemailuser != null) {
                 db.collection("trabajadores").document(currentemailuser).get().addOnCompleteListener {
@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
             textViewparte1.setVisibility(View.GONE)
             textViewparte2.setVisibility(View.VISIBLE)
             darkbluebackground.setVisibility(View.GONE)
-            startActivity(Intent(applicationContext,User_MainActivity::class.java))
         }
         buttonTrabajador.setOnClickListener {
             linearparte1.setVisibility(View.GONE)
@@ -56,12 +55,9 @@ class MainActivity : AppCompatActivity() {
             textViewparte2.setVisibility(View.VISIBLE)
             darkbluebackground.setVisibility(View.GONE)
         }
-
-        var buttonacceder = findViewById<Button>(R.id.buttonAcceder)
         buttonacceder.setOnClickListener {
          login()
         }
-        var buttonregistrarse = findViewById<Button>(R.id.buttonRegistrarse)
         buttonregistrarse.setOnClickListener {
             startActivity(Intent(applicationContext,Register::class.java))
         }

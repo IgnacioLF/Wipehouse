@@ -48,14 +48,13 @@ class Trabajador_pedidos : Fragment() {
         var vista = inflater.inflate(R.layout.fragment_trabajador_pedidos, container, false)
         var listviewpedidos = vista.findViewById<ListView>(R.id.listviewpedidos)
         var db = Firebase.firestore
-        var emailcurrentuser = FirebaseAuth.getInstance().currentUser?.email
+        var currentuseremail = FirebaseAuth.getInstance().currentUser?.email
         var listpedidos = ArrayList<Pedido>()
         var imageViewlogoloading = vista.findViewById<ImageView>(R.id.imageViewlogoloading)
         var relativeloading = vista.findViewById<RelativeLayout>(R.id.relativeloading)
         var textViewisempty = vista.findViewById<TextView>(R.id.textViewisempty)
         Glide.with(this).load(R.drawable.loading_logo).into(imageViewlogoloading)
-
-        db.collection("pedidos").whereEqualTo("email_trabajador",emailcurrentuser).get().addOnSuccessListener { result ->
+        db.collection("pedidos").whereEqualTo("email_trabajador",currentuseremail).get().addOnSuccessListener { result ->
             for (document in result) {
                 var email_cliente = document.data["email_cliente"].toString()
                 var email_trabajador = document.data["email_trabajador"].toString()
@@ -70,37 +69,33 @@ class Trabajador_pedidos : Fragment() {
                 var nombreyapellido_trabajdor = document.data["nombreyapellido_trabajdor"].toString()
                 var nombreyapellido_cliente = document.data["nombreyapellido_cliente"].toString()
                 var direccion_cliente = document.data["direccion_cliente"].toString()
-
-
-
+                // --[Actualización del estado del peddo segun la fecha actual]--
                 val sdf = SimpleDateFormat("d/M/y")
                 val currentDate = sdf.format(Date())
-                var splitpedidotime = hora_inicio.split(":")
-                var currenttimeall =  Calendar.getInstance().time
-                var splitcurrenttimeall = currenttimeall.toString().split(" ")
-                var splittesttime = splitcurrenttimeall[3].split(":")
-                var currenthours = splittesttime[0]
-                var currentminute = splittesttime[1]
+                var time_pedido_split = hora_inicio.split(":")
+                var currenttime_all =  Calendar.getInstance().time
+                var currenttime_all_split = currenttime_all.toString().split(" ")
+                var split_hours_minutes = currenttime_all_split[3].split(":")
+                var currenthours = split_hours_minutes[0]
+                var currentminute = split_hours_minutes[1]
                 var currentemailuser = FirebaseAuth.getInstance().currentUser?.email
                 var fechasinespacios =fecha.replace(" ","")
                 val sdf2 = SimpleDateFormat("dd/MM/yyyy")
-                val fechadelitem = sdf2.parse(fechasinespacios)
-                val fechaactual = sdf2.parse(currentDate)
-                if (estado.equals("Aceptado")&&(fechaactual.after(fechadelitem) || (fecha.replace(" ","")==currentDate&&(currenthours>splitpedidotime[0]||(currenthours==splitpedidotime[0]&&currentminute>splitpedidotime[1]))))){
+                val fecha_pedido = sdf2.parse(fechasinespacios)
+                val fecha_actual = sdf2.parse(currentDate)
+                if (estado.equals("Aceptado")&&(fecha_actual.after(fecha_pedido) || (fecha.replace(" ","")==currentDate&&(currenthours>time_pedido_split[0]||(currenthours==time_pedido_split[0]&&currentminute>time_pedido_split[1]))))){
                     var fechasinbarras =fecha.replace("/","-").replace(" ","")
-                    var documentid = currentemailuser + "#"+ email_trabajador +"#"+fechasinbarras+"#"+hora_inicio
-                    db.collection("pedidos").document(documentid).update("estado","Realizado")
+                    var id_pedido = currentemailuser + "#"+ email_trabajador +"#"+fechasinbarras+"#"+hora_inicio
+                    db.collection("pedidos").document(id_pedido).update("estado","Realizado")
                     estado = "Realizado"
                 }
-
-                if (estado.equals("Pendiente")&&(fechaactual.after(fechadelitem) || (fecha.replace(" ","")==currentDate&&(currenthours>splitpedidotime[0]||(currenthours==splitpedidotime[0]&&currentminute>splitpedidotime[1]))))){
+                if (estado.equals("Pendiente")&&(fecha_actual.after(fecha_pedido) || (fecha.replace(" ","")==currentDate&&(currenthours>time_pedido_split[0]||(currenthours==time_pedido_split[0]&&currentminute>time_pedido_split[1]))))){
                     var fechasinbarras =fecha.replace("/","-").replace(" ","")
-                    var documentid = currentemailuser + "#"+ email_trabajador +"#"+fechasinbarras+"#"+hora_inicio
-                    db.collection("pedidos").document(documentid).update("estado","Caducado")
+                    var id_pedido = currentemailuser + "#"+ email_trabajador +"#"+fechasinbarras+"#"+hora_inicio
+                    db.collection("pedidos").document(id_pedido).update("estado","Caducado")
                     estado = "Caducado"
                 }
-
-
+                // --[END Actualización del estado del peddo segun la fecha actual]--
                 var currentpedido = Pedido(email_cliente,email_trabajador,tipo,precio, cantidad, fecha, hora_inicio, puntuacion, estado,imageurl_trabajador,nombreyapellido_trabajdor,nombreyapellido_cliente,direccion_cliente)
                 listpedidos.add(currentpedido)
             }

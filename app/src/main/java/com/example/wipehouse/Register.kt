@@ -1,25 +1,17 @@
 package com.example.wipehouse
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
@@ -101,7 +93,6 @@ class Register : AppCompatActivity() {
             var openGalleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             launcher.launch(openGalleryIntent)
         }
-
         imageButtonCliente.setOnClickListener {
             cliente=true
             trabajador=false
@@ -115,6 +106,7 @@ class Register : AppCompatActivity() {
             imageButtonTrabajador.setImageResource(R.drawable.trabajador_button_on_selected)
         }
         backarrowB.setOnClickListener {
+      /*
             if(partes==1){
                 startActivity(Intent(applicationContext,MainActivity::class.java))
             } else if (partes==2){
@@ -133,10 +125,27 @@ class Register : AppCompatActivity() {
                 buttonContinuar.isEnabled = true
                 partes=2
             }
+            */
+            when (partes){
+                1 -> {startActivity(Intent(applicationContext,MainActivity::class.java))}
+                2 -> {linearparte1.setVisibility(View.VISIBLE)
+                    linearparte2.setVisibility(View.INVISIBLE)
+                    relativeloading.setVisibility(View.INVISIBLE)
+                    buttonContinuar.isEnabled = true
+                    partes=1}
+                3 -> {linearparte2.setVisibility(View.VISIBLE)
+                    textViewTitulo.setVisibility(View.VISIBLE)
+                    textViewTitulo2.setVisibility(View.INVISIBLE)
+                    profile_image.setVisibility(View.INVISIBLE)
+                    imageButtonAddimage.setVisibility(View.INVISIBLE)
+                    relativeloading.setVisibility(View.INVISIBLE)
+                    buttonContinuar.isEnabled = true
+                    partes=2 }
+            }
         }
 
-
         buttonContinuar.setOnClickListener {
+            /*
             if (partes==1){
                 if (editTextTextNombre.text.isNotEmpty()&&editTextapellidos.text.isNotEmpty()&&editTextTextContraseña.text.isNotEmpty()&&editTextDNI.text.isNotEmpty()&&editTextEmail.text.isNotEmpty()&&editTextTelefono.text.isNotEmpty()){
                     linearparte1.setVisibility(View.INVISIBLE)
@@ -175,7 +184,44 @@ class Register : AppCompatActivity() {
                     Toast.makeText(applicationContext,"Error necesitas subir una imagen",Toast.LENGTH_LONG).show()
                 }
             }
+            */
+            when (partes) {
+                1 -> {if (editTextTextNombre.text.isNotEmpty()&&editTextapellidos.text.isNotEmpty()&&editTextTextContraseña.text.isNotEmpty()&&editTextDNI.text.isNotEmpty()&&editTextEmail.text.isNotEmpty()&&editTextTelefono.text.isNotEmpty()){
+                        linearparte1.setVisibility(View.INVISIBLE)
+                        linearparte2.setVisibility(View.VISIBLE)
+                        partes=2
+                    } else {
+                        Toast.makeText(applicationContext,"Error alguno de los campos esta vacio",Toast.LENGTH_LONG).show()
+                    }}
+                2 -> {if (editTextDireccion.text.isNotEmpty()&&editTextCodigopostal.text.isNotEmpty()&&(trabajador==true||cliente==true)){
+                        if(trabajador==true){
+                            partes=3
+                            linearparte2.setVisibility(View.INVISIBLE)
+                            textViewTitulo.setVisibility(View.INVISIBLE)
+                            textViewTitulo2.setVisibility(View.VISIBLE)
+                            profile_image.setVisibility(View.VISIBLE)
+                            imageButtonAddimage.setVisibility(View.VISIBLE)
+                        }else{
+                            linearparte2.setVisibility(View.INVISIBLE)
+                            relativeloading.setVisibility(View.VISIBLE)
+                            buttonContinuar.isEnabled = false
+                            registerCliente()
+                        }
+                    } else {
+                        Toast.makeText(applicationContext,"Error alguno de los campos esta vacio",Toast.LENGTH_LONG).show()
+                    }}
+                3 -> { if (::imageUri.isInitialized){
+                        relativeloading.setVisibility(View.VISIBLE)
+                        buttonContinuar.isEnabled = false
+                        profile_image.setVisibility(View.INVISIBLE)
+                        imageButtonAddimage.setVisibility(View.INVISIBLE)
+                        registerTrabajador()
+                    } else {
+                        Toast.makeText(applicationContext,"Error necesitas subir una imagen",Toast.LENGTH_LONG).show()
+                    }}
+            }
         }
+
     }
 
     private val launcher = registerForActivityResult(
@@ -212,7 +258,6 @@ class Register : AppCompatActivity() {
                         FirebaseAuth.getInstance().currentUser?.delete()
                         error("Se ha producido un error en la operacion")
                     }
-
             } else{
                 if (it.getException().toString().contains("The email address is already in use by another account")){
                     error("Se ha producido un error este email ya esta siendo utilizado")
@@ -300,30 +345,30 @@ class Register : AppCompatActivity() {
                                     FirebaseAuth.getInstance().currentUser?.delete()
                                     db.collection("trabajadores").document(editTextEmail.text.toString()).delete()
                                     db.collection("usuarios").document(editTextEmail.text.toString()).delete()
-                                    error("Se ha producido un error en la operacion")
+                                    error("Se ha producido un error en la operación")
                                 }
                             }.addOnFailureListener {
                                 FirebaseAuth.getInstance().currentUser?.delete()
                                 db.collection("usuarios").document(editTextEmail.text.toString()).delete()
-                                error("Se ha producido un error en la operacion")
+                                error("Se ha producido un error en la operación")
                             }
                         }.addOnFailureListener{
                             FirebaseAuth.getInstance().currentUser?.delete()
                             db.collection("usuarios").document(editTextEmail.text.toString()).delete()
-                            error("Se ha producido un error en la operacion")
+                            error("Se ha producido un error en la operación")
                         }
                     }
                     .addOnFailureListener { e ->
                         FirebaseAuth.getInstance().currentUser?.delete()
-                        error("Se ha producido un error en la operacion")
+                        error("Se ha producido un error en la operación")
                     }
             } else{
                 if (it.getException().toString().contains("The email address is already in use by another account")){
-                    error("Se ha producido un error este email ya esta siendo utilizado")
+                    error("Se ha producido un error el email ya esta siendo utilizado")
                 } else if (it.getException().toString().contains("The given password is invalid")){
                     error("Se ha producido un error la contraseña es erronea recuerda que tiene que contener al menos 6 carácteres")
                 } else {
-                    error("Se ha producido un error en la operacion")
+                    error("Se ha producido un error en la operación")
                 }
             }
         }

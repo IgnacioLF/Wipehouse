@@ -1,7 +1,6 @@
 package com.example.wipehouse
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,13 +18,13 @@ class TrabajadorBuscarArrayAdapter (context : Context, viewtopaint : Int, privat
         val textViewNombreyapellido = currentlistitem.findViewById<TextView>(R.id.textViewNombreyapellido)
         val textViewCategoria = currentlistitem.findViewById<TextView>(R.id.textViewCategoria)
         val textViewprecio = currentlistitem.findViewById<TextView>(R.id.textViewprecio)
-        val image = currentlistitem.findViewById<ImageView>(R.id.imageView_trabajador)
+        val imageview_trabajador = currentlistitem.findViewById<ImageView>(R.id.imageView_trabajador)
         val imageViewestrella2 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella2)
         val imageViewestrella3 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella3)
         val imageViewestrella4 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella4)
         val imageViewestrella5 = currentlistitem.findViewById<ImageView>(R.id.imageViewestrella5)
-        val options = RequestOptions().circleCrop()
-        Glide.with(currentlistitem).load(trabajadorlist.get(position).imageurl).apply(options).dontAnimate().into(image)
+        val options_circleimage = RequestOptions().circleCrop()
+        Glide.with(currentlistitem).load(trabajadorlist.get(position).imageurl).apply(options_circleimage).dontAnimate().into(imageview_trabajador)
         textViewNombreyapellido.text = trabajadorlist.get(position).nombreyapellido
         textViewCategoria.text = categoria
         when (categoria) {

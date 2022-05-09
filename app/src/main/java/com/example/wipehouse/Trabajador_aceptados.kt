@@ -13,8 +13,6 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match

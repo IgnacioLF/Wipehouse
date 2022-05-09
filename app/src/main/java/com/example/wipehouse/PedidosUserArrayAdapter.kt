@@ -3,7 +3,6 @@ package com.example.wipehouse
 import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,17 +10,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlin.math.log
 import android.content.DialogInterface
-import android.print.PrintAttributes
 import android.view.Gravity
 import android.widget.*
-
 import android.widget.RatingBar.OnRatingBarChangeListener
-import androidx.core.view.marginTop
-import com.google.firebase.auth.FirebaseAuth
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -38,10 +30,10 @@ class PedidosUserArrayAdapter (context : Context, viewtopaint : Int, private val
         val textViewEstado = currentlistitem.findViewById<TextView>(R.id.textViewEstado)
         val imageView_trabajador = currentlistitem.findViewById<ImageView>(R.id.imageView_trabajador)
         val textViewtipo = currentlistitem.findViewById<TextView>(R.id.textViewtipo)
-        val options = RequestOptions().circleCrop()
+        val options_circleimage = RequestOptions().circleCrop()
         var db = Firebase.firestore
 
-        Glide.with(currentlistitem).load(pedidoslist.get(position).imageurl_trabajador).apply(options).dontAnimate().into(imageView_trabajador)
+        Glide.with(currentlistitem).load(pedidoslist.get(position).imageurl_trabajador).apply(options_circleimage).dontAnimate().into(imageView_trabajador)
         textViewtipo.text = pedidoslist.get(position).tipo
         textViewEstado.text = pedidoslist.get(position).estado
         textViewfecha.text = pedidoslist.get(position).fecha

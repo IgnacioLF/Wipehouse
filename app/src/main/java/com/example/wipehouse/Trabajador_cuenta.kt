@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -52,6 +51,7 @@ class Trabajador_cuenta : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         var vista = inflater.inflate(R.layout.fragment_trabajador_cuenta, container, false)
+        var db = Firebase.firestore
         var imageurltrabajador = ""
         var newimageurl = ""
         val options = RequestOptions().circleCrop()
@@ -88,7 +88,6 @@ class Trabajador_cuenta : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
-        var db = Firebase.firestore
         db.collection("usuarios").document(currentuseremail).get().addOnSuccessListener { document ->
             var ciudad = document.data?.get("ciudad")?.toString()
             editTextTextNombre.setText(document.data?.get("nombre")?.toString())
@@ -112,7 +111,6 @@ class Trabajador_cuenta : Fragment() {
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(context,MainActivity::class.java))
         }
-
         val launcher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result: ActivityResult ->
@@ -127,7 +125,6 @@ class Trabajador_cuenta : Fragment() {
             var openGalleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             launcher.launch(openGalleryIntent)
         }
-
         buttonModificar.setOnClickListener {
            //TODO revisar y añadir faileturelisener
             if (editTextTextNombre.text.isNotEmpty()&&editTextapellidos.text.isNotEmpty()&&editTextCodigopostal.text.isNotEmpty()&&editTextDireccion.text.isNotEmpty()&&editTextDNI.text.isNotEmpty()&&editTextTelefono.text.isNotEmpty()){
@@ -154,8 +151,8 @@ class Trabajador_cuenta : Fragment() {
                                 newimageurl = it.toString()
                                var nombreyapellido = editTextTextNombre.text.toString() + " " + editTextapellidos.text.toString()
                                if (editTextapellidos.text.toString().contains(" ")) {
-                                   var apellidosarr = Pattern.compile(" ").split(editTextapellidos.text.toString())
-                                   nombreyapellido = editTextTextNombre.text.toString() + " " + apellidosarr[0]
+                                   var apellidos_split = Pattern.compile(" ").split(editTextapellidos.text.toString())
+                                   nombreyapellido = editTextTextNombre.text.toString() + " " + apellidos_split[0]
                                }
                                db.collection("trabajadores").document(currentuseremail)
                                    .update("ciudad", spinnerciudad.selectedItem.toString(),
@@ -170,14 +167,14 @@ class Trabajador_cuenta : Fragment() {
                                    Toast.makeText(context,"Cambios guardados correctamente",Toast.LENGTH_LONG).show()
                                }
                            }.addOnFailureListener {
-                               //error
+                               //TODO error
                            }
                        }
                    } else {
                        var nombreyapellido = editTextTextNombre.text.toString() + " " + editTextapellidos.text.toString()
                        if (editTextapellidos.text.toString().contains(" ")) {
-                           var apellidosarr = Pattern.compile(" ").split(editTextapellidos.text.toString())
-                           nombreyapellido = editTextTextNombre.text.toString() + " " + apellidosarr[0]
+                           var apellidos_split = Pattern.compile(" ").split(editTextapellidos.text.toString())
+                           nombreyapellido = editTextTextNombre.text.toString() + " " + apellidos_split[0]
                        }
                        db.collection("trabajadores").document(currentuseremail)
                            .update("ciudad", spinnerciudad.selectedItem.toString(),
@@ -189,9 +186,8 @@ class Trabajador_cuenta : Fragment() {
                            Toast.makeText(context,"Cambios guardados correctamente",Toast.LENGTH_LONG).show()
                        }
                    }
-
                 }.addOnFailureListener {
-                    Toast.makeText(context,"Error al realizar la operacion",Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,"Error al realizar la operación",Toast.LENGTH_LONG).show()
                 }
             } else {
                 Toast.makeText(context,"Error alguno de los campos esta vacio",Toast.LENGTH_LONG).show()
@@ -200,7 +196,6 @@ class Trabajador_cuenta : Fragment() {
         buttonEditartrabajos.setOnClickListener {
             startActivity(Intent(context,Trabajos::class.java))
         }
-
         return vista
     }
 
