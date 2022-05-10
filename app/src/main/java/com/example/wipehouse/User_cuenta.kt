@@ -12,7 +12,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.regex.Pattern
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -23,7 +22,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class User_cuenta : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,6 +103,9 @@ class User_cuenta : Fragment() {
                             "direccion_cliente",editTextDireccion.text.toString())
                         }
                         Toast.makeText(context,"Cambios guardados correctamente",Toast.LENGTH_LONG).show()
+                        // reloading user_buscar_fragment to refresh currentciudad
+                        var fragment_user_buscar = getParentFragmentManager().getFragments().get(1)
+                        getParentFragmentManager().beginTransaction().remove(fragment_user_buscar).commit()
                     }
                 }.addOnFailureListener {
                     Toast.makeText(context,"Error al realizar la operación",Toast.LENGTH_LONG).show()
@@ -129,7 +130,6 @@ class User_cuenta : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment User_cuenta.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             User_cuenta().apply {
