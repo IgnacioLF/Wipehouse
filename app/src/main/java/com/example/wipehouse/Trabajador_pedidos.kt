@@ -69,7 +69,7 @@ class Trabajador_pedidos : Fragment() {
                 var nombreyapellido_trabajdor = document.data["nombreyapellido_trabajdor"].toString()
                 var nombreyapellido_cliente = document.data["nombreyapellido_cliente"].toString()
                 var direccion_cliente = document.data["direccion_cliente"].toString()
-                // --[Actualización del estado del peddo segun la fecha actual]--
+                // --[Actualización del estado del pedido segun la fecha actual]--
                 val sdf = SimpleDateFormat("d/M/y")
                 val currentDate = sdf.format(Date())
                 var time_pedido_split = hora_inicio.split(":")
@@ -95,7 +95,7 @@ class Trabajador_pedidos : Fragment() {
                     db.collection("pedidos").document(id_pedido).update("estado","Caducado")
                     estado = "Caducado"
                 }
-                // --[END Actualización del estado del peddo segun la fecha actual]--
+                // --[END Actualización del estado del pedido segun la fecha actual]--
                 var currentpedido = Pedido(email_cliente,email_trabajador,tipo,precio, cantidad, fecha, hora_inicio, puntuacion, estado,imageurl_trabajador,nombreyapellido_trabajdor,nombreyapellido_cliente,direccion_cliente)
                 listpedidos.add(currentpedido)
             }

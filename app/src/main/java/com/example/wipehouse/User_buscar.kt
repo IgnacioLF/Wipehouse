@@ -4,14 +4,12 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.isEmpty
 import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -53,25 +51,19 @@ class User_buscar : Fragment() {
     ): View? {
         var vista = inflater.inflate(R.layout.fragment_user_buscar, container, false)
         var currentemailuser = FirebaseAuth.getInstance().currentUser?.email
-        val options = RequestOptions().circleCrop()
-        //buscador
+        val options_circleimage = RequestOptions().circleCrop()
         var imageButtonbuscar = vista.findViewById<ImageButton>(R.id.imageButtonbuscar)
         var editTexbuscador = vista.findViewById<EditText>(R.id.editTexbuscador)
-        // cocina
         var linearbotonescocina = vista.findViewById<LinearLayout>(R.id.linearbotonescocina)
         var linearcocineromain = vista.findViewById<LinearLayout>(R.id.linearcocineromain)
         var imageViewcocinerologo = vista.findViewById<ImageView>(R.id.imageViewcocinerologo)
-        // piscias
         var linearpiscinasmain = vista.findViewById<LinearLayout>(R.id.linearpiscinasmain)
         var imageViewpiscinaslogo = vista.findViewById<ImageView>(R.id.imageViewpiscinaslogo)
         var linearbotonespiscinas = vista.findViewById<LinearLayout>(R.id.linearbotonespiscinas)
-        // limpiador
         var linearlimpiadormain = vista.findViewById<LinearLayout>(R.id.linearlimpiadormain)
         var imageViewlimpiadorlogo = vista.findViewById<ImageView>(R.id.imageViewlimpiadorlogo)
-        // cortacesped
         var linearcortacespedmain = vista.findViewById<LinearLayout>(R.id.linearcortacespedmain)
         var imageViewcortacespedlogo = vista.findViewById<ImageView>(R.id.imageViewcortacespedlogo)
-
         var scrollseleccion = vista.findViewById<ScrollView>(R.id.scrollseleccion)
         var scrolllist = vista.findViewById<LinearLayout>(R.id.scrolllist)
         var imageButtonbackarrow = vista.findViewById<ImageButton>(R.id.imageButtonbackarrow)
@@ -86,7 +78,6 @@ class User_buscar : Fragment() {
         var textselecciona = vista.findViewById<TextView>(R.id.textselecciona)
         var listview = vista.findViewById<ListView>(R.id.listviewbuscar)
         var scrollrealizarpedido = vista.findViewById<ScrollView>(R.id.scrollrealizarpedido)
-        // scroll realizar pedido data
         var imageView_trabajador = vista.findViewById<ImageView>(R.id.imageView_trabajador)
         var imageViewestrella1 = vista.findViewById<ImageView>(R.id.imageViewestrella1)
         var imageViewestrella2 = vista.findViewById<ImageView>(R.id.imageViewestrella2)
@@ -111,20 +102,19 @@ class User_buscar : Fragment() {
         var db = Firebase.firestore
         var nombreyapellido_user = ""
         var direccion_user = ""
+        var currentciudad = ""
         var imageViewlogoloading = vista.findViewById<ImageView>(R.id.imageViewlogoloading)
         var relativeloading = vista.findViewById<RelativeLayout>(R.id.relativeloading)
         var textViewisempty = vista.findViewById<TextView>(R.id.textViewisempty)
         Glide.with(this).load(R.drawable.loading_logo).into(imageViewlogoloading)
-
-        var currentciudad = ""
         if (currentemailuser != null) {
             db.collection("usuarios").document(currentemailuser).get().addOnSuccessListener {
                     document ->
                 currentciudad = document.data?.get("ciudad").toString()
                 nombreyapellido_user = document.data?.get("nombre").toString() + " " + document.data?.get("apellidos").toString()
                 if (document.data?.get("apellidos").toString().contains(" ")){
-                    var apellidosarr = Pattern.compile(" ").split(document.data?.get("apellidos").toString())
-                    nombreyapellido_user = document.data?.get("nombre").toString() + " " + apellidosarr[0]
+                    var apellidos_split = Pattern.compile(" ").split(document.data?.get("apellidos").toString())
+                    nombreyapellido_user = document.data?.get("nombre").toString() + " " + apellidos_split[0]
                 }
                 direccion_user = document.data?.get("direccion").toString()
             }
@@ -136,14 +126,12 @@ class User_buscar : Fragment() {
             builder?.setPositiveButton("Aceptar", null)
             builder?.create()?.show()
         }
-
         fun gotolista(){
             scrollseleccion.setVisibility(View.GONE)
             textselecciona.setVisibility(View.GONE)
             scrolllist.setVisibility(View.VISIBLE)
             relativeloading.setVisibility(View.VISIBLE)
             listview.setVisibility(View.GONE)}
-
         fun closemenus(){
             linearcocineromain.setBackgroundResource(R.drawable.bluestroke_roundcorners_low)
             imageViewcocinerologo.setImageResource(R.drawable.cocinero_icon)
@@ -156,40 +144,27 @@ class User_buscar : Fragment() {
             buttonlimpiador.setVisibility(View.GONE)
             linearpiscinasmain.setBackgroundResource(R.drawable.bluestroke_roundcorners_low)
             imageViewpiscinaslogo.setImageResource(R.drawable.mantenimiento_icon)
-            linearbotonespiscinas.setVisibility(View.GONE)
-        }
-        imageButtonbackarrowrelizarpedido.setOnClickListener {
-            editTextcantidadde.setText("")
-            editTextfecha.setText("")
-            editTexthorainicio.setText("")
-            scrolllist.setVisibility(View.VISIBLE)
-            scrollrealizarpedido.setVisibility(View.GONE)
-        }
+            linearbotonespiscinas.setVisibility(View.GONE)}
         linearpiscinasmain.setOnClickListener {
             closemenus()
             linearpiscinasmain.setBackgroundResource(R.drawable.blue_roundcorners_low)
             imageViewpiscinaslogo.setImageResource(R.drawable.mantenimientoicon_darkblue)
-            linearbotonespiscinas.setVisibility(View.VISIBLE)
-        }
-
+            linearbotonespiscinas.setVisibility(View.VISIBLE) }
         linearlimpiadormain.setOnClickListener {
             closemenus()
             linearlimpiadormain.setBackgroundResource(R.drawable.blue_roundcorners_low)
             imageViewlimpiadorlogo.setImageResource(R.drawable.limpiadoricon_darkblue)
-            buttonlimpiador.setVisibility(View.VISIBLE)
-        }
+            buttonlimpiador.setVisibility(View.VISIBLE) }
         linearcortacespedmain.setOnClickListener {
             closemenus()
             linearcortacespedmain.setBackgroundResource(R.drawable.blue_roundcorners_low)
             imageViewcortacespedlogo.setImageResource(R.drawable.cortacespedicon_darkblue)
-            buttoncortacesped.setVisibility(View.VISIBLE)
-        }
+            buttoncortacesped.setVisibility(View.VISIBLE) }
         linearcocineromain.setOnClickListener {
             closemenus()
             linearcocineromain.setBackgroundResource(R.drawable.blue_roundcorners_low)
             imageViewcocinerologo.setImageResource(R.drawable.cocineroicon_darkblue)
-            linearbotonescocina.setVisibility(View.VISIBLE)
-        }
+            linearbotonescocina.setVisibility(View.VISIBLE)}
 
         var listatrabajadoresfiltrada=ArrayList<Trabajador>()
 
@@ -203,47 +178,21 @@ class User_buscar : Fragment() {
                         var altacocina_desc = document.data["altacocina_desc"].toString()
                         var altacocina_platos = document.data["altacocina_platos"].toString()
                         var altacocina_precio = document.data["altacocina_precio"].toString()
-                        var cocinatradicional_desc =
-                            document.data["cocinatradicional_desc"].toString()
-                        var cocinatradicional_platos =
-                            document.data["cocinatradicional_platos"].toString()
-                        var cocinatradicional_precio =
-                            document.data["cocinatradicional_precio"].toString()
+                        var cocinatradicional_desc = document.data["cocinatradicional_desc"].toString()
+                        var cocinatradicional_platos = document.data["cocinatradicional_platos"].toString()
+                        var cocinatradicional_precio = document.data["cocinatradicional_precio"].toString()
                         var cocinalowcost_desc = document.data["cocinalowcost_desc"].toString()
                         var cocinalowcost_platos = document.data["cocinalowcost_platos"].toString()
                         var cocinalowcost_precio = document.data["cocinalowcost_precio"].toString()
                         var limpiador_precio = document.data["limpiador_precio"].toString()
                         var cortacesped_precio = document.data["cortacesped_precio"].toString()
-                        var mantenimiento_precio_grande =
-                            document.data["mantenimiento_precio_grande"].toString()
-                        var mantenimiento_precio_mediana =
-                            document.data["mantenimiento_precio_mediana"].toString()
-                        var mantenimiento_precio_pequena =
-                            document.data["mantenimiento_precio_pequena"].toString()
+                        var mantenimiento_precio_grande = document.data["mantenimiento_precio_grande"].toString()
+                        var mantenimiento_precio_mediana = document.data["mantenimiento_precio_mediana"].toString()
+                        var mantenimiento_precio_pequena = document.data["mantenimiento_precio_pequena"].toString()
                         var puntuacion_media = document.data["puntuacion_media"].toString()
                         var emailtrabajador = document.id
                         var nombreyapellido = document.data["nombreyapellido"].toString()
-                        val currecttrabajador = Trabajador(
-                            emailtrabajador,
-                            nombreyapellido,
-                            trabajadorciudad,
-                            imagenurl,
-                            altacocina_desc,
-                            altacocina_platos,
-                            altacocina_precio,
-                            cocinatradicional_desc,
-                            cocinatradicional_platos,
-                            cocinatradicional_precio,
-                            cocinalowcost_desc,
-                            cocinalowcost_platos,
-                            cocinalowcost_precio,
-                            limpiador_precio,
-                            cortacesped_precio,
-                            mantenimiento_precio_grande,
-                            mantenimiento_precio_mediana,
-                            mantenimiento_precio_pequena,
-                            puntuacion_media
-                        )
+                        val currecttrabajador = Trabajador(emailtrabajador, nombreyapellido, trabajadorciudad, imagenurl, altacocina_desc, altacocina_platos, altacocina_precio, cocinatradicional_desc, cocinatradicional_platos, cocinatradicional_precio, cocinalowcost_desc, cocinalowcost_platos, cocinalowcost_precio, limpiador_precio, cortacesped_precio, mantenimiento_precio_grande, mantenimiento_precio_mediana, mantenimiento_precio_pequena, puntuacion_media)
                         listatrabajadoresfiltrada.add(currecttrabajador)
                     }
                 }
@@ -253,6 +202,7 @@ class User_buscar : Fragment() {
                 listview.setEmptyView(textViewisempty)
                 var listaonclick = ArrayList<Trabajador>()
                 var listafiltrar = ArrayList<Trabajador>()
+                // buscador
                 imageButtonbuscar.setOnClickListener {
                     listafiltrar.clear()
                     listview.adapter = null
@@ -263,13 +213,11 @@ class User_buscar : Fragment() {
                     listview.adapter = context?.let { it1 -> TrabajadorBuscarArrayAdapter(it1, R.layout.item_list_trabajador_buscar, listafiltrar, categoria_lista) }
                     listaonclick = listafiltrar
                 }
-
                 if (listafiltrar.isEmpty()){
                     listaonclick = listatrabajadoresfiltrada
                 } else{
                     listaonclick = listafiltrar
                 }
-
                 listview.setOnItemClickListener { parent, view, position, id ->
                     var precioporitem = 0
                     var preciofinal = 0
@@ -281,7 +229,7 @@ class User_buscar : Fragment() {
                     scrolllist.setVisibility(View.GONE)
                     scrollrealizarpedido.setVisibility(View.VISIBLE)
                     textViewNombreyapellido.text = listaonclick.get(position).nombreyapellido
-                    Glide.with(vista).load(listaonclick.get(position).imageurl).apply(options).dontAnimate().into(imageView_trabajador)
+                    Glide.with(vista).load(listaonclick.get(position).imageurl).apply(options_circleimage).dontAnimate().into(imageView_trabajador)
                     when (listaonclick.get(position).puntucaion_media.toInt()) {
                         0 -> {imageViewestrella1.setImageResource(R.drawable.estrellaicon)
                             imageViewestrella2.setImageResource(R.drawable.estrellaicon)
@@ -375,8 +323,8 @@ class User_buscar : Fragment() {
                                 .set(pedido)
                                 .addOnSuccessListener {
                                     // reloading user_pedidos_fragment
-                                    var frrr = getParentFragmentManager().getFragments().get(0)
-                                    getParentFragmentManager().beginTransaction().remove(frrr).commit()
+                                    var fragment_user_pedidos = getParentFragmentManager().getFragments().get(0)
+                                    getParentFragmentManager().beginTransaction().remove(fragment_user_pedidos).commit()
 
                                     mensajepopup("Pedido Realizado","El pedido se realizo con exito puede comprobar su estado en pedidos")
                                     closemenus()
@@ -397,7 +345,6 @@ class User_buscar : Fragment() {
                         }
                     }
                 }
-
             }
         }
         buttonaltacocina.setOnClickListener{
@@ -430,6 +377,12 @@ class User_buscar : Fragment() {
             scrollseleccion.setVisibility(View.VISIBLE)
             textselecciona.setVisibility(View.VISIBLE)
             scrolllist.setVisibility(View.GONE) }
+        imageButtonbackarrowrelizarpedido.setOnClickListener {
+            editTextcantidadde.setText("")
+            editTextfecha.setText("")
+            editTexthorainicio.setText("")
+            scrolllist.setVisibility(View.VISIBLE)
+            scrollrealizarpedido.setVisibility(View.GONE)}
 
         fun showDatePickerDialog() {
             val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
@@ -451,8 +404,7 @@ class User_buscar : Fragment() {
                 }
                 val selectedtime = hour.toString() + ":" + finalminute
                 editText.setText(selectedtime) }
-            TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(
-                Calendar.MINUTE), true).show()
+            TimePickerDialog(context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
         editTexthorainicio.setOnClickListener {
             context?.let { it1 -> getTime(editTexthorainicio, it1) }

@@ -26,7 +26,6 @@ class User_cuenta : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    lateinit var editTextTextNombre : EditText
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -61,7 +60,6 @@ class User_cuenta : Fragment() {
             spinadapter.setDropDownViewResource(R.layout.mydropdownspinner)
         }
         spinnerciudad.adapter = spinadapter
-
         spinnerciudad.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
@@ -74,17 +72,11 @@ class User_cuenta : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
-
-
         db.collection("usuarios").document(currentuseremail).get().addOnSuccessListener { document ->
             var ciudad = document.data?.get("ciudad")?.toString()
             editTextTextNombre.setText(document.data?.get("nombre")?.toString())
             editTextapellidos.setText(document.data?.get("apellidos")?.toString())
-            ciudad?.let { Usuario.Ciudades.valueOf(it).ordinal }?.let {
-                spinnerciudad.setSelection(
-                    it
-                )
-            }
+            ciudad?.let { Usuario.Ciudades.valueOf(it).ordinal }?.let { spinnerciudad.setSelection(it) }
             editTextCodigopostal.setText(document.data?.get("cp")?.toString())
             editTextDireccion.setText(document.data?.get("direccion")?.toString())
             editTextDNI.setText(document.data?.get("dni")?.toString())
@@ -105,8 +97,8 @@ class User_cuenta : Fragment() {
                     db.collection("pedidos").whereEqualTo("email_cliente",currentuseremail).get().addOnSuccessListener { result ->
                         var nombreyapellido = editTextTextNombre.text.toString() + " " + editTextapellidos.text.toString()
                         if (editTextapellidos.text.toString().contains(" ")) {
-                            var apellidosarr = Pattern.compile(" ").split(editTextapellidos.text.toString())
-                            nombreyapellido = editTextTextNombre.text.toString() + " " + apellidosarr[0]
+                            var apellidos_split = Pattern.compile(" ").split(editTextapellidos.text.toString())
+                            nombreyapellido = editTextTextNombre.text.toString() + " " + apellidos_split[0]
                         }
                         for (document in result){
                             db.collection("pedidos").document(document.id).update("nombreyapellido_cliente",nombreyapellido,
@@ -115,7 +107,7 @@ class User_cuenta : Fragment() {
                         Toast.makeText(context,"Cambios guardados correctamente",Toast.LENGTH_LONG).show()
                     }
                 }.addOnFailureListener {
-                    Toast.makeText(context,"Error al realizar la operacion",Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,"Error al realizar la operación",Toast.LENGTH_LONG).show()
                 }
             } else {
                 Toast.makeText(context,"Error alguno de los campos esta vacio",Toast.LENGTH_LONG).show()

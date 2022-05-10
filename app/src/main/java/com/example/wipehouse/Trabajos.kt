@@ -1,7 +1,6 @@
 package com.example.wipehouse
 
 import android.content.Intent
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -26,7 +25,7 @@ class Trabajos : AppCompatActivity() {
     lateinit var editTextcocinalowcostplatos : EditText
     lateinit var editTextcocinalowcostprecio : EditText
     var db = Firebase.firestore
-    var email = FirebaseAuth.getInstance().currentUser?.email
+    var currentuseremail = FirebaseAuth.getInstance().currentUser?.email
 
     var cocinero = false
     var cortacesped = false
@@ -36,7 +35,6 @@ class Trabajos : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trabajos)
         var empty = true
-        //edittext
         editTextlimpiadorprecio = findViewById(R.id.editTextlimpiadorprecio)
         editTextcortacespedprecio = findViewById(R.id.editTextcortacespedprecio)
         editTextpreciopiscinagrande = findViewById(R.id.editTextpreciopiscinagrande)
@@ -51,7 +49,6 @@ class Trabajos : AppCompatActivity() {
         editTextcocinalowcostdesc = findViewById(R.id.editTextcocinalowcostdesc)
         editTextcocinalowcostplatos = findViewById(R.id.editTextcocinalowcostplatos)
         editTextcocinalowcostprecio = findViewById(R.id.editTextcocinalowcostprecio)
-        // checkbox de cocina
         var linearaltacocina = findViewById<LinearLayout>(R.id.linearaltacocina)
         var checkBoxaltacocina = findViewById<CheckBox>(R.id.checkBoxaltacocina)
         var linearaltacocina_desc = findViewById<LinearLayout>(R.id.linearaltacocina_desc)
@@ -61,7 +58,6 @@ class Trabajos : AppCompatActivity() {
         var linearcocinalowcost = findViewById<LinearLayout>(R.id.linearcocinalowcost)
         var checkBoxcocinalowcost = findViewById<CheckBox>(R.id.checkBoxcocinalowcost)
         var linearlowcostcocina_desc = findViewById<LinearLayout>(R.id.linearcocinalowcost_desc)
-        // genear visibility
         var imageButtonBackArrow = findViewById<ImageButton>(R.id.imageButtonBackArrow)
         var imageViewlogo = findViewById<ImageView>(R.id.imageViewlogo)
         var linearseleccione = findViewById<LinearLayout>(R.id.linearseleccione)
@@ -81,7 +77,7 @@ class Trabajos : AppCompatActivity() {
         var imageButtonLimpiador = findViewById<ImageButton>(R.id.imageButtonLimpiador)
         var imageButtonCocinero = findViewById<ImageButton>(R.id.imageButtonCocinero)
 
-        email?.let { db.collection("trabajadores").document(it).get().addOnSuccessListener { document ->
+        currentuseremail?.let { db.collection("trabajadores").document(it).get().addOnSuccessListener { document ->
             editTextlimpiadorprecio.setText(document.data?.get("limpiador_precio").toString())
             editTextcortacespedprecio.setText(document.data?.get("cortacesped_precio").toString())
             editTextpreciopiscinagrande.setText(document.data?.get("mantenimiento_precio_grande").toString())
@@ -107,8 +103,6 @@ class Trabajos : AppCompatActivity() {
 
             }
         } }
-
-
         imageButtonCocinero.setOnClickListener {
             linearmianbotones.setVisibility(View.GONE)
             linearseleccione.setVisibility(View.GONE)
@@ -118,9 +112,7 @@ class Trabajos : AppCompatActivity() {
             scrollViewcocineromain.setVisibility(View.VISIBLE)
             textViewTituloCocinero.setVisibility(View.VISIBLE)
             buttonGuardar.setVisibility(View.VISIBLE)
-            cocinero=true
-        }
-
+            cocinero=true }
         imageButtonCortacesped.setOnClickListener {
             linearmianbotones.setVisibility(View.GONE)
             linearseleccione.setVisibility(View.GONE)
@@ -130,9 +122,7 @@ class Trabajos : AppCompatActivity() {
             linearcortacesped.setVisibility(View.VISIBLE)
             textViewCortacesped.setVisibility(View.VISIBLE)
             buttonGuardar.setVisibility(View.VISIBLE)
-            cortacesped=true
-        }
-
+            cortacesped=true }
         imageButtonLimpiador.setOnClickListener {
             linearmianbotones.setVisibility(View.GONE)
             linearseleccione.setVisibility(View.GONE)
@@ -142,9 +132,7 @@ class Trabajos : AppCompatActivity() {
             linearlimpiador.setVisibility(View.VISIBLE)
             textViewLimpiador.setVisibility(View.VISIBLE)
             buttonGuardar.setVisibility(View.VISIBLE)
-            limpiador=true
-        }
-
+            limpiador=true }
         imageButtonMantenimiento.setOnClickListener {
             linearmianbotones.setVisibility(View.GONE)
             linearseleccione.setVisibility(View.GONE)
@@ -154,9 +142,7 @@ class Trabajos : AppCompatActivity() {
             linearmantenimiento.setVisibility(View.VISIBLE)
             titulomantenimiento.setVisibility(View.VISIBLE)
             buttonGuardar.setVisibility(View.VISIBLE)
-            mantenimiento=true
-        }
-
+            mantenimiento=true }
         imageButtonBackArrow.setOnClickListener {
             if (cocinero==true){
                 linearmianbotones.setVisibility(View.VISIBLE)
@@ -210,7 +196,6 @@ class Trabajos : AppCompatActivity() {
                 linearaltacocina_desc.setVisibility(View.GONE)
             }
         }
-
         checkBoxcocinatradicional.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 linearcocinatradicional.setBackgroundResource(R.drawable.blue_roundcorners_low)
@@ -220,7 +205,6 @@ class Trabajos : AppCompatActivity() {
                 linearcocinatradicional_desc.setVisibility(View.GONE)
             }
         }
-
         checkBoxcocinalowcost.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 linearcocinalowcost.setBackgroundResource(R.drawable.blue_roundcorners_low)
@@ -230,7 +214,6 @@ class Trabajos : AppCompatActivity() {
                 linearlowcostcocina_desc.setVisibility(View.GONE)
             }
         }
-
         buttonGuardar.setOnClickListener {
             var data = hashMapOf<String,String>()
             if (cocinero==true){
@@ -297,15 +280,15 @@ class Trabajos : AppCompatActivity() {
     }
 
     fun guardardatos(data : HashMap<String,String>){
-        if (email != null) {
+        if (currentuseremail != null) {
             db.collection("trabajadores")
-                .document(email!!)
+                .document(currentuseremail!!)
                 .update(data as Map<String, Any>)
                 .addOnSuccessListener { documentReference ->
                     Toast.makeText(applicationContext,"Cambios guardados correctamente",Toast.LENGTH_LONG).show()
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(applicationContext,"Se ha poucido un error en la operacion",Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,"Se ha poucido un error en la operación",Toast.LENGTH_LONG).show()
                 }
         }
     }

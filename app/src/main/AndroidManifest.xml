@@ -22,9 +22,6 @@
             android:name=".Trabajos"
             android:exported="true" />
         <activity
-            android:name=".test"
-            android:exported="true" />
-        <activity
             android:name=".Register"
             android:exported="true" />
         <activity

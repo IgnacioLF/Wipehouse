@@ -676,6 +676,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="50dp"
                             android:layout_weight="0.45"
+                            android:maxLength="3"
                             android:background="@drawable/white_roundcorners"
                             android:ems="10"
                             android:gravity="center"

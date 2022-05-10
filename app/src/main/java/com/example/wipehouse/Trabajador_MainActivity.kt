@@ -23,13 +23,13 @@ class Trabajador_MainActivity : AppCompatActivity() {
         bottom_bar.setupWithViewPager2(ViewPager2)
         var myPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                var frrr = getSupportFragmentManager().getFragments().get(0)
+                var fragment_trabajador_pedidos = getSupportFragmentManager().getFragments().get(0)
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
                 if(position==0){
-                    fragmentTransaction.remove(frrr).commit()
+                    fragmentTransaction.remove(fragment_trabajador_pedidos).commit()
                 }
                 if (position==1){
-                    fragmentTransaction.remove(frrr).commit()
+                    fragmentTransaction.remove(fragment_trabajador_pedidos).commit()
                 }
             }
         }
