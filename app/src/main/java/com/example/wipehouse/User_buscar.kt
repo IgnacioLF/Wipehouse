@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
@@ -300,44 +302,62 @@ class User_buscar : Fragment() {
                     }
                     buttonrealizarpedido.setOnClickListener {
                         if ((editTextcantidadde.text.isNotEmpty()||categoria_lista.contains("Piscina"))&&editTextfecha.text.isNotEmpty()&&editTexthorainicio.text.isNotEmpty()){
-                            var fechasinbarras =editTextfecha.text.toString().replace("/","-").replace(" ","")
-                            var idpedido = currentemailuser + "#"+ listaonclick.get(position).email +"#"+fechasinbarras+"#"+editTexthorainicio.text.toString()
-                            var pedido = hashMapOf(
-                                "email_cliente" to currentemailuser,
-                                "email_trabajador" to listaonclick.get(position).email,
-                                "tipo" to categoria_lista,
-                                "precio" to preciofinal,
-                                "cantidad" to editTextcantidadde.text.toString(),
-                                "fecha" to editTextfecha.text.toString(),
-                                "hora_inicio" to editTexthorainicio.text.toString(),
-                                "puntuacion" to "",
-                                "estado" to "Pendiente",
-                                "imageurl_trabajador" to listaonclick.get(position).imageurl,
-                                "nombreyapellido_trabajdor" to listaonclick.get(position).nombreyapellido,
-                                "nombreyapellido_cliente" to nombreyapellido_user,
-                                "direccion_cliente" to direccion_user)
-                            db.collection("pedidos")
-                                .document(idpedido)
-                                .set(pedido)
-                                .addOnSuccessListener {
-                                    // reloading user_pedidos_fragment
-                                    var fragment_user_pedidos = getParentFragmentManager().getFragments().get(0)
-                                    getParentFragmentManager().beginTransaction().remove(fragment_user_pedidos).commit()
+                            val sdf = SimpleDateFormat("d/M/y")
+                            val currentDate_string = sdf.format(Date())
+                            val sdf2 = SimpleDateFormat("dd/MM/yyyy")
+                            var fechasinespacios =editTextfecha.text.toString().replace(" ","")
+                            val currentDate = sdf2.parse(currentDate_string)
+                            val selectedDate = sdf2.parse(fechasinespacios)
+                            if (selectedDate.after(currentDate)) {
+                                var fechasinbarras =
+                                    editTextfecha.text.toString().replace("/", "-").replace(" ", "")
+                                var idpedido =
+                                    currentemailuser + "#" + listaonclick.get(position).email + "#" + fechasinbarras + "#" + editTexthorainicio.text.toString()
+                                var pedido = hashMapOf(
+                                    "email_cliente" to currentemailuser,
+                                    "email_trabajador" to listaonclick.get(position).email,
+                                    "tipo" to categoria_lista,
+                                    "precio" to preciofinal,
+                                    "cantidad" to editTextcantidadde.text.toString(),
+                                    "fecha" to editTextfecha.text.toString(),
+                                    "hora_inicio" to editTexthorainicio.text.toString(),
+                                    "puntuacion" to "",
+                                    "estado" to "Pendiente",
+                                    "imageurl_trabajador" to listaonclick.get(position).imageurl,
+                                    "nombreyapellido_trabajdor" to listaonclick.get(position).nombreyapellido,
+                                    "nombreyapellido_cliente" to nombreyapellido_user,
+                                    "direccion_cliente" to direccion_user
+                                )
+                                db.collection("pedidos")
+                                    .document(idpedido)
+                                    .set(pedido)
+                                    .addOnSuccessListener {
+                                        // reloading user_pedidos_fragment
+                                        var fragment_user_pedidos =
+                                            getParentFragmentManager().getFragments().get(0)
+                                        getParentFragmentManager().beginTransaction()
+                                            .remove(fragment_user_pedidos).commit()
 
-                                    mensajepopup("Pedido Realizado","El pedido se realizo con exito puede comprobar su estado en pedidos")
-                                    closemenus()
-                                    listview.adapter = null
-                                    scrollseleccion.setVisibility(View.VISIBLE)
-                                    textselecciona.setVisibility(View.VISIBLE)
-                                    editTextcantidadde.setText("")
-                                    editTextfecha.setText("")
-                                    editTexthorainicio.setText("")
-                                    textViewpreciofinal.text = "0€"
-                                    scrolllist.setVisibility(View.GONE)
-                                    scrollrealizarpedido.setVisibility(View.GONE)
-                                }.addOnFailureListener {
-                                    mensajepopup("Error al realizar pedido","Ocurrio un error al relizar el pedido compruebe los campos y pruebe otra vez")
-                                }
+                                        mensajepopup(
+                                            "Pedido Realizado",
+                                            "El pedido se realizo con exito puede comprobar su estado en pedidos"
+                                        )
+                                        closemenus()
+                                        listview.adapter = null
+                                        scrollseleccion.setVisibility(View.VISIBLE)
+                                        textselecciona.setVisibility(View.VISIBLE)
+                                        editTextcantidadde.setText("")
+                                        editTextfecha.setText("")
+                                        editTexthorainicio.setText("")
+                                        textViewpreciofinal.text = "0€"
+                                        scrolllist.setVisibility(View.GONE)
+                                        scrollrealizarpedido.setVisibility(View.GONE)
+                                    }.addOnFailureListener {
+                                        mensajepopup("Error al realizar pedido", "Ocurrio un error al relizar el pedido compruebe los campos y pruebe otra vez")
+                                    }
+                            } else {
+                                Toast.makeText(context,"Error la fecha seleccionada no puede ser menor a la actual",Toast.LENGTH_LONG).show()
+                            }
                         } else{
                             Toast.makeText(context,"Error alguno de los campos esta vacio",Toast.LENGTH_LONG).show()
                         }
