@@ -308,7 +308,7 @@ class User_buscar : Fragment() {
                             var fechasinespacios =editTextfecha.text.toString().replace(" ","")
                             val currentDate = sdf2.parse(currentDate_string)
                             val selectedDate = sdf2.parse(fechasinespacios)
-                            if (selectedDate.after(currentDate)) {
+                            if (selectedDate.after(currentDate)||selectedDate.equals(currentDate)) {
                                 var fechasinbarras =
                                     editTextfecha.text.toString().replace("/", "-").replace(" ", "")
                                 var idpedido =
@@ -337,11 +337,7 @@ class User_buscar : Fragment() {
                                             getParentFragmentManager().getFragments().get(0)
                                         getParentFragmentManager().beginTransaction()
                                             .remove(fragment_user_pedidos).commit()
-
-                                        mensajepopup(
-                                            "Pedido Realizado",
-                                            "El pedido se realizo con exito puede comprobar su estado en pedidos"
-                                        )
+                                        mensajepopup("Pedido Realizado", "El pedido se realizo con exito puede comprobar su estado en pedidos")
                                         closemenus()
                                         listview.adapter = null
                                         scrollseleccion.setVisibility(View.VISIBLE)

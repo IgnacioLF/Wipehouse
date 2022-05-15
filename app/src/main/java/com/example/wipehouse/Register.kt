@@ -269,6 +269,7 @@ class Register : AppCompatActivity() {
                                     "cocinatradicional_precio" to "",
                                     "cocinalowcost_desc" to "",
                                     "cocinalowcost_platos" to "",
+                                    "cocinalowcost_precio" to "",
                                     "limpiador_precio" to "",
                                     "cortacesped_precio" to "",
                                     "mantenimiento_precio_grande" to "",
