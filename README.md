@@ -1,5 +1,5 @@
 # <img src="https://i.imgur.com/oQLBQFR.png" width="30"> Wipehouse 
-Wipehouse es una aplicación móvil para poner en práctica todos los conocimientros aprendidos en el curso.
+Wipehouse es una aplicación móvil para poner en práctica todos los conocimientros aprendidos en la asignatura de programación de dispositivos móviles del primer año del grado superior de desarrollo de aplicaciones web y móvil.
 
 La aplicación esta desarollada en kotlin y hace uso de las diferentes funcionalidades que ofrece Firebase.
 
